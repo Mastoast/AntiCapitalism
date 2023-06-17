@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://24cbebrminxu"]
+[gd_scene load_steps=3 format=3 uid="uid://24cbebrminxu"]
 
 [ext_resource type="Script" path="res://scripts/test_scene.gd" id="1_l0dtl"]
 [ext_resource type="Texture2D" uid="uid://bdtt5ei4ix11l" path="res://sprites/icon.svg" id="1_nrvnb"]
-[ext_resource type="PackedScene" uid="uid://vj64c86d5ydp" path="res://objects/qte.tscn" id="2_c5b56"]
 
 [node name="test_scene" type="Node2D"]
 script = ExtResource("1_l0dtl")
@@ -10,6 +9,3 @@ script = ExtResource("1_l0dtl")
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(575, 354)
 texture = ExtResource("1_nrvnb")
-
-[node name="qte" parent="." instance=ExtResource("2_c5b56")]
-position = Vector2(247, 199)
