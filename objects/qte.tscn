@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/qte.gd" id="1_aenkx"]
 [ext_resource type="Texture2D" uid="uid://bdtt5ei4ix11l" path="res://sprites/icon.svg" id="2_8akbm"]
 
-[node name="qte" type="Node2D"]
+[node name="qte" type="Node2D" groups=["qte"]]
 script = ExtResource("1_aenkx")
 
 [node name="Icon" type="Sprite2D" parent="."]
