@@ -23,7 +23,7 @@ var pattern2 = [
 func _ready():
 	randomize()
 	load_patterns(pattern2)
-	StaticMusic.play(StaticMusic.music2)
+	StaticMusic.play(StaticMusic.music2, 1.0)
 
 func _process(delta):
 	if Input.is_key_pressed(KEY_F5):

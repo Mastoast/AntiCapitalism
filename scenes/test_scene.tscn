@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://24cbebrminxu"]
+[gd_scene load_steps=5 format=3 uid="uid://24cbebrminxu"]
 
 [ext_resource type="Script" path="res://scripts/test_scene.gd" id="1_l0dtl"]
 [ext_resource type="Theme" uid="uid://ced1k3bls70p" path="res://themes/arcade_theme.tres" id="2_86pe1"]
+[ext_resource type="Texture2D" uid="uid://bdtt5ei4ix11l" path="res://sprites/icon.svg" id="3_3h4sx"]
+[ext_resource type="Script" path="res://scripts/rythm_helper.gd" id="4_xail3"]
 
 [node name="test_scene" type="Node2D"]
 script = ExtResource("1_l0dtl")
@@ -21,3 +23,8 @@ theme = ExtResource("2_86pe1")
 text = "Score :"
 scroll_active = false
 autowrap_mode = 0
+
+[node name="rythm_helper" type="Sprite2D" parent="."]
+position = Vector2(1073, 572)
+texture = ExtResource("3_3h4sx")
+script = ExtResource("4_xail3")
