@@ -5,6 +5,10 @@ extends Node2D
 @export var arc_width := 10
 @export var arc_color := Color.RED
 @export var max_input_delay := 0.1
+
+signal qte_succeed
+signal qte_failed
+
 var counter = 0.0
 var timer := 1.0
 var expected_action := "ui_accept"
@@ -41,16 +45,18 @@ func _draw():
 func is_input_valid():
 	return absf(timer - counter) < max_input_delay
 
-func try_input():
-	if is_input_valid():
+func try_input(event):
+	if event.is_action_pressed(expected_action) and is_input_valid():
 		succeed()
 	else:
 		fail()
 
 func fail():
 	print("FAIL")
+	qte_failed.emit(timer - counter)
 	queue_free()
 
 func succeed():
+	qte_succeed.emit(timer - counter)
 	print("OK")
 	queue_free()
