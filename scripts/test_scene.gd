@@ -7,10 +7,10 @@ var combo:float = 0.0
 var expected_actions = ["input_left", "input_right", "input_up", "input_down", "input_begin", "input_action"]
 
 var pattern1 = [
-	{"input": "input_left", "delay": 0.5, "position": Vector2(200, 200), "timer": 1.0},
-	{"input": "input_right", "delay": 0.5, "position": Vector2(500, 200), "timer": 1.0},
-	{"input": "input_up", "delay": 0.25, "position": Vector2(200, 500), "timer": 1.0},
-	{"input": "input_down", "delay": 1.0, "position": Vector2(800, 500), "timer": 1.0}
+	{"input": "input_left", "delay": 1.0, "position": Vector2(200, 200), "timer": 1.0},
+	{"input": "input_right", "delay": 1.0, "position": Vector2(500, 200), "timer": 1.0},
+	{"input": "input_up", "delay": 0.5, "position": Vector2(200, 500), "timer": 2.0},
+	{"input": "input_down", "delay": 2.0, "position": Vector2(800, 500), "timer": 1.0}
 ]
 
 var pattern2 = [
@@ -20,10 +20,23 @@ var pattern2 = [
 	{"input": "input_up", "delay": 1.0, "position": Vector2(800, 500), "timer": 1.0}
 ]
 
+var pattern3 = [
+	{"input": "input_up", "delay": 1.0, "position": Vector2(200, 200), "timer": 1.0},
+	{"input": "input_up", "delay": 1.0, "position": Vector2(300, 200), "timer": 1.0},
+	{"input": "input_up", "delay": 1.0, "position": Vector2(300, 200), "timer": 1.0},
+	{"input": "input_up", "delay": 1.0, "position": Vector2(400, 200), "timer": 1.0},
+	{"input": "input_up", "delay": 0.5, "position": Vector2(500, 200), "timer": 1.0},
+	{"input": "input_up", "delay": 1.5, "position": Vector2(600, 200), "timer": 1.0},
+	{"input": "input_up", "delay": 0.5, "position": Vector2(700, 200), "timer": 1.0},
+	{"input": "input_up", "delay": 1.5, "position": Vector2(800, 200), "timer": 1.0},
+	{"input": "input_up", "delay": 0.5, "position": Vector2(900, 200), "timer": 1.0},
+	{"input": "input_up", "delay": 1.0, "position": Vector2(900, 200), "timer": 1.0},
+]
+
 func _ready():
 	randomize()
-	load_patterns(pattern2)
-	StaticMusic.play(StaticMusic.music2, 1.0)
+	StaticMusic.play(StaticMusic.music1, 1.0)
+	load_patterns(pattern3)
 
 func _process(delta):
 	if Input.is_key_pressed(KEY_F5):
@@ -31,9 +44,11 @@ func _process(delta):
 	$ScoreText.text = str(score)
 
 func load_patterns(patterns):
+	var pos = Vector2(200, 200)
 	for pattern in patterns:
-		spawn_qte(pattern["timer"], pattern["position"], pattern["input"])
-		await get_tree().create_timer(pattern["delay"]).timeout
+		spawn_qte(StaticMusic.beat_length * pattern["timer"], pos, pattern["input"])
+		pos.x = 200 + (int)(pos.x + 100) % 800
+		await get_tree().create_timer(pattern["delay"] * StaticMusic.beat_length).timeout
 
 func spawn_qte(timer, position, input):
 	var new_qte = qte.instantiate()

@@ -17,8 +17,7 @@ var loop_count
 var beat_count
 
 func _ready():
-	player = AudioStreamPlayer.new()
-	player.name = playerName
+	pass
 
 func _process(delta):
 	if player.playing:
@@ -32,6 +31,9 @@ func _process(delta):
 		last_time = Time.get_ticks_usec()
 
 func play(music, pitch = 1.0, position = 0.0):
+	if !player:
+		player = AudioStreamPlayer.new()
+		player.name = playerName
 	if !player.is_inside_tree():
 		get_tree().current_scene.add_child(player)
 	loop_count = 0
