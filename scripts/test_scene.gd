@@ -6,7 +6,6 @@ var combo:float = 0.0
 
 var expected_actions = ["input_left", "input_right", "input_up", "input_down", "input_begin", "input_action"]
 
-var catch_pattern = {"input": "input_begin", "delay": 2.0, "position": Vector2(650, 350), "timer": 1.0}
 var pattern1 = [
 	{"input": "input_left", "delay": 0.5, "position": Vector2(200, 200), "timer": 1.0},
 	{"input": "input_right", "delay": 0.5, "position": Vector2(500, 200), "timer": 1.0},
@@ -24,6 +23,7 @@ var pattern2 = [
 func _ready():
 	randomize()
 	load_patterns(pattern2)
+	StaticMusic.play(StaticMusic.music2)
 
 func _process(delta):
 	if Input.is_key_pressed(KEY_F5):

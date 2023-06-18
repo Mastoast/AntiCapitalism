@@ -15,6 +15,14 @@ run/main_scene="res://scenes/test_scene.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 config/icon="res://sprites/icon.svg"
 
+[audio]
+
+driver/output_latency=50
+
+[autoload]
+
+StaticMusic="*res://scripts/singletons/StaticMusic.gd"
+
 [display]
 
 window/stretch/mode="viewport"
