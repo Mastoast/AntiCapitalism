@@ -4,7 +4,7 @@ extends Node2D
 @export var max_point_count := 80
 @export var arc_width := 10
 @export var arc_color := Color.RED
-@export var max_input_delay := 0.1
+@export var max_input_delay := 0.15
 
 signal qte_succeed
 signal qte_failed

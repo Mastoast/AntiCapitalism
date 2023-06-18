@@ -39,7 +39,7 @@ func _ready():
 	load_patterns(pattern3)
 
 func _process(delta):
-	if Input.is_key_pressed(KEY_F5):
+	if Input.is_action_just_pressed("restart"):
 		get_tree().reload_current_scene()
 	$ScoreText.text = str(score)
 
