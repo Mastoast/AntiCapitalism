@@ -8,29 +8,29 @@ var expected_actions = ["input_left", "input_right", "input_up", "input_down", "
 
 var pattern1 = [
 	{"input": "input_left", "delay": 1.0, "position": Vector2(200, 200), "timer": 1.0},
-	{"input": "input_right", "delay": 1.0, "position": Vector2(500, 200), "timer": 1.0},
-	{"input": "input_up", "delay": 0.5, "position": Vector2(200, 500), "timer": 2.0},
-	{"input": "input_down", "delay": 2.0, "position": Vector2(800, 500), "timer": 1.0}
+	{"input": "input_right", "delay": 2.0, "position": Vector2(500, 200), "timer": 1.0},
+	{"input": "input_up", "delay": 3.0, "position": Vector2(200, 500), "timer": 2.0},
+	{"input": "input_down", "delay": 3.5, "position": Vector2(800, 500), "timer": 1.0}
 ]
 
 var pattern2 = [
-	{"input": "input_right", "delay": 0.5, "position": Vector2(200, 200), "timer": 1.0},
-	{"input": "input_left", "delay": 0.5, "position": Vector2(500, 200), "timer": 1.0},
-	{"input": "input_right", "delay": 0.25, "position": Vector2(200, 500), "timer": 1.0},
-	{"input": "input_up", "delay": 1.0, "position": Vector2(800, 500), "timer": 1.0}
+	{"input": "input_right", "delay": 1, "position": Vector2(200, 200), "timer": 1.0},
+	{"input": "input_left", "delay": 1.5, "position": Vector2(500, 200), "timer": 1.0},
+	{"input": "input_right", "delay": 1.75, "position": Vector2(200, 500), "timer": 1.0},
+	{"input": "input_up", "delay": 2.0, "position": Vector2(800, 500), "timer": 1.0}
 ]
 
 var pattern3 = [
 	{"input": "input_up", "delay": 1.0, "position": Vector2(200, 200), "timer": 1.0},
-	{"input": "input_up", "delay": 1.0, "position": Vector2(300, 200), "timer": 1.0},
-	{"input": "input_up", "delay": 1.0, "position": Vector2(300, 200), "timer": 1.0},
-	{"input": "input_up", "delay": 1.0, "position": Vector2(400, 200), "timer": 1.0},
-	{"input": "input_up", "delay": 1.0, "position": Vector2(500, 200), "timer": 0.5},
-	{"input": "input_up", "delay": 1.0, "position": Vector2(600, 200), "timer": 1.0},
-	{"input": "input_up", "delay": 1.0, "position": Vector2(700, 200), "timer": 1.0},
-	{"input": "input_up", "delay": 1.0, "position": Vector2(800, 200), "timer": 1.0},
-	{"input": "input_up", "delay": 1.0, "position": Vector2(900, 200), "timer": 1.0},
-	{"input": "input_up", "delay": 1.0, "position": Vector2(900, 200), "timer": 1.0},
+	{"input": "input_up", "delay": 2.0, "position": Vector2(300, 200), "timer": 1.0},
+	{"input": "input_up", "delay": 3.0, "position": Vector2(300, 200), "timer": 1.0},
+	{"input": "input_up", "delay": 4.0, "position": Vector2(400, 200), "timer": 1.0},
+	{"input": "input_up", "delay": 5.0, "position": Vector2(500, 200), "timer": 0.5},
+	{"input": "input_up", "delay": 6.0, "position": Vector2(600, 200), "timer": 1.0},
+	{"input": "input_up", "delay": 7.0, "position": Vector2(700, 200), "timer": 1.0},
+	{"input": "input_up", "delay": 8.0, "position": Vector2(800, 200), "timer": 1.0},
+	{"input": "input_up", "delay": 9.0, "position": Vector2(900, 200), "timer": 1.0},
+	{"input": "input_up", "delay": 10.0, "position": Vector2(900, 200), "timer": 1.0},
 ]
 
 var pattern4 = [
@@ -51,7 +51,6 @@ func _ready():
 	randomize()
 	StaticMusic.play(StaticMusic.music1, 1.0)
 	StaticMusic.new_beat.connect(_on_new_beat)
-
 
 func _process(delta):
 	if !buffer_qte.is_empty() and current_pattern:
@@ -83,7 +82,7 @@ func spawn_qte(timer, position, input):
 
 func _input(event):
 	if event.is_action_pressed("input_begin") and !current_pattern:
-		buffer_qte = pattern4.duplicate(true)
+		buffer_qte = pattern1.duplicate(true)
 		return
 	if !event.is_action_type() || !is_expected_action(event):
 		return
