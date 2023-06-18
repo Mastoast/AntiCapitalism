@@ -6,6 +6,8 @@ var playerName = "audio_player"
 var music1 = { "stream": load("res://sounds/drums_test.wav"), "bpm": 100.0}
 var music2 = { "stream": load("res://sounds/ChildrenOfTheRuins.wav"), "bpm": 78.0}
 
+signal new_beat
+
 var current_music
 var beat_length
 
@@ -23,9 +25,10 @@ func _process(delta):
 	if player.playing:
 		if player.get_playback_position() < last_player_position:
 			loop_count += 1
-			print("LOOP: ", loop_count)
+#			print("LOOP: ", loop_count)
 		if get_player_total_position() > get_next_beat_time():
 			beat_count += 1
+			new_beat.emit()
 			print("BEAT: ", beat_count)
 		last_player_position = player.get_playback_position()
 		last_time = Time.get_ticks_usec()
@@ -52,9 +55,10 @@ func stop():
 
 func get_player_total_position():
 	return player.stream.get_length() * loop_count + player.get_playback_position()
+	+ AudioServer.get_time_since_last_mix() - AudioServer.get_output_latency()
 
 func get_next_beat_time():
-	return beat_count * beat_length + AudioServer.get_time_since_last_mix() - AudioServer.get_output_latency()
+	return beat_count * beat_length
 
 func get_delay_with_next_beat():
 	return get_next_beat_time() - get_player_total_position()
