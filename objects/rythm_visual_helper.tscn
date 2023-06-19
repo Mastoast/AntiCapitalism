@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cacrapbtcy27r"]
+
+[ext_resource type="Texture2D" uid="uid://bdtt5ei4ix11l" path="res://sprites/icon.svg" id="1_6a6qp"]
+[ext_resource type="Script" path="res://scripts/rythm_helper.gd" id="2_i35ba"]
+
+[node name="rythm_helper" type="Sprite2D"]
+position = Vector2(1073, 572)
+texture = ExtResource("1_6a6qp")
+script = ExtResource("2_i35ba")
