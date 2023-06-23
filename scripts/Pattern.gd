@@ -40,6 +40,19 @@ const pattern4 = [
 	{"input": "input_left", "delay": 6.0, "position": Vector2(300, 200), "timer": 1.0}
 ]
 
+const pattern5 = [
+	{"input": "input_up", "delay": 1.0, "position": Vector2(200, 200), "timer": 1.0},
+	{"input": "input_down", "delay": 1.0, "position": Vector2(300, 200), "timer": 1.0},
+	{"input": "input_left", "delay": 2.0, "position": Vector2(300, 200), "timer": 1.0},
+	{"input": "input_right", "delay": 2.0, "position": Vector2(200, 200), "timer": 1.0},
+	{"input": "input_up", "delay": 3.0 + 2/3, "position": Vector2(300, 200), "timer": 1.0},
+	{"input": "input_left", "delay": 3.0 + 2/3, "position": Vector2(300, 200), "timer": 1.0},
+	{"input": "input_up", "delay": 3 + 4/3, "position": Vector2(200, 200), "timer": 1.0},
+	{"input": "input_down", "delay": 3 + 4/3, "position": Vector2(300, 200), "timer": 1.0},
+	{"input": "input_up", "delay": 3 + 6/3, "position": Vector2(200, 200), "timer": 1.0},
+	{"input": "input_right", "delay": 3 + 6/3, "position": Vector2(300, 200), "timer": 1.0},
+]
+
 func _ready():
 	pass
 

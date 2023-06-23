@@ -52,7 +52,7 @@ func _input(event):
 	if selected_qte:
 		selected_qte.try_input(event)
 	else:
-		_on_qte_failure()
+		_on_bad_input()
 
 func spawn_qte_on_time():
 	if !buffer_qte.is_empty():
@@ -78,13 +78,14 @@ func is_expected_action(event):
 
 func _on_qte_success(precision:float):
 	qte_succeeded.emit(precision)
-	print("QTE SUCCEEDED")
 	qte_count -= 1
 	if buffer_qte.is_empty() and qte_count == 0:
 		pattern_succeeded.emit()
-		print("PATTERN SUCCEEDED")
 
-func _on_qte_failure():
+func _on_qte_failure(precision:float):
 	stop_current_pattern()
 	pattern_failed.emit()
-	print("PATTERN FAILED")
+
+func _on_bad_input():
+	stop_current_pattern()
+	pattern_failed.emit()

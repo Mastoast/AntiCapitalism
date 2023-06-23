@@ -62,8 +62,6 @@ offset_top = 92.0
 offset_right = 261.0
 offset_bottom = 147.0
 
-[node name="PatternPlayer" parent="." instance=ExtResource("3_1evdy")]
-
 [node name="truck" parent="." instance=ExtResource("3_dewsc")]
 
 [node name="TrashSpawn" type="Marker2D" parent="."]
@@ -77,3 +75,5 @@ position = Vector2(926, 756)
 
 [node name="rythm_helper" parent="." instance=ExtResource("4_42vja")]
 position = Vector2(90, 562)
+
+[node name="PatternPlayer" parent="." instance=ExtResource("3_1evdy")]

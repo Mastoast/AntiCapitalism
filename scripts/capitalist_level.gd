@@ -9,6 +9,8 @@ var previous_time = 0.0
 var distance = 0.0
 var score = 0
 var combo = 20.0
+var combo_min_value = 0.0
+var combo_max_value = 100.0
 
 var is_truck_moving
 var in_pattern = false
@@ -21,8 +23,9 @@ var level1 = [
 	{"distance": 5.0, "sprite": Color.GREEN_YELLOW, "pattern": Pattern.pattern1},
 	{"distance": 10.0, "sprite": Color.MIDNIGHT_BLUE, "pattern": Pattern.pattern2},
 	{"distance": 20.0, "sprite": Color.GREEN_YELLOW, "pattern": Pattern.pattern1},
-	{"distance": 23.0, "sprite": Color.GREEN_YELLOW, "pattern": Pattern.pattern3},
-	{"distance": 28.0, "sprite": Color.GREEN_YELLOW, "pattern": Pattern.pattern4}
+	{"distance": 23.0, "sprite": Color.BLUE_VIOLET, "pattern": Pattern.pattern3},
+	{"distance": 28.0, "sprite": Color.DARK_RED, "pattern": Pattern.pattern4},
+	{"distance": 28.0, "sprite": Color.DARK_GREEN, "pattern": Pattern.pattern5},
 ]
 
 var pattern_player: PatternPlayer  
@@ -43,13 +46,13 @@ func _ready():
 func _process(delta):
 	var current_time = StaticMusic.get_player_total_position()
 	var music_delta = current_time - previous_time
-	combo -= combo_decrease_speed * music_delta
+	add_combo( -combo_decrease_speed * music_delta)
 	#
 	if is_truck_moving:
 		distance += truck_speed * music_delta
 		update_trash_cans()
 	#
-	$UI/ScoreText.text = str(score)
+	$UI/ScoreText.text = str(int(score))
 	$UI/ComboBar.value = combo
 	$UI/PickUpInstruction.visible = pickable_trash and not in_pattern
 	$UI/debug_distance.text = "distance : " + str(distance)
@@ -97,10 +100,10 @@ func update_trash_cans():
 		# position
 		if truck_distance >= 0:
 			var ratio = 1 - truck_distance / (max_trash_distance - truck_distance)
-			trash.position = $TrashSpawn.position.lerp($TrashInteraction.position, min(max(ratio, 0), 1))
+			trash.position = $TrashSpawn.position.lerp($TrashInteraction.position, clampf(ratio, 0, 1))
 		else:
 			var ratio = 1 - truck_distance / (min_trash_distance - truck_distance)
-			trash.position = $TrashDespawn.position.lerp($TrashInteraction.position, min(max(ratio, 0), 1))
+			trash.position = $TrashDespawn.position.lerp($TrashInteraction.position, clampf(ratio, 0, 1))
 		#
 		if not trash.is_empty and absf(truck_distance) < pickup_distance:
 			pickable = true
@@ -112,11 +115,14 @@ func update_trash_cans():
 func _on_new_beat():
 	pass
 
+func add_combo(value):
+	combo = clampf(combo + value, combo_min_value, combo_max_value)
+
 func _on_pattern_success():
 	pickable_trash.is_empty = true
 	pickable_trash = null
 	score += 50
-	combo += 25
+	add_combo(25)
 	in_pattern = false
 	is_truck_moving = true
 	$truck.drive()
@@ -125,12 +131,12 @@ func _on_pattern_failure():
 	in_pattern = false
 	is_truck_moving = true
 	$truck.drive()
-	score -= 5
+	add_combo(-5)
 
 func _on_qte_success(precision:float):
 	score += 10 * (1.0 - precision)
-	combo += 10 * (1.0 - precision)
+	add_combo(10 * (1.0 - precision))
 
 func _on_missed_trash():
 	pickable_trash = false
-	combo -= 3
+	add_combo(-3)
