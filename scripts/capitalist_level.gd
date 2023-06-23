@@ -2,8 +2,9 @@ extends Node2D
 
 @export var combo_decrease_speed = 5.0
 @export var truck_speed = 3.0
-@export var trash_can = load("res://objects/trash_can.tscn")
 @export var pickup_distance = 1.0
+
+var trash_can = load("res://objects/trash_can.tscn")
 
 var previous_time = 0.0
 var distance = 0.0
@@ -14,6 +15,7 @@ var combo_max_value = 100.0
 
 var is_truck_moving
 var in_pattern = false
+var starting_pattern = false
 var pickable_trash
 
 var max_trash_distance = 20.0
@@ -70,7 +72,8 @@ func try_start_pattern():
 		$truck.stop()
 		if pickable_trash and !pickable_trash.is_empty:
 			in_pattern = true
-			$PatternPlayer.start_pattern(pickable_trash.pattern)
+			starting_pattern = true
+			#$PatternPlayer.start_pattern(pickable_trash.pattern)
 	elif not in_pattern:
 		is_truck_moving = true
 		$truck.drive()
@@ -113,7 +116,10 @@ func update_trash_cans():
 		_on_missed_trash()
 
 func _on_new_beat():
-	pass
+	if StaticMusic.beat_count % 2 == 0: # trigger every 2 beat
+		if starting_pattern:
+			$PatternPlayer.start_pattern(pickable_trash.pattern)
+			starting_pattern = false
 
 func add_combo(value):
 	combo = clampf(combo + value, combo_min_value, combo_max_value)
