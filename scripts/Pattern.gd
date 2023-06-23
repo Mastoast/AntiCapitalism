@@ -4,7 +4,11 @@ const pattern1 = [
 	{"input": "input_left", "delay": 1.0, "position": Vector2(200, 200), "timer": 1.0},
 	{"input": "input_right", "delay": 2.0, "position": Vector2(500, 200), "timer": 1.0},
 	{"input": "input_up", "delay": 3.0, "position": Vector2(200, 500), "timer": 2.0},
-	{"input": "input_down", "delay": 3.5, "position": Vector2(800, 500), "timer": 1.0}
+	{"input": "input_down", "delay": 3.5, "position": Vector2(800, 500), "timer": 1.0},
+	{"input": "input_action", "delay": 5.0, "position": Vector2(800, 500), "timer": 1.0},
+	{"input": "input_left", "delay": 5.5, "position": Vector2(200, 200), "timer": 1.0},
+	{"input": "input_action", "delay": 7.0, "position": Vector2(200, 200), "timer": 1.0},
+	{"input": "input_left", "delay": 7.5, "position": Vector2(200, 200), "timer": 1.0}
 ]
 
 const pattern2 = [

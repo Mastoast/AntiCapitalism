@@ -48,7 +48,7 @@ func spawn_qte(timer, position, input):
 	add_child(new_qte)
 
 func _input(event):
-	if event.is_action_pressed("input_begin") and !current_pattern:
+	if event.is_action_pressed("input_begin") and !current_pattern and buffer_qte.is_empty():
 		buffer_qte = Pattern.pattern1.duplicate(true)
 		return
 	if !event.is_action_type() || !is_expected_action(event):
