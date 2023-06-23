@@ -24,3 +24,4 @@ scroll_active = false
 autowrap_mode = 0
 
 [node name="rythm_helper" parent="." instance=ExtResource("3_6d8o8")]
+position = Vector2(1059, 560)

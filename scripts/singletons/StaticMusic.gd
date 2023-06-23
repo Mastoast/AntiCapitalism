@@ -2,6 +2,7 @@ extends Node
 
 var player:AudioStreamPlayer
 var playerName = "audio_player"
+var player_volume = -20.0
 
 var music1 = { "stream": load("res://sounds/drums_test.wav"), "bpm": 100.0}
 
@@ -36,6 +37,7 @@ func play(music, pitch = 1.0, position = 0.0):
 	if !player:
 		player = AudioStreamPlayer.new()
 		player.name = playerName
+		player.volume_db = player_volume
 	if !player.is_inside_tree():
 		get_tree().current_scene.add_child(player)
 	loop_count = 0

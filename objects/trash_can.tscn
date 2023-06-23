@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvr0gyhyuce5x"]
+
+[ext_resource type="Script" path="res://scripts/trash_can.gd" id="1_82o3l"]
+[ext_resource type="Texture2D" uid="uid://dmrqdmicvuhcm" path="res://sprites/direction_arrow.png" id="2_7ieta"]
+
+[node name="trash_can" type="Node2D" groups=["trash"]]
+script = ExtResource("1_82o3l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_7ieta")

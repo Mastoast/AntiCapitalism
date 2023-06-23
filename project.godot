@@ -15,10 +15,6 @@ run/main_scene="res://scenes/capitalist_level.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 config/icon="res://sprites/icon.svg"
 
-[audio]
-
-driver/mix_rate=0
-
 [autoload]
 
 StaticMusic="*res://scripts/singletons/StaticMusic.gd"
