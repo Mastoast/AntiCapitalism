@@ -33,6 +33,8 @@ func start_pattern(pattern):
 
 func stop_current_pattern():
 	qte_count = 0
+	for qte in get_tree().get_nodes_in_group("qte"):
+		qte.queue_free()
 	buffer_qte.clear()
 
 func _process(delta):

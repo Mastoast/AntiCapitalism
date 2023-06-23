@@ -20,7 +20,9 @@ var trash_cans = []
 var level1 = [
 	{"distance": 5.0, "sprite": Color.GREEN_YELLOW, "pattern": Pattern.pattern1},
 	{"distance": 10.0, "sprite": Color.MIDNIGHT_BLUE, "pattern": Pattern.pattern2},
-	{"distance": 20.0, "sprite": Color.GREEN_YELLOW, "pattern": Pattern.pattern1}	
+	{"distance": 20.0, "sprite": Color.GREEN_YELLOW, "pattern": Pattern.pattern1},
+	{"distance": 23.0, "sprite": Color.GREEN_YELLOW, "pattern": Pattern.pattern3},
+	{"distance": 28.0, "sprite": Color.GREEN_YELLOW, "pattern": Pattern.pattern4}
 ]
 
 var pattern_player: PatternPlayer  
@@ -33,8 +35,8 @@ func _ready():
 	pattern_player = $PatternPlayer
 	is_truck_moving = true
 	$truck.drive()
-	pattern_player.pattern_failed.connect(_on_qte_failure)
 	pattern_player.pattern_succeeded.connect(_on_pattern_success)
+	pattern_player.pattern_failed.connect(_on_pattern_failure)
 	pattern_player.qte_succeeded.connect(_on_qte_success)
 
 
@@ -66,7 +68,7 @@ func try_start_pattern():
 		if pickable_trash and !pickable_trash.is_empty:
 			in_pattern = true
 			$PatternPlayer.start_pattern(pickable_trash.pattern)
-	else:
+	elif not in_pattern:
 		is_truck_moving = true
 		$truck.drive()
 
@@ -115,12 +117,19 @@ func _on_pattern_success():
 	pickable_trash = null
 	score += 50
 	combo += 25
+	in_pattern = false
+	is_truck_moving = true
+	$truck.drive()
+
+func _on_pattern_failure():
+	in_pattern = false
+	is_truck_moving = true
+	$truck.drive()
+	score -= 5
 
 func _on_qte_success(precision:float):
 	score += 10 * (1.0 - precision)
-
-func _on_qte_failure(precision:float):
-	score -= 5
+	combo += 10 * (1.0 - precision)
 
 func _on_missed_trash():
 	pickable_trash = false
