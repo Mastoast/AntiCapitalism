@@ -9,6 +9,9 @@ extends Node2D
 signal qte_succeed
 signal qte_failed
 
+const sprite_dict = {"input_up" : {"rotation": 0}, "input_down" : {"rotation": 180},
+	"input_left" : {"rotation": -90}, "input_right" : {"rotation": 90}}
+
 var counter = 0.0
 var timer := 1.0
 var expected_action := "ui_accept"
@@ -17,6 +20,7 @@ func init(timer:float = timer, action:String = expected_action):
 	self.timer = timer
 	self.expected_action = action
 	$TextEdit.text = action
+	$DirectionArrowSprite.rotation_degrees = sprite_dict[action]["rotation"]
 
 func _ready():
 	pass

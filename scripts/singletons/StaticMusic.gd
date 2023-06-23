@@ -4,7 +4,6 @@ var player:AudioStreamPlayer
 var playerName = "audio_player"
 
 var music1 = { "stream": load("res://sounds/drums_test.wav"), "bpm": 100.0}
-var music2 = { "stream": load("res://sounds/ChildrenOfTheRuins.wav"), "bpm": 78.0}
 
 signal new_beat
 
