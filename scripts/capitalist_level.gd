@@ -23,13 +23,19 @@ var level1 = [
 	{"distance": 20.0, "sprite": Color.GREEN_YELLOW, "pattern": Pattern.pattern1}	
 ]
 
+var pattern_player: PatternPlayer  
+
 func _ready():
 	randomize()
 	StaticMusic.play(StaticMusic.music1, 1.0)
 	StaticMusic.new_beat.connect(_on_new_beat)
 	load_level(level1)
+	pattern_player = $PatternPlayer
 	is_truck_moving = true
 	$truck.drive()
+	pattern_player.pattern_failed.connect(_on_qte_failure)
+	pattern_player.pattern_succeeded.connect(_on_pattern_success)
+	pattern_player.qte_succeeded.connect(_on_qte_success)
 
 
 func _process(delta):
@@ -57,11 +63,12 @@ func try_start_pattern():
 	if is_truck_moving:
 		is_truck_moving = false
 		$truck.stop()
+		if pickable_trash and !pickable_trash.is_empty:
+			in_pattern = true
+			$PatternPlayer.start_pattern(pickable_trash.pattern)
 	else:
 		is_truck_moving = true
 		$truck.drive()
-	print(distance)
-	print(trash_cans[0].global_position)
 
 func load_level(level):
 	for item in level:
@@ -103,14 +110,17 @@ func update_trash_cans():
 func _on_new_beat():
 	pass
 
+func _on_pattern_success():
+	pickable_trash.is_empty = true
+	pickable_trash = null
+	score += 50
+	combo += 25
+
 func _on_qte_success(precision:float):
 	score += 10 * (1.0 - precision)
 
 func _on_qte_failure(precision:float):
 	score -= 5
-
-func _on_bad_input():
-	combo -= 3
 
 func _on_missed_trash():
 	pickable_trash = false

@@ -29,7 +29,7 @@ func _process(delta):
 		if get_player_total_position() > get_next_beat_time():
 			beat_count += 1
 			new_beat.emit()
-			print("BEAT: ", beat_count)
+#			print("BEAT: ", beat_count)
 		last_player_position = player.get_playback_position()
 		last_time = Time.get_ticks_usec()
 

@@ -70,11 +70,9 @@ func try_input(event):
 		fail()
 
 func fail():
-	print("FAIL")
 	qte_failed.emit(timer - counter)
 	queue_free()
 
 func succeed():
 	qte_succeed.emit(timer - counter)
-	print("OK")
 	queue_free()

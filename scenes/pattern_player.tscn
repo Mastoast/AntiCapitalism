@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj4ndq5wr0mvi"]
+
+[ext_resource type="Script" path="res://scripts/pattern_player.gd" id="1_8355h"]
+
+[node name="PatternPlayer" type="Node2D"]
+script = ExtResource("1_8355h")
