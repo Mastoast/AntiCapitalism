@@ -21,7 +21,7 @@ func _ready():
 	pass
 
 func _process(delta):
-	if player.playing:
+	if player and player.playing:
 		if player.get_playback_position() < last_player_position:
 			loop_count += 1
 #			print("LOOP: ", loop_count)
@@ -51,6 +51,9 @@ func play(music, pitch = 1.0, position = 0.0):
 
 func stop():
 	player.stop()
+
+func resume():
+	player.play((beat_count - 1) * beat_length)
 
 func get_player_total_position():
 	return player.stream.get_length() * loop_count + player.get_playback_position()

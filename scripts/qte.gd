@@ -20,12 +20,14 @@ const sprite_dict = {
 	"input_action": {"rotation": 0}
 }
 
+var creation_time = 0.0
 var counter = 0.0
 var timer := 1.0
 var expected_action := "ui_accept"
 
 func init(timer:float = timer, action:String = expected_action):
 	self.timer = timer
+	self.creation_time = StaticMusic.get_player_total_position()
 	self.expected_action = action
 	$TextEdit.text = action
 	if action == "input_action":
@@ -40,7 +42,7 @@ func _ready():
 func _process(delta):
 	if counter > timer + max_input_delay:
 		self.fail()
-	counter += delta
+	counter = StaticMusic.get_player_total_position() - creation_time
 	if is_input_valid():
 		arc_color = Color.GREEN
 	else:

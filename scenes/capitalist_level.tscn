@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnp4dmlfkp0m6"]
+
+[ext_resource type="Script" path="res://scripts/capitalist_level.gd" id="1_2kj73"]
+[ext_resource type="Theme" uid="uid://ced1k3bls70p" path="res://themes/arcade_theme.tres" id="2_0yje6"]
+
+[node name="capitalist_level" type="Node2D"]
+script = ExtResource("1_2kj73")
+
+[node name="ComboBar" type="ProgressBar" parent="."]
+offset_left = 4.0
+offset_top = 37.0
+offset_right = 936.0
+offset_bottom = 64.0
+allow_greater = true
+show_percentage = false
+
+[node name="ScoreText" type="RichTextLabel" parent="."]
+offset_left = 118.0
+offset_top = 4.0
+offset_right = 202.0
+offset_bottom = 47.0
+theme = ExtResource("2_0yje6")
+text = "0"
+
+[node name="ScoreLabel" type="RichTextLabel" parent="."]
+offset_top = 4.0
+offset_right = 118.0
+offset_bottom = 38.0
+theme = ExtResource("2_0yje6")
+text = "Score :"
+scroll_active = false
+autowrap_mode = 0
