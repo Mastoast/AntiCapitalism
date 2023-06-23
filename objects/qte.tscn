@@ -21,6 +21,5 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="DirectionArrowSprite" type="Sprite2D" parent="."]
-top_level = true
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_2v87f")
