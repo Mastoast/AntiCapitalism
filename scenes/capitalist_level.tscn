@@ -46,23 +46,31 @@ scroll_active = false
 autowrap_mode = 0
 
 [node name="PickUpInstruction" type="RichTextLabel" parent="UI"]
+layout_mode = 0
 offset_left = 967.0
 offset_top = 378.0
 offset_right = 1154.0
 offset_bottom = 444.0
 bbcode_enabled = true
-text = "[tornado radius=5.0 freq=5.0][center][shake rate=20.0 level=20]PRESS SPACE TO PICKUP TRASH[/shake][/center][/tornado]"
+text = "[tornado radius=1.0 freq=2.0][center][shake rate=35.0 level=10]PRESS SPACE TO PICKUP TRASH[/shake][/center][/tornado]"
+
+[node name="debug_distance" type="TextEdit" parent="UI"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 92.0
+offset_right = 261.0
+offset_bottom = 147.0
 
 [node name="truck" parent="." instance=ExtResource("3_dewsc")]
 
 [node name="TrashSpawn" type="Marker2D" parent="."]
-position = Vector2(773, -127)
-
-[node name="TrashDespawn" type="Marker2D" parent="."]
-position = Vector2(900, 748)
+position = Vector2(556, -112)
 
 [node name="TrashInteraction" type="Marker2D" parent="."]
-position = Vector2(900, 400)
+position = Vector2(798, 423)
+
+[node name="TrashDespawn" type="Marker2D" parent="."]
+position = Vector2(926, 756)
 
 [node name="rythm_helper" parent="." instance=ExtResource("4_42vja")]
 position = Vector2(90, 562)

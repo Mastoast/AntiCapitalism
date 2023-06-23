@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var combo_decrease_speed = 5.0
-@export var truck_speed = 1.0
+@export var truck_speed = 3.0
 @export var trash_can = load("res://objects/trash_can.tscn")
 @export var pickup_distance = 1.0
 
@@ -11,13 +11,15 @@ var score = 0
 var combo = 20.0
 
 var is_truck_moving
+var in_pattern = false
+var pickable_trash
 
 var max_trash_distance = 20.0
 var min_trash_distance = -3.0
 var trash_cans = []
 var level1 = [
-	{"distance": 1.0, "sprite": Color.GREEN_YELLOW, "pattern": Pattern.pattern1},
-	{"distance": 5.0, "sprite": Color.MIDNIGHT_BLUE, "pattern": Pattern.pattern2},
+	{"distance": 5.0, "sprite": Color.GREEN_YELLOW, "pattern": Pattern.pattern1},
+	{"distance": 10.0, "sprite": Color.MIDNIGHT_BLUE, "pattern": Pattern.pattern2},
 	{"distance": 20.0, "sprite": Color.GREEN_YELLOW, "pattern": Pattern.pattern1}	
 ]
 
@@ -41,6 +43,8 @@ func _process(delta):
 	#
 	$UI/ScoreText.text = str(score)
 	$UI/ComboBar.value = combo
+	$UI/PickUpInstruction.visible = pickable_trash and not in_pattern
+	$UI/debug_distance.text = "distance : " + str(distance)
 	previous_time = current_time
 
 func _input(event):
@@ -79,9 +83,8 @@ func update_trash_cans():
 			trash.queue_free()
 			continue
 		# visual scaling
-#		var trash_scale = min(1 / absf(truck_distance), 1.0)
-#		trash.scale = Vector2(trash_scale, trash_scale)
-#		var ratio = 1 - truck_distance / (max_trash_distance - min_trash_distance)
+		var trash_scale = min(1 / absf(truck_distance), 1.0)
+		trash.scale = Vector2(trash_scale, trash_scale)
 		# position
 		if truck_distance >= 0:
 			var ratio = 1 - truck_distance / (max_trash_distance - truck_distance)
@@ -90,9 +93,12 @@ func update_trash_cans():
 			var ratio = 1 - truck_distance / (min_trash_distance - truck_distance)
 			trash.position = $TrashDespawn.position.lerp($TrashInteraction.position, min(max(ratio, 0), 1))
 		#
-		if absf(truck_distance) <  pickup_distance:
+		if not trash.is_empty and absf(truck_distance) < pickup_distance:
 			pickable = true
-	$UI/PickUpInstruction.visible = pickable
+			pickable_trash = trash
+	# missed trash
+	if not pickable and pickable_trash and not pickable_trash.is_empty:
+		_on_missed_trash()
 
 func _on_new_beat():
 	pass
@@ -104,4 +110,8 @@ func _on_qte_failure(precision:float):
 	score -= 5
 
 func _on_bad_input():
-	score -= 3
+	combo -= 3
+
+func _on_missed_trash():
+	pickable_trash = false
+	combo -= 3
