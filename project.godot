@@ -17,7 +17,7 @@ config/icon="res://sprites/icon.svg"
 
 [audio]
 
-driver/output_latency=50
+driver/mix_rate=0
 
 [autoload]
 
