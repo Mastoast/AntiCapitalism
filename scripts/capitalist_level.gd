@@ -177,3 +177,4 @@ func _on_truck_start():
 
 func _on_survival_timer_timeout():
 	print("GAME OVER")
+	get_tree().change_scene_to_file("res://scenes/menu.tscn")
