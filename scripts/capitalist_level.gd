@@ -5,8 +5,17 @@ extends Node2D
 @export var trash_pickup_distance = 1.0
 @export var music_pitch = 1.0
 
-@export_category("Scoring")
+@export_category("Combo")
 @export var combo_bar_decrease_speed = 5.0
+@export var threshold_survival_time = 5.0
+@export var combo_point_qte_success = 10.0
+@export var combo_point_pattern_success = 20.0
+@export var combo_point_qte_failure = -5.0
+@export var combo_point_trash_missed = -3.0
+
+
+@export_category("Scoring")
+
 
 var trash_can = load("res://objects/trash_can.tscn")
 
@@ -25,6 +34,8 @@ var pickable_trash
 var max_trash_distance = 20.0
 var min_trash_distance = -3.0
 var trash_cans = []
+
+var combo_threshold = 15.0
 var level1 = [
 	{"distance": 5.0, "sprite": Color.GREEN_YELLOW, "pattern": Pattern.pattern1},
 	{"distance": 10.0, "sprite": Color.MIDNIGHT_BLUE, "pattern": Pattern.pattern2},
@@ -42,6 +53,8 @@ func _ready():
 	StaticMusic.new_beat.connect(_on_new_beat)
 	$truck.started.connect(_on_truck_start)
 	load_level(level1)
+	$SurvivalTimer.wait_time = threshold_survival_time
+	setup_combo_threshold()
 	pattern_player = $PatternPlayer
 	$truck.start()
 	pattern_player.pattern_succeeded.connect(_on_pattern_success)
@@ -89,6 +102,11 @@ func load_level(level):
 		trash_cans.append(trash)
 		add_child(trash)
 
+func setup_combo_threshold():
+	var combo_y_position = $UI/ComboBar.get_global_rect().position.y + $UI/ComboBar.get_global_rect().size.y/2
+	var threshold_x_position = $UI/ComboBar.get_global_rect().position.x + $UI/ComboBar.get_global_rect().size.x * combo_threshold / combo_max_value
+	$comb_threshold.position = Vector2(threshold_x_position, combo_y_position)
+
 func update_trash_cans():
 	var pickable = false
 	for trash in trash_cans:
@@ -124,13 +142,18 @@ func _on_new_beat():
 			starting_pattern = false
 
 func add_combo(value):
-	combo = clampf(combo + value, combo_min_value, combo_max_value)
+	var new_combo = clampf(combo + value, combo_min_value, combo_max_value)
+	if new_combo < combo_threshold and combo >= combo_threshold:
+		$SurvivalTimer.start()
+	if new_combo >= combo_threshold and combo < combo_threshold:
+		$SurvivalTimer.stop()
+	combo = new_combo
 
 func _on_pattern_success():
 	pickable_trash.is_empty = true
 	pickable_trash = null
 	score += 50
-	add_combo(25)
+	add_combo(combo_point_pattern_success)
 	in_pattern = false
 	$truck.start()
 
@@ -139,15 +162,18 @@ func _on_pattern_failure():
 	pickable_trash = null
 	in_pattern = false
 	$truck.start()
-	add_combo(-5)
+	add_combo(combo_point_qte_failure)
 
 func _on_qte_success(precision:float):
 	score += 10 * (1.0 - precision)
-	add_combo(10 * (1.0 - precision))
+	add_combo(combo_point_qte_success * (1.0 - precision))
 
 func _on_missed_trash():
 	pickable_trash = false
-	add_combo(-3)
+	add_combo(combo_point_trash_missed)
 
 func _on_truck_start():
 	is_truck_moving = true
+
+func _on_survival_timer_timeout():
+	print("GAME OVER")

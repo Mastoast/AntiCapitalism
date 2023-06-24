@@ -5,7 +5,7 @@ extends Node2D
 @export var arc_width := 10
 @export var arc_color := Color.RED
 @export var arc_valid_color := Color.GREEN
-@export var max_input_delay := 0.15
+@export var max_input_delay := 0.3
 
 signal qte_succeed
 signal qte_failed
@@ -42,7 +42,7 @@ func _ready():
 	current_arc_color = arc_color
 
 func _process(delta):
-	if counter > timer + max_input_delay:
+	if counter > timer + StaticMusic.beat_length * max_input_delay:
 		self.fail()
 	counter = StaticMusic.get_player_total_position() - creation_time
 	if is_input_valid():
@@ -63,7 +63,7 @@ func _draw():
 #		angle, point_count, arc_color, arc_width, false)
 
 func is_input_valid():
-	return absf(timer - counter) < max_input_delay
+	return absf(timer - counter) < StaticMusic.beat_length * max_input_delay
 
 func try_input(event):
 	if event.is_action_pressed(expected_action) and is_input_valid():
