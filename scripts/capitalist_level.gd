@@ -1,8 +1,12 @@
 extends Node2D
 
-@export var combo_decrease_speed = 5.0
+@export_category("Game feel")
 @export var truck_speed = 3.0
-@export var pickup_distance = 1.0
+@export var trash_pickup_distance = 1.0
+@export var music_pitch = 1.0
+
+@export_category("Scoring")
+@export var combo_bar_decrease_speed = 5.0
 
 var trash_can = load("res://objects/trash_can.tscn")
 
@@ -34,7 +38,7 @@ var pattern_player: PatternPlayer
 
 func _ready():
 	randomize()
-	StaticMusic.play(StaticMusic.music1, 1.0)
+	StaticMusic.play(StaticMusic.music1, music_pitch)
 	StaticMusic.new_beat.connect(_on_new_beat)
 	load_level(level1)
 	pattern_player = $PatternPlayer
@@ -48,7 +52,7 @@ func _ready():
 func _process(delta):
 	var current_time = StaticMusic.get_player_total_position()
 	var music_delta = current_time - previous_time
-	add_combo( -combo_decrease_speed * music_delta)
+	add_combo( -combo_bar_decrease_speed * music_delta)
 	#
 	if is_truck_moving:
 		distance += truck_speed * music_delta
@@ -108,7 +112,7 @@ func update_trash_cans():
 			var ratio = 1 - truck_distance / (min_trash_distance - truck_distance)
 			trash.position = $TrashDespawn.position.lerp($TrashInteraction.position, clampf(ratio, 0, 1))
 		#
-		if not trash.is_empty and absf(truck_distance) < pickup_distance:
+		if not trash.is_empty and absf(truck_distance) < trash_pickup_distance:
 			pickable = true
 			pickable_trash = trash
 	# missed trash
