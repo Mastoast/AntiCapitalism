@@ -40,10 +40,10 @@ func _ready():
 	randomize()
 	StaticMusic.play(StaticMusic.music1, music_pitch)
 	StaticMusic.new_beat.connect(_on_new_beat)
+	$truck.started.connect(_on_truck_start)
 	load_level(level1)
 	pattern_player = $PatternPlayer
-	is_truck_moving = true
-	$truck.drive()
+	$truck.start()
 	pattern_player.pattern_succeeded.connect(_on_pattern_success)
 	pattern_player.pattern_failed.connect(_on_pattern_failure)
 	pattern_player.qte_succeeded.connect(_on_qte_success)
@@ -73,14 +73,12 @@ func _input(event):
 func try_start_pattern():
 	if is_truck_moving:
 		is_truck_moving = false
-		$truck.stop()
 		if pickable_trash and !pickable_trash.is_empty:
+			$truck.stop()
 			in_pattern = true
 			starting_pattern = true
-			#$PatternPlayer.start_pattern(pickable_trash.pattern)
-	elif not in_pattern:
-		is_truck_moving = true
-		$truck.drive()
+		else:
+			$truck.start()
 
 func load_level(level):
 	for item in level:
@@ -134,15 +132,13 @@ func _on_pattern_success():
 	score += 50
 	add_combo(25)
 	in_pattern = false
-	is_truck_moving = true
-	$truck.drive()
+	$truck.start()
 
 func _on_pattern_failure():
 	pickable_trash.is_empty = true
 	pickable_trash = null
 	in_pattern = false
-	is_truck_moving = true
-	$truck.drive()
+	$truck.start()
 	add_combo(-5)
 
 func _on_qte_success(precision:float):
@@ -152,3 +148,6 @@ func _on_qte_success(precision:float):
 func _on_missed_trash():
 	pickable_trash = false
 	add_combo(-3)
+
+func _on_truck_start():
+	is_truck_moving = true
