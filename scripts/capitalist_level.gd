@@ -138,6 +138,8 @@ func _on_pattern_success():
 	$truck.drive()
 
 func _on_pattern_failure():
+	pickable_trash.is_empty = true
+	pickable_trash = null
 	in_pattern = false
 	is_truck_moving = true
 	$truck.drive()
