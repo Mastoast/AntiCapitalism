@@ -98,8 +98,6 @@ func load_level(level):
 	for item in level:
 		var trash = trash_can.instantiate()
 		trash.init(item["distance"], item["pattern"], item["sprite"])
-#		trash.global_position = $Marker3D.position
-#		trash.hide()
 		trash.position.x = $Marker3D.position.x
 		trash.position.y = $Marker3D.position.y
 		trash_cans.append(trash)
@@ -115,24 +113,12 @@ func update_trash_cans():
 	var pickable = false
 	for trash in trash_cans:
 		var truck_distance = trash.distance - self.distance
-#		if truck_distance < max_trash_distance:
-#			trash.show()
 		if truck_distance < min_trash_distance:
 			trash_cans.remove_at(trash_cans.bsearch(trash)) 
 			trash.queue_free()
 			continue
-		# visual scaling
-#		var trash_scale = min(1 / absf(truck_distance), 1.0)
-#		trash.scale = Vector2(trash_scale, trash_scale)
 		# position
 		trash.position.z = $Marker3D.position.z - truck_distance
-#		if truck_distance >= 0:
-#			var ratio = 1 - truck_distance / (max_trash_distance - truck_distance)
-#			trash.position = $TrashSpawn.position.lerp($TrashInteraction.position, clampf(ratio, 0, 1))
-#		else:
-#			var ratio = 1 - truck_distance / (min_trash_distance - truck_distance)
-#			trash.position = $TrashDespawn.position.lerp($TrashInteraction.position, clampf(ratio, 0, 1))
-		#
 		if not trash.is_empty and absf(truck_distance) < trash_pickup_distance:
 			pickable = true
 			pickable_trash = trash
@@ -182,4 +168,4 @@ func _on_truck_start():
 
 func _on_survival_timer_timeout():
 	print("GAME OVER")
-	#get_tree().change_scene_to_file("res://scenes/menu.tscn")
+	get_tree().change_scene_to_file("res://scenes/menu.tscn")

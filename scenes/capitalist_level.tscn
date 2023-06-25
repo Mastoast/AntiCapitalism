@@ -101,6 +101,10 @@ region_rect = Rect2(0, -448, 45, 704)
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.203, -0.114, -0.249)
 
+[node name="CSGBox3D" type="CSGBox3D" parent="Marker3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00507951, 0)
+size = Vector3(0.181851, 0.002, 0.144916)
+
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 
 [connection signal="timeout" from="SurvivalTimer" to="." method="_on_survival_timer_timeout"]
