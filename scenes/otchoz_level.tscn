@@ -1,0 +1,118 @@
+[gd_scene load_steps=12 format=3 uid="uid://hnnds01fc3au"]
+
+[ext_resource type="Script" path="res://scripts/otchoz_level.gd" id="1_6tj17"]
+[ext_resource type="Texture2D" uid="uid://d26sjdjtf60pa" path="res://sprites/tiles.png" id="1_m4plf"]
+[ext_resource type="Texture2D" uid="uid://bdtt5ei4ix11l" path="res://sprites/icon.svg" id="2_bkkyb"]
+[ext_resource type="Script" path="res://scripts/truck2D.gd" id="2_dnr5s"]
+[ext_resource type="PackedScene" uid="uid://cacrapbtcy27r" path="res://objects/rythm_visual_helper.tscn" id="5_d703r"]
+[ext_resource type="PackedScene" uid="uid://bj4ndq5wr0mvi" path="res://scenes/pattern_player.tscn" id="6_o3201"]
+[ext_resource type="Texture2D" uid="uid://dmrqdmicvuhcm" path="res://sprites/direction_arrow.png" id="7_bxgvd"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o3nl4"]
+texture = ExtResource("1_m4plf")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 6.5, 8, 6.5, 8, 8, -8, 8)
+0:0/0/physics_layer_0/polygon_1/points = PackedVector2Array(-8, -6, 8, -6, 8, -8, -8, -8)
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -6, -8, -6, 8, -8, 8)
+1:0/0/physics_layer_0/polygon_1/points = PackedVector2Array(6, -8, 8, -8, 8, 8, 6, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, 8, -8, 8, -8, -8, 8, -8, 8, 8, 6, 8, 6, -6, -6, -6)
+3:0/0 = 0
+3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:0/0/physics_layer_0/angular_velocity = 0.0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(6, -8, 6, 6, -8, 6, -8, 8, 8, 8, 8, -8)
+4:0/0 = 0
+4:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:0/0/physics_layer_0/angular_velocity = 0.0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -6, -8, -8, 8, -8, 8, 8, 6, 8, 6, -6)
+5:0/0 = 0
+5:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+5:0/0/physics_layer_0/angular_velocity = 0.0
+6:0/0 = 0
+6:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+6:0/0/physics_layer_0/angular_velocity = 0.0
+7:0/0 = 0
+7:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+7:0/0/physics_layer_0/angular_velocity = 0.0
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+2:1/0 = 0
+2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:1/0/physics_layer_0/angular_velocity = 0.0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -6, -6, -6, -6, 6, 8, 6, 8, 8, -8, 8, -8, -8, 8, -8)
+
+[sub_resource type="TileSet" id="TileSet_a7oir"]
+physics_layer_0/collision_layer = 1
+sources/4 = SubResource("TileSetAtlasSource_o3nl4")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hclmx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_11pov"]
+
+[node name="Otchoz" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_6tj17")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_a7oir")
+format = 2
+layer_0/tile_data = PackedInt32Array(196612, 4, 0, 196613, 4, 0, 196614, 4, 0, 196615, 4, 0, 196616, 4, 0, 196617, 4, 0, 196618, 4, 0, 196619, 4, 0, 196620, 4, 0, 196621, 4, 0, 196622, 262148, 0, 262158, 65540, 0, 327694, 65540, 0, 393230, 65540, 0, 458766, 65540, 0, 524302, 65540, 0, 262148, 458756, 0, 262149, 458756, 0, 262150, 458756, 0, 262151, 458756, 0, 262152, 458756, 0, 262153, 458756, 0, 262154, 458756, 0, 262155, 458756, 0, 262156, 458756, 0, 262157, 458756, 0, 327693, 458756, 0, 393229, 458756, 0, 393228, 458756, 0, 393227, 458756, 0, 393226, 458756, 0, 393225, 458756, 0, 393224, 458756, 0, 393223, 458756, 0, 393222, 458756, 0, 327686, 458756, 0, 327685, 458756, 0, 327684, 458756, 0, 327687, 458756, 0, 327688, 458756, 0, 327689, 458756, 0, 327690, 458756, 0, 327691, 458756, 0, 327692, 458756, 0, 393221, 458756, 0, 393220, 458756, 0, 131076, 458756, 0, 131077, 458756, 0, 131078, 458756, 0, 131079, 458756, 0, 131080, 458756, 0, 131081, 458756, 0, 131082, 458756, 0, 131083, 458756, 0, 131084, 458756, 0, 131085, 458756, 0, 131086, 458756, 0, 131087, 458756, 0, 196623, 458756, 0, 262159, 458756, 0, 327695, 458756, 0, 393231, 458756, 0, 393232, 458756, 0, 458768, 458756, 0, 524304, 458756, 0, 524303, 458756, 0, 458767, 458756, 0, 589840, 458756, 0, 655376, 458756, 0, 720912, 458756, 0, 720911, 458756, 0, 655375, 458756, 0, 589838, 65540, 0, 655374, 65540, 0, 720910, 196612, 0, 720909, 4, 0, 720908, 4, 0, 720907, 4, 0, 720906, 4, 0, 720905, 4, 0, 720904, 4, 0, 720903, 4, 0, 720902, 4, 0, 720901, 4, 0, 720900, 4, 0, 720899, 131076, 1, 196611, 131076, 1, 458765, 458756, 0, 458764, 458756, 0, 458763, 458756, 0, 458762, 458756, 0, 458761, 458756, 0, 458760, 458756, 0, 458759, 458756, 0, 458758, 458756, 0, 458757, 458756, 0, 458756, 458756, 0, 458755, 458756, 0, 458754, 458756, 0, 524290, 458756, 0, 524289, 458756, 0, 589826, 458756, 0, 589827, 458756, 0, 655363, 458756, 0, 655364, 458756, 0, 655365, 458756, 0, 655366, 458756, 0, 655367, 458756, 0, 655368, 458756, 0, 655369, 458756, 0, 589833, 458756, 0, 589834, 458756, 0, 589835, 458756, 0, 589836, 458756, 0, 655372, 458756, 0, 655373, 458756, 0, 655371, 458756, 0, 655370, 458756, 0, 589837, 458756, 0, 524301, 458756, 0, 524298, 458756, 0, 524297, 458756, 0, 524296, 458756, 0, 589832, 458756, 0, 589831, 458756, 0, 589830, 458756, 0, 589829, 458756, 0, 589828, 458756, 0, 524291, 458756, 0, 524292, 458756, 0, 524293, 458756, 0, 524294, 458756, 0, 524295, 458756, 0, 524299, 458756, 0, 524300, 458756, 0, 589839, 458756, 0, 589841, 458756, 0, 524305, 458756, 0, 524306, 458756, 0, 458770, 458756, 0, 393234, 458756, 0)
+layer_1/name = ""
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 0
+layer_1/tile_data = PackedInt32Array()
+
+[node name="truck2D" type="Node2D" parent="."]
+position = Vector2(50, 50)
+script = ExtResource("2_dnr5s")
+
+[node name="Sprite2D" type="Sprite2D" parent="truck2D"]
+position = Vector2(6, 6)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_bkkyb")
+
+[node name="RayCast2D" type="RayCast2D" parent="truck2D"]
+position = Vector2(6, 6)
+target_position = Vector2(0, 16)
+
+[node name="Area2D" type="Area2D" parent="truck2D"]
+position = Vector2(6, 6)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="truck2D/Area2D"]
+shape = SubResource("CircleShape2D_hclmx")
+
+[node name="rythm_helper" parent="." instance=ExtResource("5_d703r")]
+position = Vector2(528.5, 278.5)
+scale = Vector2(0.582031, 0.582031)
+
+[node name="PatternPlayer" parent="." instance=ExtResource("6_o3201")]
+
+[node name="trash2D" type="Node2D" parent="."]
+position = Vector2(72, 40)
+
+[node name="Sprite2D" type="Sprite2D" parent="trash2D"]
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("7_bxgvd")
+
+[node name="Area2D" type="Area2D" parent="trash2D"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="trash2D/Area2D"]
+shape = SubResource("CircleShape2D_11pov")
