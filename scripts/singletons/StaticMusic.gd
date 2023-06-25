@@ -22,7 +22,7 @@ func _ready():
 	pass
 
 func _process(delta):
-	if player and player.playing:
+	if player != null and player.playing:
 		if player.get_playback_position() < last_player_position:
 			loop_count += 1
 #			print("LOOP: ", loop_count)

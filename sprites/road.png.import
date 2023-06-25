@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdtt5ei4ix11l"
-path.s3tc="res://.godot/imported/icon.svg-964d8c66fbd3bda40c44ca195472a8e1.s3tc.ctex"
+uid="uid://dgsamkr00cv2i"
+path.s3tc="res://.godot/imported/road.png-fc10919831f1098332bbf00f955cabc5.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://sprites/icon.svg"
-dest_files=["res://.godot/imported/icon.svg-964d8c66fbd3bda40c44ca195472a8e1.s3tc.ctex"]
+source_file="res://sprites/road.png"
+dest_files=["res://.godot/imported/road.png-fc10919831f1098332bbf00f955cabc5.s3tc.ctex"]
 
 [params]
 
@@ -33,6 +33,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=0
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

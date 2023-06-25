@@ -4,13 +4,15 @@ extends Node2D
 @export var max_point_count := 80
 @export var arc_width := 10
 @export var arc_color := Color.RED
-@export var max_input_delay := 0.15
+@export var arc_valid_color := Color.GREEN
+@export var max_input_delay := 0.3
 
 signal qte_succeed
 signal qte_failed
 
 var arrow_texture = load("res://sprites/direction_arrow.png")
 var e_texture = load("res://sprites/e_action.png")
+var current_arc_color : Color
 
 const sprite_dict = {
 	"input_up" : {"rotation": 0},
@@ -37,16 +39,16 @@ func init(timer:float = timer, action:String = expected_action):
 	$Sprite.rotation_degrees = sprite_dict[action]["rotation"]
 
 func _ready():
-	pass
+	current_arc_color = arc_color
 
 func _process(delta):
-	if counter > timer + max_input_delay:
+	if counter > timer + StaticMusic.beat_length * max_input_delay:
 		self.fail()
 	counter = StaticMusic.get_player_total_position() - creation_time
 	if is_input_valid():
-		arc_color = Color.GREEN
+		current_arc_color = arc_valid_color
 	else:
-		arc_color = Color.RED
+		current_arc_color = arc_color
 	queue_redraw()
 
 func _draw():
@@ -56,12 +58,12 @@ func _draw():
 	draw_arc( self.global_position - self.position, radius, 0.0,
 		2*PI, max_point_count, Color(1.0, 1.0, 1.0, 0.3), arc_width, false)
 	draw_arc( self.global_position - self.position, radius + radius * (2 * maxf(qte_ratio, 0)), 0.0,
-		2*PI, max_point_count, Color(arc_color.r, arc_color.g, arc_color.b, 1 - qte_ratio), arc_width, false)
+		2*PI, max_point_count, Color(current_arc_color.r, current_arc_color.g, current_arc_color.b, 1 - qte_ratio), arc_width, false)
 #	draw_arc( self.global_position - self.position, radius, 0.0,
 #		angle, point_count, arc_color, arc_width, false)
 
 func is_input_valid():
-	return absf(timer - counter) < max_input_delay
+	return absf(timer - counter) < StaticMusic.beat_length * max_input_delay
 
 func try_input(event):
 	if event.is_action_pressed(expected_action) and is_input_valid():

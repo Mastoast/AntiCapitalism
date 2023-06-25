@@ -1,4 +1,4 @@
-extends Node2D
+extends Node3D
 
 var distance
 var pattern
@@ -9,7 +9,7 @@ func init(distance, pattern, sprite):
 	self.distance = distance
 	self.pattern = pattern
 	self.sprite = sprite
-	$Sprite2D.modulate = sprite
+	$Sprite.modulate = sprite
 
 func _ready():
 	pass
