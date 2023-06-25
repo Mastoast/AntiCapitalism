@@ -37,12 +37,12 @@ var trash_cans = []
 
 var combo_threshold = 15.0
 var level1 = [
-	{"distance": 5.0, "sprite": Color.GREEN_YELLOW, "pattern": Pattern.pattern1},
-	{"distance": 10.0, "sprite": Color.MIDNIGHT_BLUE, "pattern": Pattern.pattern2},
-	{"distance": 20.0, "sprite": Color.GREEN_YELLOW, "pattern": Pattern.pattern1},
-	{"distance": 23.0, "sprite": Color.BLUE_VIOLET, "pattern": Pattern.pattern3},
-	{"distance": 28.0, "sprite": Color.DARK_RED, "pattern": Pattern.pattern4},
-	{"distance": 28.0, "sprite": Color.DARK_GREEN, "pattern": Pattern.pattern5},
+	{"distance": 1.0, "sprite": Color.GREEN_YELLOW, "pattern": Pattern.pattern1},
+	{"distance": 2.0, "sprite": Color.MIDNIGHT_BLUE, "pattern": Pattern.pattern2},
+	{"distance": 3.0, "sprite": Color.GREEN_YELLOW, "pattern": Pattern.pattern1},
+	{"distance": 5.0, "sprite": Color.BLUE_VIOLET, "pattern": Pattern.pattern3},
+	{"distance": 6.0, "sprite": Color.DARK_RED, "pattern": Pattern.pattern4},
+	{"distance": 6.5, "sprite": Color.DARK_GREEN, "pattern": Pattern.pattern5},
 ]
 
 var pattern_player: PatternPlayer  

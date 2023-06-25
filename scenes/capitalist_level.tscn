@@ -10,9 +10,9 @@
 
 [node name="capitalist_level" type="Node3D"]
 script = ExtResource("1_2kj73")
-truck_speed = 2.0
-trash_pickup_distance = 0.2
-combo_bar_decrease_speed = 2.0
+truck_speed = 0.5
+trash_pickup_distance = 0.5
+combo_bar_decrease_speed = 0.0
 
 [node name="Camera" type="Camera3D" parent="."]
 current = true
