@@ -1,4 +1,4 @@
-extends Node2D
+extends Node3D
 
 @export_category("Game feel")
 @export var truck_speed = 3.0
@@ -20,7 +20,7 @@ extends Node2D
 var trash_can = load("res://objects/trash_can.tscn")
 
 var previous_time = 0.0
-var distance = 0.0
+var distance := 0.0
 var score = 0
 var combo = 20.0
 var combo_min_value = 0.0
@@ -70,6 +70,7 @@ func _process(delta):
 	if is_truck_moving:
 		distance += truck_speed * music_delta
 		update_trash_cans()
+	$Road.offset.y = -int(distance * 20.0) % $Road.texture.get_height()
 	#
 	$UI/ScoreText.text = str(int(score))
 	$UI/ComboBar.value = combo
@@ -97,10 +98,13 @@ func load_level(level):
 	for item in level:
 		var trash = trash_can.instantiate()
 		trash.init(item["distance"], item["pattern"], item["sprite"])
-		trash.global_position = $TrashSpawn.position
-		trash.hide()
+#		trash.global_position = $Marker3D.position
+#		trash.hide()
+		trash.position.x = $Marker3D.position.x
+		trash.position.y = $Marker3D.position.y
 		trash_cans.append(trash)
 		add_child(trash)
+	update_trash_cans()
 
 func setup_combo_threshold():
 	var combo_y_position = $UI/ComboBar.get_global_rect().position.y + $UI/ComboBar.get_global_rect().size.y/2
@@ -111,22 +115,23 @@ func update_trash_cans():
 	var pickable = false
 	for trash in trash_cans:
 		var truck_distance = trash.distance - self.distance
-		if truck_distance < max_trash_distance:
-			trash.show()
+#		if truck_distance < max_trash_distance:
+#			trash.show()
 		if truck_distance < min_trash_distance:
 			trash_cans.remove_at(trash_cans.bsearch(trash)) 
 			trash.queue_free()
 			continue
 		# visual scaling
-		var trash_scale = min(1 / absf(truck_distance), 1.0)
-		trash.scale = Vector2(trash_scale, trash_scale)
+#		var trash_scale = min(1 / absf(truck_distance), 1.0)
+#		trash.scale = Vector2(trash_scale, trash_scale)
 		# position
-		if truck_distance >= 0:
-			var ratio = 1 - truck_distance / (max_trash_distance - truck_distance)
-			trash.position = $TrashSpawn.position.lerp($TrashInteraction.position, clampf(ratio, 0, 1))
-		else:
-			var ratio = 1 - truck_distance / (min_trash_distance - truck_distance)
-			trash.position = $TrashDespawn.position.lerp($TrashInteraction.position, clampf(ratio, 0, 1))
+		trash.position.z = $Marker3D.position.z - truck_distance
+#		if truck_distance >= 0:
+#			var ratio = 1 - truck_distance / (max_trash_distance - truck_distance)
+#			trash.position = $TrashSpawn.position.lerp($TrashInteraction.position, clampf(ratio, 0, 1))
+#		else:
+#			var ratio = 1 - truck_distance / (min_trash_distance - truck_distance)
+#			trash.position = $TrashDespawn.position.lerp($TrashInteraction.position, clampf(ratio, 0, 1))
 		#
 		if not trash.is_empty and absf(truck_distance) < trash_pickup_distance:
 			pickable = true
@@ -177,4 +182,4 @@ func _on_truck_start():
 
 func _on_survival_timer_timeout():
 	print("GAME OVER")
-	get_tree().change_scene_to_file("res://scenes/menu.tscn")
+	#get_tree().change_scene_to_file("res://scenes/menu.tscn")
