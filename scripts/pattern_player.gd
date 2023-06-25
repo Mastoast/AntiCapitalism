@@ -16,7 +16,7 @@ var expected_actions = [
 
 var buffer_qte = []
 var pattern_start
-var last_pos = Vector2(200, 200)
+var last_pos
 var qte_count = 0
 
 #func _ready():
@@ -57,8 +57,8 @@ func _input(event):
 func spawn_qte_on_time():
 	if !buffer_qte.is_empty():
 		if StaticMusic.get_player_total_position() >= pattern_start + buffer_qte[0]["delay"] * StaticMusic.beat_length - buffer_qte[0]["timer"] * StaticMusic.beat_length:
-			spawn_qte(StaticMusic.beat_length * buffer_qte[0]["timer"], last_pos, buffer_qte[0]["input"])
-			last_pos.x = 200 + (int)(last_pos.x + 100) % 800
+			spawn_qte(StaticMusic.beat_length * buffer_qte[0]["timer"], buffer_qte[0]["position"], buffer_qte[0]["input"])
+#			last_pos.x = 200 + (int)(last_pos.x + 100) % 800
 			buffer_qte.pop_front()
 
 func spawn_qte(timer, position, input):
