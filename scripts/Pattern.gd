@@ -53,9 +53,3 @@ const pattern5 = [
 	{"input": "input_up"	, "delay": 2/3, 	"position": Vector2(200, 200), "timer": 1.0},
 	{"input": "input_right"	, "delay": 0.0, 	"position": Vector2(300, 200), "timer": 1.0},
 ]
-
-func _ready():
-	pass
-
-func _process(delta):
-	pass

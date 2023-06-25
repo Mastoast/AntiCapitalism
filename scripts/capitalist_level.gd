@@ -36,14 +36,6 @@ var min_trash_distance = -3.0
 var trash_cans = []
 
 var combo_threshold = 15.0
-var level1 = [
-	{"distance": 1.0, "sprite": Color.GREEN_YELLOW, "pattern": Pattern.pattern1},
-	{"distance": 2.0, "sprite": Color.MIDNIGHT_BLUE, "pattern": Pattern.pattern1},
-	{"distance": 3.0, "sprite": Color.GREEN_YELLOW, "pattern": Pattern.pattern1},
-	{"distance": 5.0, "sprite": Color.BLUE_VIOLET, "pattern": Pattern.pattern1},
-	{"distance": 6.0, "sprite": Color.DARK_RED, "pattern": Pattern.pattern1},
-	{"distance": 6.5, "sprite": Color.DARK_GREEN, "pattern": Pattern.pattern1},
-]
 
 var pattern_player: PatternPlayer  
 
@@ -52,7 +44,7 @@ func _ready():
 	StaticMusic.play(StaticMusic.music1, music_pitch)
 	StaticMusic.new_beat.connect(_on_new_beat)
 	$truck.started.connect(_on_truck_start)
-	load_level(level1)
+	load_level(Level.level1)
 	$SurvivalTimer.wait_time = threshold_survival_time
 	setup_combo_threshold()
 	pattern_player = $PatternPlayer

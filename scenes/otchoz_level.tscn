@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://hnnds01fc3au"]
+[gd_scene load_steps=10 format=3 uid="uid://hnnds01fc3au"]
 
 [ext_resource type="Script" path="res://scripts/otchoz_level.gd" id="1_6tj17"]
 [ext_resource type="Texture2D" uid="uid://d26sjdjtf60pa" path="res://sprites/tiles.png" id="1_m4plf"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://scripts/truck2D.gd" id="2_dnr5s"]
 [ext_resource type="PackedScene" uid="uid://cacrapbtcy27r" path="res://objects/rythm_visual_helper.tscn" id="5_d703r"]
 [ext_resource type="PackedScene" uid="uid://bj4ndq5wr0mvi" path="res://scenes/pattern_player.tscn" id="6_o3201"]
-[ext_resource type="Texture2D" uid="uid://dmrqdmicvuhcm" path="res://sprites/direction_arrow.png" id="7_bxgvd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o3nl4"]
 texture = ExtResource("1_m4plf")
@@ -58,8 +57,6 @@ sources/4 = SubResource("TileSetAtlasSource_o3nl4")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hclmx"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_11pov"]
-
 [node name="Otchoz" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_6tj17")
@@ -102,17 +99,3 @@ position = Vector2(528.5, 278.5)
 scale = Vector2(0.582031, 0.582031)
 
 [node name="PatternPlayer" parent="." instance=ExtResource("6_o3201")]
-
-[node name="trash2D" type="Node2D" parent="."]
-position = Vector2(72, 40)
-
-[node name="Sprite2D" type="Sprite2D" parent="trash2D"]
-scale = Vector2(0.06, 0.06)
-texture = ExtResource("7_bxgvd")
-
-[node name="Area2D" type="Area2D" parent="trash2D"]
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="trash2D/Area2D"]
-shape = SubResource("CircleShape2D_11pov")
