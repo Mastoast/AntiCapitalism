@@ -19,17 +19,28 @@ var pattern_start
 var last_pos = Vector2(200, 200)
 var qte_count = 0
 
-#func _ready():
-#	# DEBUG
-#	StaticMusic.play(StaticMusic.music1, 1.0)
-#	start_pattern(Pattern.pattern1)
-#	# DEBUG
+func _ready():
+	# DEBUG
+	StaticMusic.play(StaticMusic.music1, 1.0)
+	start_pattern(Pattern.pattern1)
+	# DEBUG
 
 func start_pattern(pattern):
 	qte_count = 0
 	last_pos = Vector2(200, 200)
 	buffer_qte = pattern.duplicate(true)
+	
+	sort_qte()			
 	pattern_start = StaticMusic.get_player_total_position()
+
+func sort_qte():
+	var cummul = 0.0;
+	for n in buffer_qte:
+		print(n)
+		cummul += n["delay"]
+		n["delay"] = cummul - n["timer"]
+	buffer_qte.sort_custom(func(a,b): return a["delay"] < b["delay"])	
+	
 
 func stop_current_pattern():
 	qte_count = 0
@@ -56,7 +67,7 @@ func _input(event):
 
 func spawn_qte_on_time():
 	if !buffer_qte.is_empty():
-		if StaticMusic.get_player_total_position() >= pattern_start + buffer_qte[0]["delay"] * StaticMusic.beat_length - buffer_qte[0]["timer"] * StaticMusic.beat_length:
+		if StaticMusic.get_player_total_position() >= pattern_start + buffer_qte[0]["delay"] * StaticMusic.beat_length:
 			spawn_qte(StaticMusic.beat_length * buffer_qte[0]["timer"], last_pos, buffer_qte[0]["input"])
 			last_pos.x = 200 + (int)(last_pos.x + 100) % 800
 			buffer_qte.pop_front()
