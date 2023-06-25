@@ -19,11 +19,11 @@ var pattern_start
 var last_pos
 var qte_count = 0
 
-func _ready():
-	# DEBUG
-	StaticMusic.play(StaticMusic.music1, 1.0)
-	start_pattern(Pattern.pattern1)
-	# DEBUG
+#func _ready():
+#	# DEBUG
+#	StaticMusic.play(StaticMusic.music1, 1.0)
+#	start_pattern(Pattern.pattern1)
+#	# DEBUG
 
 func start_pattern(pattern):
 	qte_count = 0
