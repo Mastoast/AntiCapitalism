@@ -2,12 +2,12 @@ class_name Pattern extends Node
 
 const pattern1 = [
 	{"input": "input_left"	, "delay": 2.0, 	"position": Vector2(1200.0, 880.0), "timer": 2.0},
-	{"input": "input_action", "delay": 1.0, 	"position": Vector2(350.0, 880.0), "timer": 3.0},
+	{"input": "input_action", "delay": 1.0, 	"position": Vector2(350.0, 880.0), "timer": 2.0},
 	{"input": "input_down"	, "delay": 2.0, 	"position": Vector2(350.0, 300.0), "timer": 2.0},
 	{"input": "input_right"	, "delay": 0.0, 	"position": Vector2(400.0, 250.0), "timer": 2.0},
-	{"input": "input_up"	, "delay": 1.0, 	"position": Vector2(600.0, 350.0), "timer": 2.0},
+	{"input": "input_up"	, "delay": 1.0, 	"position": Vector2(600.0, 400.0), "timer": 2.0},
 	{"input": "input_down"	, "delay": 1.0, 	"position": Vector2(800.0, 250.0), "timer": 2.0},
-	{"input": "input_up"	, "delay": 1.0, 	"position": Vector2(1000.0, 350.0), "timer": 2.0},
+	{"input": "input_up"	, "delay": 1.0, 	"position": Vector2(1000.0, 400.0), "timer": 2.0},
 	{"input": "input_action", "delay": 1.0, 	"position": Vector2(1200.0, 250.0), "timer": 2.0},
 	{"input": "input_right"	, "delay": 2.0, 	"position": Vector2(1200.0, 880.0), "timer": 3.0},
 ]
