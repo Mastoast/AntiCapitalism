@@ -68,7 +68,7 @@ func _input(event):
 func spawn_qte_on_time():
 	if !buffer_qte.is_empty():
 		if StaticMusic.get_player_total_position() >= pattern_start + buffer_qte[0]["delay"] * StaticMusic.beat_length:
-			spawn_qte(StaticMusic.beat_length * buffer_qte[0]["timer"], last_pos, buffer_qte[0]["input"])
+			spawn_qte(StaticMusic.beat_length * buffer_qte[0]["timer"], buffer_qte[0]["position"], buffer_qte[0]["input"])
 #			last_pos.x = 200 + (int)(last_pos.x + 100) % 800
 			buffer_qte.pop_front()
 
