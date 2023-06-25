@@ -6,6 +6,8 @@ extends Node2D
 @export var arc_color := Color.RED
 @export var arc_valid_color := Color.GREEN
 @export var max_input_delay := 0.3
+@export var min_input_delay := -0.3
+@export var arc_size_per_beat := 3.0
 
 signal qte_succeed
 signal qte_failed
@@ -57,13 +59,15 @@ func _draw():
 	var point_count = max_point_count - (qte_ratio * max_point_count)
 	draw_arc( self.global_position - self.position, radius, 0.0,
 		2*PI, max_point_count, Color(1.0, 1.0, 1.0, 0.3), arc_width, false)
-	draw_arc( self.global_position - self.position, radius + radius * (2 * maxf(qte_ratio, 0)), 0.0,
+	draw_arc( self.global_position - self.position, radius + radius * (arc_size_per_beat * maxf(qte_ratio, 0)), 0.0,
 		2*PI, max_point_count, Color(current_arc_color.r, current_arc_color.g, current_arc_color.b, 1 - qte_ratio), arc_width, false)
 #	draw_arc( self.global_position - self.position, radius, 0.0,
 #		angle, point_count, arc_color, arc_width, false)
 
 func is_input_valid():
-	return absf(timer - counter) < StaticMusic.beat_length * max_input_delay
+	if(timer - counter > 0.0):
+		return timer - counter < StaticMusic.beat_length * max_input_delay
+	return timer - counter > StaticMusic.beat_length * min_input_delay
 
 func try_input(event):
 	if event.is_action_pressed(expected_action) and is_input_valid():

@@ -5,6 +5,8 @@
 
 [node name="qte" type="Node2D" groups=["qte"]]
 script = ExtResource("1_aenkx")
+radius = 60.0
+max_input_delay = 0.5
 
 [node name="TextEdit" type="TextEdit" parent="."]
 visible = false
@@ -21,5 +23,5 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Sprite" type="Sprite2D" parent="."]
-scale = Vector2(0.4, 0.4)
+scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_2v87f")

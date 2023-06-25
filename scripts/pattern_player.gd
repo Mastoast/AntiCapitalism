@@ -19,11 +19,11 @@ var pattern_start
 var last_pos
 var qte_count = 0
 
-func _ready():
-	# DEBUG
-	StaticMusic.play(StaticMusic.music1, 1.0)
-	start_pattern(Pattern.pattern1)
-	# DEBUG
+#func _ready():
+#	# DEBUG
+#	StaticMusic.play(StaticMusic.music1, 1.0)
+#	start_pattern(Pattern.pattern1)
+#	# DEBUG
 
 func start_pattern(pattern):
 	qte_count = 0
@@ -75,7 +75,8 @@ func spawn_qte_on_time():
 func spawn_qte(timer, position, input):
 	var new_qte = qte.instantiate()
 	new_qte.init(timer, input)
-	new_qte.position = position
+	new_qte.position = Vector2(position.x * ProjectSettings.get_setting("display/window/size/viewport_width") / 1920.0,
+							   position.y * ProjectSettings.get_setting("display/window/size/viewport_height") / 1080.0)
 	new_qte.qte_succeed.connect(_on_qte_success)
 	new_qte.qte_failed.connect(_on_qte_failure)
 	add_child(new_qte)
