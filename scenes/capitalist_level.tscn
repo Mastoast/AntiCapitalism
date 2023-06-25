@@ -10,8 +10,9 @@
 
 [node name="capitalist_level" type="Node3D"]
 script = ExtResource("1_2kj73")
-truck_speed = 1.0
+truck_speed = 2.0
 trash_pickup_distance = 0.2
+combo_bar_decrease_speed = 2.0
 
 [node name="Camera" type="Camera3D" parent="."]
 current = true
@@ -68,15 +69,6 @@ offset_bottom = 147.0
 
 [node name="truck" parent="." instance=ExtResource("3_dewsc")]
 position = Vector2(538, 364)
-
-[node name="TrashSpawn" type="Marker2D" parent="."]
-position = Vector2(556, -112)
-
-[node name="TrashInteraction" type="Marker2D" parent="."]
-position = Vector2(798, 423)
-
-[node name="TrashDespawn" type="Marker2D" parent="."]
-position = Vector2(926, 756)
 
 [node name="rythm_helper" parent="." instance=ExtResource("4_42vja")]
 position = Vector2(90, 562)
