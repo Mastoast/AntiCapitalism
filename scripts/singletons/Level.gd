@@ -56,8 +56,8 @@ var capitalism_levels = [level1, level2]
 
 var level2d = {
 	"music": StaticMusic.music1, "pitch": 1.0,
-	"trashes": [
-	{"position": Vector2(72, 40), "pattern": Pattern.pattern2}
-]}
+	"patterns": [Pattern.pattern1, Pattern.pattern2],
+	"trash_count": 2
+}
 
 var otchoz_levels = [level2d]
