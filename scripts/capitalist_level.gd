@@ -52,6 +52,7 @@ func _ready():
 	pattern_player.pattern_succeeded.connect(_on_pattern_success)
 	pattern_player.pattern_failed.connect(_on_pattern_failure)
 	pattern_player.qte_succeeded.connect(_on_qte_success)
+	$UI/TransitionLayer.wake_transition(func(): pass)
 
 
 func _process(delta):
@@ -67,7 +68,6 @@ func _process(delta):
 	$UI/ScoreText.text = str(int(score))
 	$UI/ComboBar.value = combo
 	$UI/PickUpInstruction.visible = pickable_trash and not in_pattern
-	$UI/debug_distance.text = "distance : " + str(distance)
 	previous_time = current_time
 
 func _input(event):
@@ -160,4 +160,5 @@ func _on_truck_start():
 
 func _on_survival_timer_timeout():
 	print("GAME OVER")
-	get_tree().change_scene_to_file("res://scenes/menu.tscn")
+	$UI/TransitionLayer.sleep_transition(func(): get_tree().change_scene_to_file("res://scenes/menu.tscn"))
+	

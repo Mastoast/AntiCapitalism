@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cnp4dmlfkp0m6"]
+[gd_scene load_steps=9 format=3 uid="uid://cnp4dmlfkp0m6"]
 
 [ext_resource type="Script" path="res://scripts/capitalist_level.gd" id="1_2kj73"]
 [ext_resource type="Theme" uid="uid://ced1k3bls70p" path="res://themes/arcade_theme.tres" id="2_0yje6"]
+[ext_resource type="PackedScene" uid="uid://blgqa2l8xh3dk" path="res://objects/transition_layer.tscn" id="2_8mmi8"]
 [ext_resource type="PackedScene" uid="uid://bj4ndq5wr0mvi" path="res://scenes/pattern_player.tscn" id="3_1evdy"]
 [ext_resource type="PackedScene" uid="uid://hj1g0iynj4o4" path="res://objects/truck.tscn" id="3_dewsc"]
 [ext_resource type="PackedScene" uid="uid://cacrapbtcy27r" path="res://objects/rythm_visual_helper.tscn" id="4_42vja"]
@@ -12,7 +13,7 @@
 script = ExtResource("1_2kj73")
 truck_speed = 0.5
 trash_pickup_distance = 0.5
-combo_bar_decrease_speed = 0.0
+combo_bar_decrease_speed = 10.0
 
 [node name="Camera" type="Camera3D" parent="."]
 current = true
@@ -60,12 +61,7 @@ offset_bottom = 444.0
 bbcode_enabled = true
 text = "[tornado radius=1.0 freq=2.0][center][shake rate=35.0 level=10]PRESS SPACE TO PICKUP TRASH[/shake][/center][/tornado]"
 
-[node name="debug_distance" type="TextEdit" parent="UI"]
-layout_mode = 0
-offset_left = 26.0
-offset_top = 92.0
-offset_right = 261.0
-offset_bottom = 147.0
+[node name="TransitionLayer" parent="UI" instance=ExtResource("2_8mmi8")]
 
 [node name="truck" parent="." instance=ExtResource("3_dewsc")]
 position = Vector2(538, 364)

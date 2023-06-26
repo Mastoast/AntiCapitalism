@@ -28,6 +28,7 @@ func _ready():
 	pattern_player.pattern_succeeded.connect(_on_pattern_success)
 	pattern_player.pattern_failed.connect(_on_pattern_failure)
 	pattern_player.qte_succeeded.connect(_on_qte_success)
+	$TransitionLayer.wake_transition(func(): pass)
 
 func load_level(level):
 	StaticMusic.play(level["music"], level["pitch"])

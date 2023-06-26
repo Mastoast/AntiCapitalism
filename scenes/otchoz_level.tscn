@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://hnnds01fc3au"]
+[gd_scene load_steps=11 format=3 uid="uid://hnnds01fc3au"]
 
 [ext_resource type="Script" path="res://scripts/otchoz_level.gd" id="1_6tj17"]
 [ext_resource type="Texture2D" uid="uid://d26sjdjtf60pa" path="res://sprites/tiles.png" id="1_m4plf"]
+[ext_resource type="PackedScene" uid="uid://blgqa2l8xh3dk" path="res://objects/transition_layer.tscn" id="2_2ryk7"]
 [ext_resource type="Texture2D" uid="uid://bdtt5ei4ix11l" path="res://sprites/icon.svg" id="2_bkkyb"]
 [ext_resource type="Script" path="res://scripts/truck2D.gd" id="2_dnr5s"]
 [ext_resource type="PackedScene" uid="uid://cacrapbtcy27r" path="res://objects/rythm_visual_helper.tscn" id="5_d703r"]
@@ -60,6 +61,8 @@ sources/4 = SubResource("TileSetAtlasSource_o3nl4")
 [node name="Otchoz" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_6tj17")
+
+[node name="TransitionLayer" parent="." instance=ExtResource("2_2ryk7")]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_a7oir")
