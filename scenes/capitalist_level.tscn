@@ -12,8 +12,11 @@
 [node name="capitalist_level" type="Node3D"]
 script = ExtResource("1_2kj73")
 truck_speed = 0.5
-trash_pickup_distance = 0.5
-combo_point_trash_missed = -20.0
+trash_pickup_distance = 0.1
+combo_point_qte_success = 1.0
+combo_point_pattern_success = 5.0
+combo_point_qte_failure = -10.0
+combo_point_trash_missed = -15.0
 
 [node name="Camera" type="Camera3D" parent="."]
 current = true
@@ -62,6 +65,18 @@ bbcode_enabled = true
 text = "[tornado radius=1.0 freq=2.0][center][shake rate=35.0 level=10]PRESS SPACE TO PICKUP TRASH[/shake][/center][/tornado]"
 
 [node name="TransitionLayer" parent="UI" instance=ExtResource("2_8mmi8")]
+
+[node name="SurvivalTimerText" type="RichTextLabel" parent="UI"]
+z_index = 50
+layout_mode = 0
+offset_left = 393.0
+offset_top = 256.0
+offset_right = 696.0
+offset_bottom = 386.0
+theme = ExtResource("2_0yje6")
+theme_override_colors/default_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 100
+text = "5.0"
 
 [node name="truck" parent="." instance=ExtResource("3_dewsc")]
 position = Vector2(538, 364)
