@@ -2,6 +2,8 @@ extends Node
 
 var level1 = {
 	"music": StaticMusic.music1, "pitch": 1.0,
+	"combo_bar_start": 20.0, "combo_decrease_speed" : 5.0,
+	"threshold_survival_time" : 5.0, "combo_threshold" : 50.0,
 	"briefs" : [
 		"""[font_size=44][center]02:00 AM
 
@@ -18,6 +20,8 @@ Night 1[/center][/font_size]"""
 
 var level2 = {
 	"music": StaticMusic.music1, "pitch": 1.1,
+	"combo_bar_start": 20.0, "combo_decrease_speed" : 5.0,
+	"threshold_survival_time" : 5.0, "combo_threshold" : 50.0,
 	"briefs" : [
 		"""[font_size=44][center]02:00 AM
 
