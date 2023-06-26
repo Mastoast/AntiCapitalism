@@ -20,6 +20,7 @@ config/icon="res://sprites/icon.svg"
 StaticMusic="*res://scripts/singletons/StaticMusic.gd"
 Level="*res://scripts/singletons/Level.gd"
 ProgressData="*res://scripts/singletons/ProgressData.gd"
+StaticSfx="*res://scripts/singletons/StaticSfx.gd"
 
 [display]
 
