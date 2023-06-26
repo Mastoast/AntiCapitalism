@@ -19,4 +19,5 @@ func get_pattern():
 	return pattern
 
 func empty():
+	is_empty = true
 	$Area2D/CollisionShape2D.disabled = true

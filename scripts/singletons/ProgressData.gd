@@ -4,6 +4,8 @@ var capitalism_level_count = 0
 var otchoz_level_count = 0
 var is_otchoz = false
 
+var otchoz_trash = []
+
 func _ready():
 	pass
 

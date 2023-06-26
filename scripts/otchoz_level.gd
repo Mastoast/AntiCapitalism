@@ -4,6 +4,7 @@ var music_pitch = 1.0
 @export var fail_delay = 0.5
 @export var valid_input_cooldown = 0.5
 @export var player_movement_time = 0.1
+@export var beat_per_level = 100
 
 @onready var grid_size = $level/TileMap.cell_quadrant_size
 
@@ -22,8 +23,7 @@ var last_after_beat_used := 0
 var last_input_time = 0.0
 var starting_pattern = false
 var current_trash
-
-var trashes = []
+var level_ending = false
 
 func _ready():
 	randomize()
@@ -39,15 +39,19 @@ func load_level(level):
 	var cells = $level/TileMap.get_used_cells(0).filter(is_tile_spawnable)
 	for i in range(level["trash_count"]):
 		var cell = $level/TileMap.get_used_cells(0).filter(is_tile_spawnable).pick_random()
-		var trash = trash2D.instantiate()
-		trash.init(Level.level2d["patterns"].pick_random(), cell)
-		trashes.append(cell)
-		trash.position = Vector2(cell.x * grid_size, cell.y * grid_size) + Vector2(grid_size / 2, grid_size / 2)
-		$level.add_child(trash)
-
+		if cell != null:
+			var pattern = Level.level2d["patterns"].pick_random()
+			ProgressData.otchoz_trash.append({"coords": cell, "pattern": pattern})
+	for trash in ProgressData.otchoz_trash:
+		var new_trash = trash2D.instantiate()
+		new_trash.init(trash["pattern"], trash["coords"])
+		new_trash.position = Vector2(trash["coords"].x * grid_size, trash["coords"].y * grid_size) + Vector2(grid_size / 2, grid_size / 2)
+		$level.add_child(new_trash)
 
 func _process(delta):
-	pass
+	if StaticMusic.beat_count >= beat_per_level and not level_ending:
+		level_ending = true
+		$TransitionLayer.sleep_transition(func(): get_tree().change_scene_to_file("res://scenes/briefing.tscn"))
 
 func _unhandled_input(event):
 	if starting_pattern or current_trash:
@@ -87,7 +91,7 @@ func _on_new_beat():
 func _on_pattern_success():
 	current_trash.empty()
 	current_trash.visible = false
-	trashes.erase(current_trash.coords)
+	ProgressData.otchoz_trash.erase(ProgressData.otchoz_trash.filter(func(i): return i["coords"] == current_trash.coords)[0])
 	current_trash.queue_free()
 	current_trash = null
 
@@ -99,5 +103,5 @@ func _on_qte_success(precision:float):
 	pass
 
 func is_tile_spawnable(coords:Vector2i):
-	return $level/TileMap.get_cell_tile_data(0, coords).get_custom_data("spawnable") and !trashes.any(func(item): coords == item)
-	
+	return $level/TileMap.get_cell_tile_data(0, coords).get_custom_data("spawnable") and not ProgressData.otchoz_trash.any(func(item): coords == item["coords"])
+

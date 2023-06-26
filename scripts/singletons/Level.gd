@@ -62,8 +62,11 @@ var capitalism_levels = [level1, level2, level3]
 
 var level2d = {
 	"music": StaticMusic.music1, "pitch": 1.0,
-	"patterns": [Pattern.pattern1, Pattern.pattern2],
-	"trash_count": 2
+	"briefs" : [
+		"""[font_size=44][center]And a new day begins[/center][/font_size]"""
+	],
+	"patterns": [Pattern.pattern1, Pattern.pattern2, Pattern.pattern5],
+	"trash_count": 3
 }
 
 var otchoz_levels = [level2d]
