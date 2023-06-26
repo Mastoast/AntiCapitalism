@@ -2,9 +2,12 @@ extends Node2D
 
 var pattern
 var is_empty = false
+var coords:Vector2i
 
-func init(pattern):
+
+func init(pattern, coords):
 	self.pattern = pattern
+	self.coords = coords
 
 func _ready():
 	pass

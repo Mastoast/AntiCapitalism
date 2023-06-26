@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/line.gd" id="1_n4ons"]
 
 [node name="line" type="Node2D"]
+z_index = 9
 script = ExtResource("1_n4ons")
 line_width = 8.0
-line_speed = 1000.0
+line_speed = 500.0

@@ -71,10 +71,11 @@ func spawn_qte_on_time():
 		if StaticMusic.get_player_total_position() >= pattern_start + buffer_qte[0]["delay"] * StaticMusic.beat_length:
 			
 			var new_qte = spawn_qte(StaticMusic.beat_length * buffer_qte[0]["timer"], buffer_qte[0]["position"], buffer_qte[0]["input"])
-			if last_qte != null && buffer_qte[0]["draw_line"] :
+			if last_qte != null && buffer_qte[0].has("draw_line") && buffer_qte[0]["draw_line"] :
 				spawn_line(last_qte, new_qte)
 				
-			last_qte = new_qte
+			if buffer_qte[0].has("draw_line"):
+				last_qte = new_qte
 			buffer_qte.pop_front()
 
 func spawn_qte(timer, position, input):
