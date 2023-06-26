@@ -25,7 +25,6 @@ func init(qteA, qteB, pattern_succeeded, pattern_failed):
 	pattern_succeeded.connect(_finished)
 	pattern_failed.connect(_finished)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	counter = StaticMusic.get_player_total_position()	
 	queue_redraw()

@@ -6,13 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://bj4ndq5wr0mvi" path="res://scenes/pattern_player.tscn" id="3_1evdy"]
 [ext_resource type="PackedScene" uid="uid://hj1g0iynj4o4" path="res://objects/truck.tscn" id="3_dewsc"]
 [ext_resource type="PackedScene" uid="uid://cacrapbtcy27r" path="res://objects/rythm_visual_helper.tscn" id="4_42vja"]
-[ext_resource type="Texture2D" uid="uid://bak408the4f8c" path="res://sprites/e_action.png" id="6_8e6tc"]
 [ext_resource type="Texture2D" uid="uid://dgsamkr00cv2i" path="res://sprites/road.png" id="7_aev3h"]
+[ext_resource type="Texture2D" uid="uid://bhn24ik8xcqn1" path="res://sprites/rentability_threshold.png" id="7_d0p7t"]
 
 [node name="capitalist_level" type="Node3D"]
 script = ExtResource("1_2kj73")
 truck_speed = 0.5
 trash_pickup_distance = 0.5
+combo_point_trash_missed = -20.0
 
 [node name="Camera" type="Camera3D" parent="."]
 current = true
@@ -72,8 +73,7 @@ position = Vector2(90, 562)
 
 [node name="comb_threshold" type="Sprite2D" parent="."]
 position = Vector2(-138, 261)
-scale = Vector2(0.13, 0.38)
-texture = ExtResource("6_8e6tc")
+texture = ExtResource("7_d0p7t")
 
 [node name="SurvivalTimer" type="Timer" parent="."]
 one_shot = true
