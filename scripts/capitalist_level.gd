@@ -130,9 +130,9 @@ func _on_new_beat():
 
 func add_combo(value):
 	var new_combo = clampf(combo + value, combo_min_value, combo_max_value)
-	if new_combo < combo_threshold and combo >= combo_threshold:
+	if new_combo < combo_threshold and $SurvivalTimer.is_stopped():
 		$SurvivalTimer.start()
-	if new_combo >= combo_threshold and combo < combo_threshold:
+	if new_combo >= combo_threshold and not $SurvivalTimer.is_stopped():
 		$SurvivalTimer.stop()
 	combo = new_combo
 
@@ -164,7 +164,8 @@ func _on_truck_start():
 
 func _on_survival_timer_timeout():
 	print("GAME OVER")
-	$UI/TransitionLayer.sleep_transition(func(): get_tree().change_scene_to_file("res://scenes/menu.tscn"))
+	ProgressData.is_otchoz = true
+	$UI/TransitionLayer.sleep_transition(func(): get_tree().change_scene_to_file("res://scenes/briefing.tscn"))
 	
 func win_level():
 	ProgressData.setup_next_level()
