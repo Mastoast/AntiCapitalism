@@ -12,6 +12,9 @@ var trash2D = load("res://objects/trash_2d.tscn")
 @onready var pattern_player = $PatternPlayer
 @onready var truck = $level/truck2D
 
+var satisfaction_per_trash = [0.33, 0.1, 0.1, 0.1, 0, 0, 0, 0, 0, 0, -0.1, -0.1, -0.1, -0.33]
+var satisfaction = 50.0
+
 var inputs = {
 	"input_up": Vector2.UP,
 	"input_down": Vector2.DOWN,
@@ -82,6 +85,11 @@ func is_input_valid():
 		return true
 
 func _on_new_beat():
+	satisfaction += satisfaction_per_trash[min(ProgressData.otchoz_trash.size(), satisfaction_per_trash.size())]
+	$ProgressBar.value = satisfaction
+	if satisfaction >= 100.0 and not level_ending:
+		level_ending = true
+		$TransitionLayer.sleep_transition(func(): get_tree().change_scene_to_file("res://scenes/menu.tscn"))
 	if StaticMusic.beat_count % 2 == 0: # trigger every 2 beat
 		if starting_pattern:
 			current_trash = truck.get_node("Area2D").get_overlapping_areas()[0].get_parent()

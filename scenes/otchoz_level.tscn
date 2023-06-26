@@ -114,3 +114,30 @@ position = Vector2(1090, 588)
 scale = Vector2(0.582031, 0.582031)
 
 [node name="PatternPlayer" parent="." instance=ExtResource("6_o3201")]
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = 1083.0
+offset_top = 459.0
+offset_right = 1456.0
+offset_bottom = 486.0
+rotation = -1.5708
+value = 50.0
+show_percentage = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 1069.0
+offset_top = 31.0
+offset_right = 1130.0
+offset_bottom = 82.0
+bbcode_enabled = true
+text = "[font_size=44]😃[/font_size]"
+autowrap_mode = 0
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+offset_left = 1061.0
+offset_top = 476.0
+offset_right = 1138.0
+offset_bottom = 538.0
+bbcode_enabled = true
+text = "[font_size=44]😡[/font_size]"
+autowrap_mode = 0
