@@ -113,14 +113,15 @@ func update_trash_cans():
 			trash_cans.erase(trash)
 			trash.queue_free()
 			continue
-		# position
 		trash.position.z = $Marker3D.position.z - truck_distance
 		if not trash.is_empty and absf(truck_distance) < trash_pickup_distance:
 			pickable = true
 			pickable_trash = trash
-	# missed trash
-	if not pickable and pickable_trash and not pickable_trash.is_empty:
-		_on_missed_trash()
+		if not trash.is_empty and truck_distance < -trash_pickup_distance:
+			trash.is_empty = true
+			if pickable_trash == trash:
+				pickable_trash = null
+			_on_missed_trash()
 
 func _on_new_beat():
 	if StaticMusic.beat_count % 2 == 0: # trigger every 2 beat
@@ -156,7 +157,6 @@ func _on_qte_success(precision:float):
 	add_combo(combo_point_qte_success * (1.0 - precision))
 
 func _on_missed_trash():
-	pickable_trash = false
 	add_combo(combo_point_trash_missed)
 
 func _on_truck_start():
