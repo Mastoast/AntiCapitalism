@@ -4,6 +4,7 @@ extends Node3D
 @export var truck_speed = 3.0
 @export var trash_pickup_distance = 1.0
 @export var music_pitch = 1.0
+@export var road_speed = 20.0
 
 @export_category("Combo")
 @export var combo_bar_decrease_speed = 5.0
@@ -29,6 +30,7 @@ var combo_max_value = 100.0
 var is_truck_moving
 var in_pattern = false
 var starting_pattern = false
+var level_ending = false
 var pickable_trash
 
 var max_trash_distance = 20.0
@@ -40,11 +42,11 @@ var combo_threshold = 15.0
 var pattern_player: PatternPlayer  
 
 func _ready():
-	randomize()
-	StaticMusic.play(StaticMusic.music1, music_pitch)
+	var current_level = Level.capitalism_levels[ProgressData.capitalism_level_count]
+	StaticMusic.play(current_level["music"], current_level["pitch"])
 	StaticMusic.new_beat.connect(_on_new_beat)
 	$truck.started.connect(_on_truck_start)
-	load_level(Level.level1)
+	load_level(current_level["trashes"])
 	$SurvivalTimer.wait_time = threshold_survival_time
 	setup_combo_threshold()
 	pattern_player = $PatternPlayer
@@ -52,6 +54,7 @@ func _ready():
 	pattern_player.pattern_succeeded.connect(_on_pattern_success)
 	pattern_player.pattern_failed.connect(_on_pattern_failure)
 	pattern_player.qte_succeeded.connect(_on_qte_success)
+	$UI/TransitionLayer.wake_transition(func(): pass)
 
 
 func _process(delta):
@@ -62,13 +65,17 @@ func _process(delta):
 	if is_truck_moving:
 		distance += truck_speed * music_delta
 		update_trash_cans()
-	$Road.offset.y = -int(distance * 20.0) % $Road.texture.get_height()
+	$Road.offset.y = -int(distance * road_speed) % $Road.texture.get_height()
 	#
 	$UI/ScoreText.text = str(int(score))
 	$UI/ComboBar.value = combo
 	$UI/PickUpInstruction.visible = pickable_trash and not in_pattern
-	$UI/debug_distance.text = "distance : " + str(distance)
 	previous_time = current_time
+	# Win condition
+	if trash_cans.is_empty() and not level_ending:
+		$truck.stop()
+		level_ending = true
+		win_level()
 
 func _input(event):
 	if event.is_action_pressed("restart"):
@@ -160,4 +167,8 @@ func _on_truck_start():
 
 func _on_survival_timer_timeout():
 	print("GAME OVER")
-	get_tree().change_scene_to_file("res://scenes/menu.tscn")
+	$UI/TransitionLayer.sleep_transition(func(): get_tree().change_scene_to_file("res://scenes/menu.tscn"))
+	
+func win_level():
+	ProgressData.setup_next_level()
+	$UI/TransitionLayer.sleep_transition(func(): get_tree().change_scene_to_file("res://scenes/briefing.tscn"))
