@@ -59,6 +59,7 @@ sources/4 = SubResource("TileSetAtlasSource_o3nl4")
 
 [node name="Otchoz" type="Node2D"]
 texture_filter = 1
+position = Vector2(-1, 2)
 script = ExtResource("1_6tj17")
 
 [node name="TileMap" type="TileMap" parent="."]

@@ -5,6 +5,7 @@ signal pattern_succeeded
 signal qte_succeeded
 
 const qte := preload("res://objects/qte.tscn")
+const line := preload("res://objects/line.tscn")
 
 var expected_actions = [
 	"input_left",
@@ -17,6 +18,7 @@ var expected_actions = [
 var buffer_qte = []
 var pattern_start
 var last_pos
+var last_qte
 var qte_count = 0
 
 #func _ready():
@@ -27,10 +29,9 @@ var qte_count = 0
 
 func start_pattern(pattern):
 	qte_count = 0
-	last_pos = Vector2(200, 200)
-	buffer_qte = pattern.duplicate(true)
-	
+	buffer_qte = pattern.duplicate(true)	
 	sort_qte()			
+	last_qte = null
 	pattern_start = StaticMusic.get_player_total_position()
 
 func sort_qte():
@@ -68,8 +69,11 @@ func _input(event):
 func spawn_qte_on_time():
 	if !buffer_qte.is_empty():
 		if StaticMusic.get_player_total_position() >= pattern_start + buffer_qte[0]["delay"] * StaticMusic.beat_length:
+			if last_qte != null && buffer_qte[0]["draw_line"] :
+				spawn_line(last_qte, buffer_qte[0])
 			spawn_qte(StaticMusic.beat_length * buffer_qte[0]["timer"], buffer_qte[0]["position"], buffer_qte[0]["input"])
-#			last_pos.x = 200 + (int)(last_pos.x + 100) % 800
+			
+			last_qte = buffer_qte[0]
 			buffer_qte.pop_front()
 
 func spawn_qte(timer, position, input):
@@ -82,6 +86,15 @@ func spawn_qte(timer, position, input):
 	add_child(new_qte)
 	qte_count += 1
 
+func spawn_line(qteA, qteB):
+	if pattern_start + qteA["timer"] + qteA["delay"] < StaticMusic.get_player_total_position() :
+		return
+	var new_line = line.instantiate()
+	var duration = StaticMusic.beat_length * (qteA["timer"] + qteA["delay"]) + pattern_start - StaticMusic.get_player_total_position();
+	new_line.init(qteA.position, qteB.position, duration)
+	new_line.position = Vector2.ZERO
+	add_child(new_line)
+	
 func is_expected_action(event):
 	for action in expected_actions:
 		if event.is_action_pressed(action):
