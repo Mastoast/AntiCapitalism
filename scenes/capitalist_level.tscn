@@ -14,7 +14,7 @@ script = ExtResource("1_2kj73")
 truck_speed = 0.5
 trash_pickup_distance = 0.1
 combo_point_qte_success = 1.0
-combo_point_pattern_success = 10.0
+combo_point_pattern_success = 5.0
 combo_point_qte_failure = -10.0
 combo_point_trash_missed = -15.0
 

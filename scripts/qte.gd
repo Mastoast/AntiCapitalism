@@ -44,7 +44,7 @@ func init(timer:float = timer, action:String = expected_action):
 	$TextEdit.text = action
 	if action == "input_action":
 		$Sprite.texture = e_texture
-		$Sprite.modulate = action_color
+		$Sprite.modulate = Color.BLACK
 	else:
 		$Sprite.texture = arrow_texture
 		if action == "input_up" :
@@ -75,13 +75,14 @@ func _draw():
 	var qte_ratio = 1 - counter / timer
 	var angle = 2 * PI - (qte_ratio * PI * 2)
 	var point_count = max_point_count - (qte_ratio * max_point_count)
-	draw_circle( self.global_position - self.position, radius, background_color)
-	draw_arc( self.global_position - self.position, radius, 0.0,
-		2*PI, max_point_count, arc_color, arc_width, false)
+	if expected_action == "input_action" :
+		draw_circle( self.global_position - self.position, radius, action_color)
+	else :
+		draw_circle( self.global_position - self.position, radius, background_color)
+		draw_arc( self.global_position - self.position, radius, 0.0, 2*PI, max_point_count, arc_color, arc_width, false)
+				
 	draw_arc( self.global_position - self.position, radius + radius * (arc_size_per_beat * maxf(qte_ratio, 0)), 0.0,
-		2*PI, max_point_count, Color(current_arc_color.r, current_arc_color.g, current_arc_color.b, 1 - qte_ratio), arc_width, false)
-#	draw_arc( self.global_position - self.position, radius, 0.0,
-#		angle, point_count, arc_invalid_color, arc_width, false)
+			  2*PI, max_point_count, Color(current_arc_color.r, current_arc_color.g, current_arc_color.b, 1 - qte_ratio), arc_width, false)
 
 func is_input_valid():
 	if(timer - counter > 0.0):
