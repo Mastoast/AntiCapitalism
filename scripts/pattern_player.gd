@@ -69,11 +69,12 @@ func _input(event):
 func spawn_qte_on_time():
 	if !buffer_qte.is_empty():
 		if StaticMusic.get_player_total_position() >= pattern_start + buffer_qte[0]["delay"] * StaticMusic.beat_length:
-			if last_qte != null && buffer_qte[0]["draw_line"] :
-				spawn_line(last_qte, buffer_qte[0])
-			spawn_qte(StaticMusic.beat_length * buffer_qte[0]["timer"], buffer_qte[0]["position"], buffer_qte[0]["input"])
 			
-			last_qte = buffer_qte[0]
+			var new_qte = spawn_qte(StaticMusic.beat_length * buffer_qte[0]["timer"], buffer_qte[0]["position"], buffer_qte[0]["input"])
+			if last_qte != null && buffer_qte[0]["draw_line"] :
+				spawn_line(last_qte, new_qte)
+				
+			last_qte = new_qte
 			buffer_qte.pop_front()
 
 func spawn_qte(timer, position, input):
@@ -81,17 +82,20 @@ func spawn_qte(timer, position, input):
 	new_qte.init(timer, input)
 	new_qte.position = Vector2(position.x * ProjectSettings.get_setting("display/window/size/viewport_width") / 1920.0,
 							   position.y * ProjectSettings.get_setting("display/window/size/viewport_height") / 1080.0)
+	
 	new_qte.qte_succeed.connect(_on_qte_success)
 	new_qte.qte_failed.connect(_on_qte_failure)
+	
 	add_child(new_qte)
 	qte_count += 1
+	return new_qte
 
 func spawn_line(qteA, qteB):
-	if pattern_start + qteA["timer"] + qteA["delay"] < StaticMusic.get_player_total_position() :
+	if qteA == null || qteB == null :
 		return
+	
 	var new_line = line.instantiate()
-	var duration = StaticMusic.beat_length * (qteA["timer"] + qteA["delay"]) + pattern_start - StaticMusic.get_player_total_position();
-	new_line.init(qteA.position, qteB.position, duration)
+	new_line.init(qteA, qteB, pattern_succeeded, pattern_failed)
 	new_line.position = Vector2.ZERO
 	add_child(new_line)
 	
