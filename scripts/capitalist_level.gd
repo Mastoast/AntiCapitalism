@@ -63,6 +63,12 @@ func _process(delta):
 	$UI/ScoreText.text = str(int(score))
 	$UI/ComboBar.value = combo
 	$UI/PickUpInstruction.visible = pickable_trash and not in_pattern
+		
+	if $SurvivalTimer.is_stopped() :
+		$UI/SurvivalTimerText.text = ""
+	else :
+		$UI/SurvivalTimerText.text = str($SurvivalTimer.time_left).pad_decimals(1)
+	
 	previous_time = current_time
 	# Win condition
 	if trash_cans.is_empty() and not level_ending:
