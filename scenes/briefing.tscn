@@ -24,3 +24,14 @@ bbcode_enabled = true
 text = "[font_size=44][center]02:00 AM
 
 Night 1[/center][/font_size]"
+
+[node name="ContinueLabel" type="RichTextLabel" parent="."]
+offset_left = 590.0
+offset_top = 601.0
+offset_right = 1136.0
+offset_bottom = 643.0
+theme = ExtResource("2_ub1d3")
+bbcode_enabled = true
+text = "[font_size=16]PRESS SPACE TO CONTINUE >>[/font_size]"
+text_direction = 2
+structured_text_bidi_override = 1

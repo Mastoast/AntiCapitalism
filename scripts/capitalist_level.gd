@@ -3,20 +3,13 @@ extends Node3D
 @export_category("Game feel")
 @export var truck_speed = 3.0
 @export var trash_pickup_distance = 1.0
-@export var music_pitch = 1.0
 @export var road_speed = 20.0
 
 @export_category("Combo")
-@export var combo_bar_decrease_speed = 5.0
-@export var threshold_survival_time = 5.0
 @export var combo_point_qte_success = 10.0
 @export var combo_point_pattern_success = 20.0
 @export var combo_point_qte_failure = -5.0
 @export var combo_point_trash_missed = -3.0
-
-
-@export_category("Scoring")
-
 
 var trash_can = load("res://objects/trash_can.tscn")
 
@@ -26,6 +19,7 @@ var score = 0
 var combo = 20.0
 var combo_min_value = 0.0
 var combo_max_value = 100.0
+var combo_decrease_speed
 
 var is_truck_moving
 var in_pattern = false
@@ -37,7 +31,7 @@ var max_trash_distance = 20.0
 var min_trash_distance = -3.0
 var trash_cans = []
 
-var combo_threshold = 15.0
+var combo_threshold
 
 var pattern_player: PatternPlayer  
 
@@ -46,8 +40,7 @@ func _ready():
 	StaticMusic.play(current_level["music"], current_level["pitch"])
 	StaticMusic.new_beat.connect(_on_new_beat)
 	$truck.started.connect(_on_truck_start)
-	load_level(current_level["trashes"])
-	$SurvivalTimer.wait_time = threshold_survival_time
+	load_level(current_level)
 	setup_combo_threshold()
 	pattern_player = $PatternPlayer
 	$truck.start()
@@ -60,7 +53,7 @@ func _ready():
 func _process(delta):
 	var current_time = StaticMusic.get_player_total_position()
 	var music_delta = current_time - previous_time
-	add_combo( -combo_bar_decrease_speed * music_delta)
+	add_combo( -combo_decrease_speed * music_delta)
 	#
 	if is_truck_moving:
 		distance += truck_speed * music_delta
@@ -94,7 +87,11 @@ func try_start_pattern():
 			$truck.start()
 
 func load_level(level):
-	for item in level:
+	combo = level["combo_bar_start"]
+	combo_decrease_speed = level["combo_decrease_speed"]
+	$SurvivalTimer.wait_time = level["threshold_survival_time"]
+	combo_threshold = level["combo_threshold"]
+	for item in level["trashes"]:
 		var trash = trash_can.instantiate()
 		trash.init(item["distance"], item["pattern"], item["sprite"])
 		trash.position.x = $Marker3D.position.x
@@ -113,7 +110,7 @@ func update_trash_cans():
 	for trash in trash_cans:
 		var truck_distance = trash.distance - self.distance
 		if truck_distance < min_trash_distance:
-			trash_cans.remove_at(trash_cans.bsearch(trash)) 
+			trash_cans.erase(trash)
 			trash.queue_free()
 			continue
 		# position
@@ -133,9 +130,9 @@ func _on_new_beat():
 
 func add_combo(value):
 	var new_combo = clampf(combo + value, combo_min_value, combo_max_value)
-	if new_combo < combo_threshold and combo >= combo_threshold:
+	if new_combo < combo_threshold and $SurvivalTimer.is_stopped():
 		$SurvivalTimer.start()
-	if new_combo >= combo_threshold and combo < combo_threshold:
+	if new_combo >= combo_threshold and not $SurvivalTimer.is_stopped():
 		$SurvivalTimer.stop()
 	combo = new_combo
 
@@ -166,8 +163,8 @@ func _on_truck_start():
 	is_truck_moving = true
 
 func _on_survival_timer_timeout():
-	print("GAME OVER")
-	$UI/TransitionLayer.sleep_transition(func(): get_tree().change_scene_to_file("res://scenes/menu.tscn"))
+	ProgressData.is_otchoz = true
+	$UI/TransitionLayer.sleep_transition(func(): get_tree().change_scene_to_file("res://scenes/briefing.tscn"))
 	
 func win_level():
 	ProgressData.setup_next_level()
