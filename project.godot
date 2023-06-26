@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="AntiCapitalism"
-run/main_scene="res://scenes/otchoz_level.tscn"
+run/main_scene="res://scenes/menu.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 config/icon="res://sprites/icon.svg"
 
@@ -19,6 +19,7 @@ config/icon="res://sprites/icon.svg"
 
 StaticMusic="*res://scripts/singletons/StaticMusic.gd"
 Level="*res://scripts/singletons/Level.gd"
+ProgressData="*res://scripts/singletons/ProgressData.gd"
 
 [display]
 

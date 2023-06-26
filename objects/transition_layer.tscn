@@ -5,7 +5,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_awawt"]
 shader = ExtResource("2_ya4kp")
-shader_parameter/progress = 1.0
+shader_parameter/progress = 0.0
 shader_parameter/direction = 1.0
 shader_parameter/x_modifier = 2.5
 shader_parameter/y_modifier = 1.0

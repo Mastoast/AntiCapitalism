@@ -12,8 +12,5 @@ func _process(delta):
 	$StartLabel.visible = Time.get_time_dict_from_system().second % 5 > 0
 
 func _input(event):
-	if event.is_action_pressed("ui_accept") and not in_transition:
-		$TransitionLayer.sleep_transition(func(): load_level())
-
-func load_level():
-	get_tree().change_scene_to_file("res://scenes/capitalist_level.tscn")
+	if event.is_action_pressed("input_begin") and not in_transition:
+		$TransitionLayer.sleep_transition(func(): get_tree().change_scene_to_file("res://scenes/briefing.tscn"))

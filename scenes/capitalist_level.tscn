@@ -13,7 +13,7 @@
 script = ExtResource("1_2kj73")
 truck_speed = 0.5
 trash_pickup_distance = 0.5
-combo_bar_decrease_speed = 10.0
+combo_bar_decrease_speed = 1.0
 
 [node name="Camera" type="Camera3D" parent="."]
 current = true
