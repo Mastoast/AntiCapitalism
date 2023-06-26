@@ -9,6 +9,7 @@ var grid_size = 16
 
 var trash2D = load("res://objects/trash_2d.tscn")
 @onready var pattern_player = $PatternPlayer
+@onready var truck = $level/truck2D
 
 var inputs = {
 	"input_up": Vector2.UP,
@@ -36,7 +37,7 @@ func load_level(level):
 		var trash = trash2D.instantiate()
 		trash.init(item["pattern"])
 		trash.position = item["position"]
-		add_child(trash)
+		$level.add_child(trash)
 
 func _process(delta):
 	pass
@@ -45,18 +46,18 @@ func _input(event):
 	if starting_pattern or current_trash:
 		return
 	if event.is_action_pressed("ui_accept"):
-		if not $truck2D/Area2D.get_overlapping_areas().is_empty():
+		if not truck.get_node("Area2D").get_overlapping_areas().is_empty():
 			starting_pattern = true
 	for input in inputs.keys():
 		if event.is_action_pressed(input):
 			try_move(inputs[input])
 
 func try_move(move):
-	$truck2D/RayCast2D.target_position = move * grid_size
-	$truck2D/RayCast2D.force_raycast_update()
-	if !$truck2D/RayCast2D.is_colliding() and is_input_valid():
+	truck.get_node("RayCast2D").target_position = move * grid_size
+	truck.get_node("RayCast2D").force_raycast_update()
+	if !truck.get_node("RayCast2D").is_colliding() and is_input_valid():
 		var tween = create_tween()
-		var prop = tween.tween_property($truck2D, "position", move * grid_size, player_movement_time)
+		var prop = tween.tween_property(truck, "position", move * grid_size, player_movement_time)
 		prop.as_relative().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
 
 func is_input_valid():
@@ -72,7 +73,7 @@ func is_input_valid():
 func _on_new_beat():
 	if StaticMusic.beat_count % 2 == 0: # trigger every 2 beat
 		if starting_pattern:
-			current_trash = $truck2D/Area2D.get_overlapping_areas()[0].get_parent()
+			current_trash = truck.get_node("Area2D").get_overlapping_areas()[0].get_parent()
 			$PatternPlayer.start_pattern(current_trash.pattern)
 			starting_pattern = false
 
