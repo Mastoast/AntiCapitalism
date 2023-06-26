@@ -110,7 +110,7 @@ func update_trash_cans():
 	for trash in trash_cans:
 		var truck_distance = trash.distance - self.distance
 		if truck_distance < min_trash_distance:
-			trash_cans.remove_at(trash_cans.bsearch(trash)) 
+			trash_cans.erase(trash)
 			trash.queue_free()
 			continue
 		# position
@@ -163,7 +163,6 @@ func _on_truck_start():
 	is_truck_moving = true
 
 func _on_survival_timer_timeout():
-	print("GAME OVER")
 	ProgressData.is_otchoz = true
 	$UI/TransitionLayer.sleep_transition(func(): get_tree().change_scene_to_file("res://scenes/briefing.tscn"))
 	

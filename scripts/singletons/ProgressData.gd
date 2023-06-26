@@ -10,8 +10,13 @@ func _ready():
 func setup_next_level():
 	if not is_otchoz:
 		capitalism_level_count += 1
-		if capitalism_level_count == Level.capitalism_levels.size():
-			Level.capitalism_levels.append(Level.capitalism_levels[Level.capitalism_levels.size()].duplicate(true))
+		if capitalism_level_count >= Level.capitalism_levels.size():
+			var new_lvl = Level.capitalism_levels[Level.capitalism_levels.size() - 1].duplicate(true)
+			var new_pitch = new_lvl["pitch"] + 0.1
+			var difficulty_ratio = 1 - new_lvl["pitch"] / new_pitch
+			new_lvl["pitch"] += 0.1
+			new_lvl["combo_decrease_speed"] += difficulty_ratio * new_lvl["combo_decrease_speed"]
+			Level.capitalism_levels.append(new_lvl)
 	elif otchoz_level_count < Level.otchoz_levels.size():
 		otchoz_level_count += 1
 
