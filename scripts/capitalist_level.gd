@@ -62,7 +62,7 @@ func _process(delta):
 	#
 	$UI/ScoreText.text = str(int(score))
 	$UI/ComboBar.value = combo
-	$UI/PickUpInstruction.visible = pickable_trash and not in_pattern
+	$PickUpBarre.visible = pickable_trash and not in_pattern
 		
 	if $SurvivalTimer.is_stopped() :
 		$UI/SurvivalTimerText.text = ""
