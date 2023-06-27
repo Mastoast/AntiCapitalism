@@ -60,7 +60,7 @@ const pattern6 = [ # difficulty 3 DOUBLE CONTAINER
 	{"input": "input_left"	, "delay": 2.0, 	"position": Vector2(1200.0, 880.0), "timer": 3.0, "draw_line" : true},
 	{"input": "input_up"	, "delay": 1.0, 	"position": Vector2(400.0, 880.0), "timer": 2.0, "draw_line" : true},
 	{"input": "input_action", "delay": 2.0, 	"position": Vector2(1200.0,  650.0), "timer": 3.0, "draw_line" : true},
-	{"input": "input_right"	, "delay": 2.0, 	"position": Vector2(400.0, 250.0), "timer": 3.0, "draw_line" : true},
+	{"input": "input_right"	, "delay": 1.66, 	"position": Vector2(400.0, 250.0), "timer": 3.0, "draw_line" : true},
 	{"input": "input_down"	, "delay": 0.66, 	"position": Vector2(600.0, 250.0), "timer": 1.5, "draw_line" : true},
 	{"input": "input_right"	, "delay": 0.66, 	"position": Vector2(600.0, 450.0), "timer": 1.5, "draw_line" : true},
 	{"input": "input_down"	, "delay": 0.66, 	"position": Vector2(800.0, 450.0), "timer": 1.5, "draw_line" : true},

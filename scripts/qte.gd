@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var radius := 75.0
+@export var square_length := 75.0
 @export var max_point_count := 80
 @export var arc_width := 10
 @export var arc_color := Color.WHITE
@@ -46,7 +47,7 @@ func init(timer:float = timer, action:String = expected_action):
 	$TextEdit.text = action
 	if action == "input_action":
 		$Sprite.texture = e_texture
-		$Sprite.modulate = Color.BLACK
+		$Borders.rotation_degrees = 0.0
 	else:
 		$Sprite.texture = arrow_texture
 		if action == "input_up" :
@@ -81,17 +82,23 @@ func _process(delta):
 func _draw():
 	if is_finished or is_canceled : return
 	var qte_ratio = 1 - counter / timer
-	var angle = 2 * PI - (qte_ratio * PI * 2)
 	var point_count = max_point_count - (qte_ratio * max_point_count)
-	if expected_action == "input_action" :
-		draw_circle( self.global_position - self.position, radius, action_color)
-	else :
-		draw_circle( self.global_position - self.position, radius, background_color)
-		draw_arc( self.global_position - self.position, radius, 0.0, 2*PI, max_point_count, arc_color, arc_width, false)
-				
-	draw_arc( self.global_position - self.position, radius + radius * (arc_size_per_beat * maxf(qte_ratio, 0)), 0.0,
-			  2*PI, max_point_count, Color(current_arc_color.r, current_arc_color.g, current_arc_color.b, 1 - qte_ratio), arc_width, false)
-
+	
+	var angle = 0.0
+	if expected_action != "input_action" : angle = PI/4.0
+	
+	var dist = square_length * (1.0 + arc_size_per_beat * maxf(qte_ratio, 0))
+	var pos = self.global_position - self.position
+	var color = Color(current_arc_color.r, current_arc_color.g, current_arc_color.b, 1 - qte_ratio)
+	draw_line(Vector2(dist * 0.5, -dist * 0.5 - arc_width/2.0).rotated(angle) + pos, 
+			  Vector2(dist * 0.5, dist * 0.5 + arc_width/2.0).rotated(angle) + pos, color, arc_width, false)
+	draw_line(Vector2(-dist * 0.5, -dist * 0.5 - arc_width/2.0).rotated(angle) + pos, 
+			  Vector2(-dist * 0.5, dist * 0.5 + arc_width/2.0).rotated(angle) + pos, color, arc_width, false)
+	draw_line(Vector2(-dist * 0.5, dist * 0.5).rotated(angle) + pos, 
+			  Vector2(dist * 0.5, dist * 0.5).rotated(angle) + pos, color, arc_width, false)
+	draw_line(Vector2(-dist * 0.5, -dist * 0.5).rotated(angle) + pos, 
+			  Vector2(dist * 0.5, -dist * 0.5).rotated(angle) + pos, color, arc_width, false)
+	
 func is_input_valid():
 	if(timer - counter > 0.0):
 		return timer - counter < StaticMusic.beat_length * max_input_delay
