@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cb17drqalinc0"
-path="res://.godot/imported/square.png-3f8c6615d8061237b70830027fd403c3.ctex"
+uid="uid://bn4v8nlenpice"
+path="res://.godot/imported/Tilemap.png-48883bc37f20ecedadf37c943c0a9992.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/square.png"
-dest_files=["res://.godot/imported/square.png-3f8c6615d8061237b70830027fd403c3.ctex"]
+source_file="res://sprites/Otchoz/Tilemap.png"
+dest_files=["res://.godot/imported/Tilemap.png-48883bc37f20ecedadf37c943c0a9992.ctex"]
 
 [params]
 

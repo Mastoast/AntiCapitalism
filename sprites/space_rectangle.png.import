@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cb17drqalinc0"
-path="res://.godot/imported/square.png-3f8c6615d8061237b70830027fd403c3.ctex"
+uid="uid://wyoodpp3hhw2"
+path="res://.godot/imported/space_rectangle.png-b7b0f0d2fd78e128f5129cb0096d90a8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/square.png"
-dest_files=["res://.godot/imported/square.png-3f8c6615d8061237b70830027fd403c3.ctex"]
+source_file="res://sprites/space_rectangle.png"
+dest_files=["res://.godot/imported/space_rectangle.png-b7b0f0d2fd78e128f5129cb0096d90a8.ctex"]
 
 [params]
 

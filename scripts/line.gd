@@ -18,9 +18,28 @@ func init(qteA, qteB, pattern_succeeded, pattern_failed):
 	var raw_posB = qteB.position
 	end_qteA_time = 99999
 	line_start = StaticMusic.get_player_total_position()
+
+	var dirA = (raw_posB - raw_posA).normalized()
+	if qteA.expected_action != "input_action" : dirA = dirA.rotated(PI/4.0)
+	if absf(dirA.x) < absf(dirA.y) :
+		dirA = Vector2(absf(dirA.y), absf(dirA.x))
+
+	var sizeA = qteA.square_length/2.0 - 2.5;
+	var distA = Vector2(sizeA, sizeA * tan(dirA.angle())).length()
+	line_posA = raw_posA + (raw_posB - raw_posA).normalized() * distA
+
+	var dirB = (raw_posA - raw_posB).normalized()
+	if qteB.expected_action != "input_action" : dirB = dirB.rotated(PI/4.0)
+	if absf(dirB.x) < absf(dirB.y) :
+		dirB = Vector2(absf(dirB.y), absf(dirB.x))
+
+	var sizeB = qteB.square_length/2.0 - 2.5;
+	var distB = Vector2(sizeB, sizeB * tan(dirB.angle())).length()
+
+	line_posB = raw_posB + (raw_posA - raw_posB).normalized() * distB
+	#line_posA = raw_posA
+	#line_posB = raw_posB
 	
-	line_posA = raw_posA + (raw_posB - raw_posA).normalized() * qteA.radius
-	line_posB = raw_posB + (raw_posA - raw_posB).normalized() * qteB.radius
 	qteA.qte_succeed.connect(_disapear)
 	pattern_succeeded.connect(_finished)
 	pattern_failed.connect(_finished)
@@ -37,9 +56,7 @@ func _draw():
 			  line_color, line_width, true)
 
 func _disapear(precision:float):
-	print("disapear")
 	end_qteA_time = StaticMusic.get_player_total_position()
 
 func _finished():
-	print("destroy")
 	queue_free()
