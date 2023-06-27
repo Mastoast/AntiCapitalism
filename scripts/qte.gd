@@ -36,6 +36,8 @@ var creation_time = 0.0
 var counter = 0.0
 var timer := 1.0
 var expected_action := "ui_accept"
+var is_finished = false
+var is_canceled = false
 
 func init(timer:float = timer, action:String = expected_action):
 	self.timer = timer
@@ -57,21 +59,27 @@ func init(timer:float = timer, action:String = expected_action):
 				$Sprite.modulate = right_color
 		
 	$Sprite.rotation_degrees = sprite_dict[action]["rotation"]
+	$Anim.play("appear")
 
 func _ready():
 	current_arc_color = arc_invalid_color
 
 func _process(delta):
-	if counter > timer + StaticMusic.beat_length * max_input_delay:
+	if counter > timer + StaticMusic.beat_length * max_input_delay && !is_finished :
 		self.fail()
 	counter = StaticMusic.get_player_total_position() - creation_time
 	if is_input_valid():
 		current_arc_color = arc_valid_color
 	else:
 		current_arc_color = arc_invalid_color
+		
+	if !$Anim.is_playing() and (is_canceled or is_finished) : 
+		queue_free()
+	
 	queue_redraw()
 
 func _draw():
+	if is_finished or is_canceled : return
 	var qte_ratio = 1 - counter / timer
 	var angle = 2 * PI - (qte_ratio * PI * 2)
 	var point_count = max_point_count - (qte_ratio * max_point_count)
@@ -90,15 +98,28 @@ func is_input_valid():
 	return timer - counter > StaticMusic.beat_length * min_input_delay
 
 func try_input(event):
+	if is_finished or is_canceled : return	
 	if event.is_action_pressed(expected_action) and is_input_valid():
 		succeed()
 	else:
 		fail()
 
+func canceled():
+	if is_finished or is_canceled : return
+	is_canceled = true
+	$Anim.play("fail")
+	
+
 func fail():
+	if is_finished or is_canceled : return
+	is_finished = true
 	qte_failed.emit(timer - counter)
-	queue_free()
+	$Anim.play("fail")
+	#queue_free()
 
 func succeed():
+	if is_finished or is_canceled : return
+	is_finished = true
 	qte_succeed.emit(timer - counter)
-	queue_free()
+	$Anim.play("success")
+	#queue_free()
