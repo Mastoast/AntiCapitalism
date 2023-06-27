@@ -30,6 +30,7 @@ var pickable_trash
 var max_trash_distance = 20.0
 var min_trash_distance = -3.0
 var trash_cans = []
+var near_trash = false
 
 var combo_threshold
 
@@ -62,7 +63,8 @@ func _process(delta):
 	#
 	$UI/ScoreText.text = str(int(score))
 	$UI/ComboBar.value = combo
-	$PickUpBarre.visible = pickable_trash and not in_pattern
+	
+	#$PickUpBar.visible = pickable_trash and not in_pattern
 		
 	if $SurvivalTimer.is_stopped() :
 		$UI/SurvivalTimerText.text = ""
@@ -86,6 +88,7 @@ func try_start_pattern():
 	if is_truck_moving:
 		is_truck_moving = false
 		if pickable_trash and !pickable_trash.is_empty:
+			_on_success_trash()
 			$truck.stop()
 			in_pattern = true
 			starting_pattern = true
@@ -123,6 +126,7 @@ func update_trash_cans():
 		if not trash.is_empty and absf(truck_distance) < trash_pickup_distance:
 			pickable = true
 			pickable_trash = trash
+			if !near_trash: _on_near_trash()
 		if not trash.is_empty and truck_distance < -trash_pickup_distance:
 			trash.is_empty = true
 			if pickable_trash == trash:
@@ -162,8 +166,21 @@ func _on_qte_success(precision:float):
 	score += 10 * (1.0 - precision)
 	add_combo(combo_point_qte_success * (1.0 - precision))
 
+func _on_near_trash():
+	$PickUpBar/Anim.play("appear")
+	print("appear")
+	near_trash = true
+
+func _on_success_trash():
+	$PickUpBar/Anim.play("success")
+	print("success")
+	near_trash = false
+
 func _on_missed_trash():
 	add_combo(combo_point_trash_missed)
+	$PickUpBar/Anim.play("failed")
+	print("failed")
+	near_trash = false
 
 func _on_truck_start():
 	is_truck_moving = true
