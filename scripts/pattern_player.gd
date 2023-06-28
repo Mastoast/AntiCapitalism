@@ -2,7 +2,9 @@ class_name PatternPlayer extends Node2D
 
 signal pattern_failed
 signal pattern_succeeded
+signal on_new_qte
 signal qte_succeeded
+signal pattern_next_anim
 
 const qte := preload("res://objects/qte.tscn")
 const line := preload("res://objects/line.tscn")
@@ -27,11 +29,11 @@ var current_pattern_line_center
 @export var line_beat_length = 40.0
 @onready var pattern_line:Line2D = $PatternLine
 
-func _ready():
-	# DEBUG
-	StaticMusic.play(StaticMusic.music1, 1.0)
-	start_pattern(Pattern.pattern1)
-	# DEBUG
+#func _ready():
+#	# DEBUG
+#	StaticMusic.play(StaticMusic.music1, 1.0)
+#	start_pattern(Pattern.pattern1["pattern"])
+#	# DEBUG
 
 func start_pattern(pattern):
 	qte_count = 0
@@ -77,7 +79,9 @@ func spawn_qte_on_time():
 	if !buffer_qte.is_empty():
 		if StaticMusic.get_player_total_position() >= pattern_start + buffer_qte[0]["delay"] * StaticMusic.beat_length:
 			
-			var new_qte = spawn_qte(StaticMusic.beat_length * buffer_qte[0]["timer"], buffer_qte[0]["position"], buffer_qte[0]["input"])
+			on_new_qte.emit(buffer_qte[0])
+			
+			var new_qte = spawn_qte(buffer_qte[0], StaticMusic.beat_length * buffer_qte[0]["timer"], buffer_qte[0]["position"], buffer_qte[0]["input"])
 			if last_qte != null && buffer_qte[0].has("draw_line") && buffer_qte[0]["draw_line"] :
 				spawn_line(last_qte, new_qte)
 				
@@ -85,9 +89,9 @@ func spawn_qte_on_time():
 				last_qte = new_qte
 			buffer_qte.pop_front()
 
-func spawn_qte(timer, position, input):
+func spawn_qte(data, timer, position, input):
 	var new_qte = qte.instantiate()
-	new_qte.init(timer, input)
+	new_qte.init(data, timer, input)
 	new_qte.position = Vector2(position.x * ProjectSettings.get_setting("display/window/size/viewport_width") / 1920.0,
 							   position.y * ProjectSettings.get_setting("display/window/size/viewport_height") / 1080.0)
 	
@@ -113,13 +117,15 @@ func is_expected_action(event):
 			return true
 	return false
 
-func _on_qte_success(precision:float):
+func _on_qte_success(data, precision:float):
 	qte_succeeded.emit(precision)
+	if data.has("anim_sprite"):
+		pattern_next_anim.emit(data["anim_sprite"])
 	qte_count -= 1
 	if buffer_qte.is_empty() and qte_count == 0:
 		pattern_succeeded.emit()
 
-func _on_qte_failure(precision:float):
+func _on_qte_failure(data, precision:float):
 	stop_current_pattern()
 	pattern_failed.emit()
 
@@ -131,6 +137,8 @@ func create_pattern_drawing():
 	pattern_line.clear_points()
 	var last_direction = Vector2.ZERO
 	pattern_line.add_point(Vector2.ZERO)
+	print(buffer_qte)
+	print(expected_actions[buffer_qte[0]["input"]])
 	var last_position = pattern_line.get_point_position(pattern_line.get_point_count()-1) + expected_actions[buffer_qte[0]["input"]] * line_beat_length * buffer_qte[0]["delay"]
 	pattern_line.add_point(last_position)
 	line_length = Vector2.ZERO.distance_to(last_position)
@@ -157,8 +165,9 @@ func create_pattern_drawing():
 	print(pattern_start, ' ', pattern_end, ' ', line_length,' ', StaticMusic.beat_length)
 
 func update_pattern_drawing():
-	var pattern_ratio = minf(100.0, (StaticMusic.get_player_total_position() - pattern_start) / (pattern_end - pattern_start))
-	pattern_line.position = Vector2(300, 300) + get_position_on_line_from_ratio(pattern_ratio)
+	if !buffer_qte.is_empty():
+		var pattern_ratio = minf(100.0, (StaticMusic.get_player_total_position() - pattern_start) / (pattern_end - pattern_start))
+		pattern_line.position = Vector2(300, 300) + get_position_on_line_from_ratio(pattern_ratio)
 
 func get_position_on_line_from_ratio(ratio):
 	var current_length = line_length * ratio

@@ -55,7 +55,7 @@ func _draw():
 			  lerp(line_posA, line_posB, min(max((counter - line_start) * speed, 0.0), 1.0)),
 			  line_color, line_width, true)
 
-func _disapear(precision:float):
+func _disapear(data, precision:float):
 	end_qteA_time = StaticMusic.get_player_total_position()
 
 func _finished():

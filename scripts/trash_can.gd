@@ -9,7 +9,7 @@ func init(distance, pattern, sprite):
 	self.distance = distance
 	self.pattern = pattern
 	self.sprite = sprite
-	$Sprite.modulate = sprite
+	#$Sprite.modulate = sprite
 
 func _ready():
 	pass

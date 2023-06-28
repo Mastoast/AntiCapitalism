@@ -1,16 +1,20 @@
 [gd_scene load_steps=3 format=3 uid="uid://bvr0gyhyuce5x"]
 
 [ext_resource type="Script" path="res://scripts/trash_can.gd" id="1_82o3l"]
-[ext_resource type="Texture2D" uid="uid://dmrqdmicvuhcm" path="res://sprites/direction_arrow.png" id="2_7ieta"]
+[ext_resource type="Texture2D" uid="uid://ibc53snjv0lk" path="res://sprites/Cap/TrashBag.png" id="2_ibf1f"]
 
 [node name="trash_can" type="Node3D" groups=["trash"]]
 script = ExtResource("1_82o3l")
 
 [node name="Sprite" type="Sprite3D" parent="."]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.000988841, 0.105418, 0)
-visible = false
-texture = ExtResource("2_7ieta")
+transform = Transform3D(0.5, 0, 0, 0, 0.497261, 0.0522642, 0, -0.0522642, 0.497261, 0, 0.0493257, 0)
+sorting_offset = 1000.0
+alpha_scissor_threshold = 1.0
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("2_ibf1f")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0722992, 0)
+visible = false
 size = Vector3(0.0870956, 0.13816, 0.0721966)

@@ -14,3 +14,4 @@ func _process(delta):
 func _input(event):
 	if event.is_action_pressed("input_begin") and not in_transition:
 		$TransitionLayer.sleep_transition(func(): get_tree().change_scene_to_file("res://scenes/briefing.tscn"))
+		in_transition = true

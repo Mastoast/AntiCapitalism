@@ -1,6 +1,14 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://ced1k3bls70p"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://ced1k3bls70p"]
 
 [ext_resource type="FontFile" uid="uid://5axthlys458d" path="res://themes/fonts/PublicPixel-z84yD.ttf" id="1_bg72v"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2biyj"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mm2hf"]
+bg_color = Color(1, 0, 0, 1)
+
 [resource]
 default_font = ExtResource("1_bg72v")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_2biyj")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_mm2hf")
