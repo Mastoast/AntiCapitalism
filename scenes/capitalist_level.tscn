@@ -78,6 +78,17 @@ theme_override_colors/default_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 100
 text = "5.0"
 
+[node name="Rentalbility" type="RichTextLabel" parent="UI"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 44.0
+offset_right = 442.0
+offset_bottom = 78.0
+theme = ExtResource("2_0yje6")
+text = "Rentability bar"
+scroll_active = false
+autowrap_mode = 0
+
 [node name="truck" parent="." instance=ExtResource("3_dewsc")]
 position = Vector2(488, 357)
 scale = Vector2(1, 1)

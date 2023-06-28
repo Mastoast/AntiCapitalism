@@ -43,7 +43,6 @@ func sort_qte():
 		cummul += n["delay"]
 		n["delay"] = cummul - n["timer"]
 	buffer_qte.sort_custom(func(a,b): return a["delay"] < b["delay"])	
-	
 
 func stop_current_pattern():
 	qte_count = 0
