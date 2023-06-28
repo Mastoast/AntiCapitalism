@@ -94,7 +94,7 @@ func _on_new_beat():
 	if StaticMusic.beat_count % 2 == 0: # trigger every 2 beat
 		if starting_pattern:
 			current_trash = truck.get_node("Area2D").get_overlapping_areas()[0].get_parent()
-			$PatternPlayer.start_pattern(current_trash.pattern)
+			$PatternPlayer.start_pattern(current_trash.pattern["pattern"])
 			starting_pattern = false
 
 func _on_pattern_success():
