@@ -48,8 +48,8 @@ func _ready():
 	pattern_player.pattern_succeeded.connect(_on_pattern_success)
 	pattern_player.pattern_failed.connect(_on_pattern_failure)
 	pattern_player.qte_succeeded.connect(_on_qte_success)
+	pattern_player.pattern_next_anim.connect(_on_next_anim)
 	$UI/TransitionLayer.wake_transition(func(): pass)
-
 
 func _process(delta):
 	var current_time = StaticMusic.get_player_total_position()
@@ -74,7 +74,7 @@ func _process(delta):
 	previous_time = current_time
 	# Win condition
 	if trash_cans.is_empty() and not level_ending:
-		$truck.stop()
+		$truck.end()
 		level_ending = true
 		win_level()
 
@@ -136,8 +136,13 @@ func update_trash_cans():
 func _on_new_beat():
 	if StaticMusic.beat_count % 2 == 0: # trigger every 2 beat
 		if starting_pattern:
-			$PatternPlayer.start_pattern(pickable_trash.pattern)
+			$PatternPlayer.start_pattern(pickable_trash.pattern["pattern"])
+			if pickable_trash.pattern.has("anim_sprite"):
+				_on_next_anim(pickable_trash.pattern["anim_sprite"])
 			starting_pattern = false
+
+func _on_next_anim(anim_sprite):
+	$truck.set_anim(anim_sprite)
 
 func add_combo(value):
 	var new_combo = clampf(combo + value, combo_min_value, combo_max_value)
@@ -168,18 +173,15 @@ func _on_qte_success(precision:float):
 
 func _on_near_trash():
 	$PickUpBar/Anim.play("appear")
-	print("appear")
 	near_trash = true
 
 func _on_success_trash():
 	$PickUpBar/Anim.play("success")
-	print("success")
 	near_trash = false
 
 func _on_missed_trash():
 	add_combo(combo_point_trash_missed)
 	$PickUpBar/Anim.play("failed")
-	print("failed")
 	near_trash = false
 
 func _on_truck_start():

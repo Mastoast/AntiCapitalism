@@ -12,8 +12,9 @@
 
 [node name="capitalist_level" type="Node3D"]
 script = ExtResource("1_2kj73")
-truck_speed = 0.5
+truck_speed = 0.25
 trash_pickup_distance = 0.1
+road_speed = 200.0
 combo_point_qte_success = 1.0
 combo_point_pattern_success = 5.0
 combo_point_qte_failure = -10.0
@@ -99,6 +100,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.203, -0.114, -0.249)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Marker3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00507951, 0)
+visible = false
 size = Vector3(0.181851, 0.002, 0.144916)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]

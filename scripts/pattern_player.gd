@@ -2,7 +2,9 @@ class_name PatternPlayer extends Node2D
 
 signal pattern_failed
 signal pattern_succeeded
+signal on_new_qte
 signal qte_succeeded
+signal pattern_next_anim
 
 const qte := preload("res://objects/qte.tscn")
 const line := preload("res://objects/line.tscn")
@@ -30,7 +32,7 @@ var qte_count = 0
 func start_pattern(pattern):
 	qte_count = 0
 	buffer_qte = pattern.duplicate(true)	
-	sort_qte()			
+	sort_qte()
 	last_qte = null
 	pattern_start = StaticMusic.get_player_total_position()
 
@@ -70,7 +72,9 @@ func spawn_qte_on_time():
 	if !buffer_qte.is_empty():
 		if StaticMusic.get_player_total_position() >= pattern_start + buffer_qte[0]["delay"] * StaticMusic.beat_length:
 			
-			var new_qte = spawn_qte(StaticMusic.beat_length * buffer_qte[0]["timer"], buffer_qte[0]["position"], buffer_qte[0]["input"])
+			on_new_qte.emit(buffer_qte[0])
+			
+			var new_qte = spawn_qte(buffer_qte[0], StaticMusic.beat_length * buffer_qte[0]["timer"], buffer_qte[0]["position"], buffer_qte[0]["input"])
 			if last_qte != null && buffer_qte[0].has("draw_line") && buffer_qte[0]["draw_line"] :
 				spawn_line(last_qte, new_qte)
 				
@@ -78,9 +82,9 @@ func spawn_qte_on_time():
 				last_qte = new_qte
 			buffer_qte.pop_front()
 
-func spawn_qte(timer, position, input):
+func spawn_qte(data, timer, position, input):
 	var new_qte = qte.instantiate()
-	new_qte.init(timer, input)
+	new_qte.init(data, timer, input)
 	new_qte.position = Vector2(position.x * ProjectSettings.get_setting("display/window/size/viewport_width") / 1920.0,
 							   position.y * ProjectSettings.get_setting("display/window/size/viewport_height") / 1080.0)
 	
@@ -106,13 +110,15 @@ func is_expected_action(event):
 			return true
 	return false
 
-func _on_qte_success(precision:float):
+func _on_qte_success(data, precision:float):
 	qte_succeeded.emit(precision)
+	if data.has("anim_sprite"):
+		pattern_next_anim.emit(data["anim_sprite"])
 	qte_count -= 1
 	if buffer_qte.is_empty() and qte_count == 0:
 		pattern_succeeded.emit()
 
-func _on_qte_failure(precision:float):
+func _on_qte_failure(data, precision:float):
 	stop_current_pattern()
 	pattern_failed.emit()
 

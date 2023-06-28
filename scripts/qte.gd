@@ -24,6 +24,7 @@ signal qte_failed
 var arrow_texture = load("res://sprites/direction_arrow.png")
 var e_texture = load("res://sprites/e_action.png")
 var current_arc_color : Color
+var qte_data
 
 const sprite_dict = {
 	"input_up" : {"rotation": 0},
@@ -40,7 +41,8 @@ var expected_action := "ui_accept"
 var is_finished = false
 var is_canceled = false
 
-func init(timer:float = timer, action:String = expected_action):
+func init(data, timer:float = timer, action:String = expected_action):
+	self.qte_data = data
 	self.timer = timer
 	self.creation_time = StaticMusic.get_player_total_position()
 	self.expected_action = action
@@ -120,13 +122,13 @@ func canceled():
 func fail():
 	if is_finished or is_canceled : return
 	is_finished = true
-	qte_failed.emit(timer - counter)
+	qte_failed.emit(qte_data, timer - counter)
 	$Anim.play("fail")
 	#queue_free()
 
 func succeed():
 	if is_finished or is_canceled : return
 	is_finished = true
-	qte_succeed.emit(timer - counter)
+	qte_succeed.emit(qte_data, timer - counter)
 	$Anim.play("success")
 	#queue_free()

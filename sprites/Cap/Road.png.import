@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bqoe6v5rln1sq"
-path.s3tc="res://.godot/imported/Road.png-d7d9c507c018ae6516d6d0feb2bd97dc.s3tc.ctex"
+path="res://.godot/imported/Road.png-d7d9c507c018ae6516d6d0feb2bd97dc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://sprites/Cap/Road.png"
-dest_files=["res://.godot/imported/Road.png-d7d9c507c018ae6516d6d0feb2bd97dc.s3tc.ctex"]
+dest_files=["res://.godot/imported/Road.png-d7d9c507c018ae6516d6d0feb2bd97dc.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
