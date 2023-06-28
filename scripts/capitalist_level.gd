@@ -142,6 +142,7 @@ func _on_new_beat():
 			starting_pattern = false
 
 func _on_next_anim(anim_sprite):
+	if pickable_trash :	pickable_trash.hide()
 	$truck.set_anim(anim_sprite)
 
 func add_combo(value):
@@ -162,7 +163,7 @@ func _on_pattern_success():
 
 func _on_pattern_failure():
 	pickable_trash.is_empty = true
-	pickable_trash = null
+	#pickable_trash = null
 	in_pattern = false
 	$truck.start()
 	add_combo(combo_point_qte_failure)
@@ -185,6 +186,7 @@ func _on_missed_trash():
 	near_trash = false
 
 func _on_truck_start():
+	if pickable_trash : pickable_trash.show()
 	is_truck_moving = true
 
 func _on_survival_timer_timeout():
