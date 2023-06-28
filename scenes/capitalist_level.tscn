@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cnp4dmlfkp0m6"]
+[gd_scene load_steps=14 format=3 uid="uid://cnp4dmlfkp0m6"]
 
 [ext_resource type="Script" path="res://scripts/capitalist_level.gd" id="1_2kj73"]
 [ext_resource type="Theme" uid="uid://ced1k3bls70p" path="res://themes/arcade_theme.tres" id="2_0yje6"]
@@ -6,10 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://bj4ndq5wr0mvi" path="res://scenes/pattern_player.tscn" id="3_1evdy"]
 [ext_resource type="PackedScene" uid="uid://hj1g0iynj4o4" path="res://objects/truck.tscn" id="3_dewsc"]
 [ext_resource type="PackedScene" uid="uid://cacrapbtcy27r" path="res://objects/rythm_visual_helper.tscn" id="4_42vja"]
-[ext_resource type="Texture2D" uid="uid://bhn24ik8xcqn1" path="res://sprites/rentability_threshold.png" id="7_d0p7t"]
+[ext_resource type="Texture2D" uid="uid://c4dal25d1t2kj" path="res://sprites/full_square.png" id="7_e3pcv"]
 [ext_resource type="Texture2D" uid="uid://bqoe6v5rln1sq" path="res://sprites/Cap/Road.png" id="8_lo6jh"]
+[ext_resource type="Texture2D" uid="uid://c0xqv2ni2e8ox" path="res://sprites/Cap/wall.png" id="9_4da6u"]
 [ext_resource type="Texture2D" uid="uid://bd71ubuja8cut" path="res://sprites/Cap/Cadre.png" id="9_aidit"]
+[ext_resource type="Texture2D" uid="uid://bc7vwi0wtx8v7" path="res://sprites/Cap/sky.png" id="9_f0k3o"]
 [ext_resource type="PackedScene" uid="uid://bhgn7v4xfcxqa" path="res://objects/PickUpBar.tscn" id="9_gnuqi"]
+[ext_resource type="Texture2D" uid="uid://7vxj4dqlw700" path="res://sprites/Cap/bg.png" id="9_tybp2"]
 
 [node name="capitalist_level" type="Node3D"]
 script = ExtResource("1_2kj73")
@@ -33,14 +36,15 @@ offset_bottom = 40.0
 
 [node name="ComboBar" type="ProgressBar" parent="UI"]
 layout_mode = 0
-offset_left = 6.0
-offset_top = 39.0
-offset_right = 938.0
-offset_bottom = 67.0
+offset_left = 12.0
+offset_top = 13.0
+offset_right = 444.0
+offset_bottom = 35.0
+theme = ExtResource("2_0yje6")
 allow_greater = true
-show_percentage = false
 
 [node name="ScoreText" type="RichTextLabel" parent="UI"]
+visible = false
 layout_mode = 0
 offset_left = 118.0
 offset_top = 4.0
@@ -50,6 +54,7 @@ theme = ExtResource("2_0yje6")
 text = "0"
 
 [node name="ScoreLabel" type="RichTextLabel" parent="UI"]
+visible = false
 layout_mode = 0
 offset_top = 4.0
 offset_right = 118.0
@@ -83,8 +88,9 @@ position = Vector2(90, 562)
 [node name="PatternPlayer" parent="." instance=ExtResource("3_1evdy")]
 
 [node name="comb_threshold" type="Sprite2D" parent="."]
-position = Vector2(-138, 261)
-texture = ExtResource("7_d0p7t")
+position = Vector2(86, 24)
+scale = Vector2(0.0118715, 0.0726257)
+texture = ExtResource("7_e3pcv")
 
 [node name="SurvivalTimer" type="Timer" parent="."]
 one_shot = true
@@ -95,6 +101,52 @@ texture_filter = 0
 texture = ExtResource("8_lo6jh")
 region_enabled = true
 region_rect = Rect2(0.3, -498.847, 160, 1200)
+
+[node name="wallRight2" type="Sprite3D" parent="Road"]
+transform = Transform3D(1, 0, 0, 0, 0.104528, -0.994522, 0, 0.994522, 0.104528, 0, -0.82537, 0.995152)
+sorting_offset = 50.0
+cast_shadow = 0
+ignore_occlusion_culling = true
+transparent = false
+double_sided = false
+alpha_scissor_threshold = 1.0
+texture_filter = 0
+texture = ExtResource("9_f0k3o")
+region_enabled = true
+region_rect = Rect2(0.3, -486.771, 915.415, 914.507)
+
+[node name="wallRight" type="Sprite3D" parent="Road"]
+transform = Transform3D(-4.37114e-08, 0, -1, -1.06581e-14, 1, -4.23516e-22, 1, 5.32907e-14, -4.37114e-08, 0.976293, -0.145854, 1.47087)
+sorting_offset = 50.0
+cast_shadow = 0
+ignore_occlusion_culling = true
+transparent = false
+double_sided = false
+alpha_scissor_threshold = 1.0
+texture_filter = 0
+texture = ExtResource("9_4da6u")
+region_enabled = true
+region_rect = Rect2(0.3, -498.847, 308.088, 1200)
+
+[node name="wallLeft" type="Sprite3D" parent="Road"]
+transform = Transform3D(-4.37114e-08, 0, 1, -1.42109e-14, 1, -2.5411e-21, -1, -1.42109e-14, -4.37114e-08, -0.976, -0.146, 1.44637)
+sorting_offset = 50.0
+cast_shadow = 0
+ignore_occlusion_culling = true
+transparent = false
+double_sided = false
+alpha_scissor_threshold = 1.0
+texture_filter = 0
+texture = ExtResource("9_4da6u")
+region_enabled = true
+region_rect = Rect2(0.3, -498.847, 308.088, 1200)
+
+[node name="Road" type="Sprite3D" parent="Road"]
+transform = Transform3D(1, 0, 0, 0, 1, -2.84217e-14, 0, 2.84217e-14, 1, 0, 0, -0.00967905)
+texture_filter = 0
+texture = ExtResource("9_tybp2")
+region_enabled = true
+region_rect = Rect2(0.3, -498.847, 457.362, 1200)
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.241436, -0.114, -0.249)

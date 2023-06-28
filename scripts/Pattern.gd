@@ -15,7 +15,7 @@ const pattern2 = { "anim_sprite": "Pat02/Pat02Anim01.png", "pattern" :
 	{"input": "input_up"	, "delay": 1.0, 	"position": Vector2(800.0, 920.0), "timer": 2.0, 	"anim_sprite":"Pat02/Pat02Anim04.png", "draw_line" : true},
 	{"input": "input_down"	, "delay": 2.0, 	"position": Vector2(1600.0, 500.0), "timer": 3.0, 	"anim_sprite":"Pat02/Pat02Anim05.png", "draw_line" : false},
 	{"input": "input_left"	, "delay": 1.0, 	"position": Vector2(1600.0, 920.0), "timer": 2.0, 	"anim_sprite":"Pat02/Pat02Anim06.png", "draw_line" : true},
-	{"input": "input_up"	, "delay": 1.0, 	"position": Vector2(800.0, 920.0), "timer": 2.0, "draw_line" : true}
+	{"input": "input_up"	, "delay": 1.0, 	"position": Vector2(800.0, 920.0), "timer": 2.0, 	"anim_sprite":"Pat02/Pat02Anim04.png", "draw_line" : true}
 ]}
 	
 const pattern3 = { "anim_sprite": "Pat03/Pat03Anim01.png", "pattern" :
