@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnah2tjrpr5i8"
-path="res://.godot/imported/Pat02Anim05.png-6479b04cb2ebbafc5b492893a6070db5.ctex"
+uid="uid://bgetknd03xpku"
+path="res://.godot/imported/Pat03Anim01.png-3849808f4856b5ceb73bf4ea43affe99.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Cap/Pat02/Pat02Anim05.png"
-dest_files=["res://.godot/imported/Pat02Anim05.png-6479b04cb2ebbafc5b492893a6070db5.ctex"]
+source_file="res://sprites/Cap/Pat03/Pat03Anim01.png"
+dest_files=["res://.godot/imported/Pat03Anim01.png-3849808f4856b5ceb73bf4ea43affe99.ctex"]
 
 [params]
 
