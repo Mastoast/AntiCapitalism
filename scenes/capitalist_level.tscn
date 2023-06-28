@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bj4ndq5wr0mvi" path="res://scenes/pattern_player.tscn" id="3_1evdy"]
 [ext_resource type="PackedScene" uid="uid://hj1g0iynj4o4" path="res://objects/truck.tscn" id="3_dewsc"]
 [ext_resource type="PackedScene" uid="uid://cacrapbtcy27r" path="res://objects/rythm_visual_helper.tscn" id="4_42vja"]
-[ext_resource type="Texture2D" uid="uid://dgsamkr00cv2i" path="res://sprites/road.png" id="7_aev3h"]
 [ext_resource type="Texture2D" uid="uid://bhn24ik8xcqn1" path="res://sprites/rentability_threshold.png" id="7_d0p7t"]
+[ext_resource type="Texture2D" uid="uid://bqoe6v5rln1sq" path="res://sprites/Cap/Road.png" id="8_lo6jh"]
 [ext_resource type="PackedScene" uid="uid://bhgn7v4xfcxqa" path="res://objects/PickUpBar.tscn" id="9_gnuqi"]
 
 [node name="capitalist_level" type="Node3D"]
@@ -20,6 +20,7 @@ combo_point_qte_failure = -10.0
 combo_point_trash_missed = -15.0
 
 [node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.994645, 0.103348, 0, -0.103348, 0.994645, 0, 0.0698191, 0)
 current = true
 
 [node name="UI" type="Control" parent="."]
@@ -59,19 +60,20 @@ autowrap_mode = 0
 [node name="TransitionLayer" parent="UI" instance=ExtResource("2_8mmi8")]
 
 [node name="SurvivalTimerText" type="RichTextLabel" parent="UI"]
-z_index = 50
+z_index = 10
 layout_mode = 0
-offset_left = 393.0
-offset_top = 256.0
-offset_right = 696.0
-offset_bottom = 386.0
+offset_left = 377.0
+offset_top = 247.0
+offset_right = 680.0
+offset_bottom = 377.0
 theme = ExtResource("2_0yje6")
 theme_override_colors/default_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 100
 text = "5.0"
 
 [node name="truck" parent="." instance=ExtResource("3_dewsc")]
-position = Vector2(538, 364)
+position = Vector2(488, 357)
+scale = Vector2(1, 1)
 
 [node name="rythm_helper" parent="." instance=ExtResource("4_42vja")]
 position = Vector2(90, 562)
@@ -86,11 +88,11 @@ texture = ExtResource("7_d0p7t")
 one_shot = true
 
 [node name="Road" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.111804, 0)
+transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, 0.5, 0, -0.5, -2.18557e-08, 0, -0.111804, 0)
 texture_filter = 0
-texture = ExtResource("7_aev3h")
+texture = ExtResource("8_lo6jh")
 region_enabled = true
-region_rect = Rect2(0, -448, 45, 704)
+region_rect = Rect2(0.3, -498.847, 160, 890.447)
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.203, -0.114, -0.249)
