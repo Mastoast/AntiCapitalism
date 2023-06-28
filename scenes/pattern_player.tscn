@@ -4,3 +4,7 @@
 
 [node name="PatternPlayer" type="Node2D"]
 script = ExtResource("1_8355h")
+
+[node name="PatternLine" type="Line2D" parent="."]
+position = Vector2(383, 319)
+points = PackedVector2Array(0, 0, 0, 53.2359, 0, 80, -40, 80, -40, 51)

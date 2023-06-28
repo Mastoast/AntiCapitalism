@@ -27,8 +27,8 @@ var starting_pattern = false
 var level_ending = false
 var pickable_trash
 
-var max_trash_distance = 20.0
-var min_trash_distance = -3.0
+@export var max_trash_distance = 20.0
+@export var min_trash_distance = -3.0
 var trash_cans = []
 var near_trash = false
 

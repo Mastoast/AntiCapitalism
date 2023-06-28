@@ -9,32 +9,39 @@ signal pattern_next_anim
 const qte := preload("res://objects/qte.tscn")
 const line := preload("res://objects/line.tscn")
 
-var expected_actions = [
-	"input_left",
-	"input_right",
-	"input_up",
-	"input_down",
-	"input_action"
-]
+var expected_actions = {
+	"input_left" : Vector2.LEFT,
+	"input_right" : Vector2.RIGHT,
+	"input_up" : Vector2.UP,
+	"input_down" : Vector2.DOWN,
+	"input_action" : Vector2.ZERO
+}
 
 var buffer_qte = []
 var pattern_start
-var last_pos
+var pattern_end
+var line_length
 var last_qte
 var qte_count = 0
+var current_pattern_line_center
+
+# drawing pattern
+@export var line_beat_length = 40.0
+@onready var pattern_line:Line2D = $PatternLine
 
 #func _ready():
 #	# DEBUG
 #	StaticMusic.play(StaticMusic.music1, 1.0)
-#	start_pattern(Pattern.pattern1)
+#	start_pattern(Pattern.pattern1["pattern"])
 #	# DEBUG
 
 func start_pattern(pattern):
 	qte_count = 0
-	buffer_qte = pattern.duplicate(true)	
-	sort_qte()
 	last_qte = null
+	buffer_qte = pattern.duplicate(true)
 	pattern_start = StaticMusic.get_player_total_position()
+	create_pattern_drawing()
+	sort_qte()
 
 func sort_qte():
 	var cummul = 0.0;
@@ -43,7 +50,6 @@ func sort_qte():
 		cummul += n["delay"]
 		n["delay"] = cummul - n["timer"]
 	buffer_qte.sort_custom(func(a,b): return a["delay"] < b["delay"])	
-	
 
 func stop_current_pattern():
 	qte_count = 0
@@ -53,6 +59,7 @@ func stop_current_pattern():
 
 func _process(delta):
 	spawn_qte_on_time()
+	update_pattern_drawing()
 
 func _input(event):
 	if qte_count == 0 or !event.is_action_type() or !is_expected_action(event):
@@ -105,7 +112,7 @@ func spawn_line(qteA, qteB):
 	add_child(new_line)
 	
 func is_expected_action(event):
-	for action in expected_actions:
+	for action in expected_actions.keys():
 		if event.is_action_pressed(action):
 			return true
 	return false
@@ -125,3 +132,52 @@ func _on_qte_failure(data, precision:float):
 func _on_bad_input():
 	stop_current_pattern()
 	pattern_failed.emit()
+
+func create_pattern_drawing():
+	pattern_line.clear_points()
+	var last_direction = Vector2.ZERO
+	pattern_line.add_point(Vector2.ZERO)
+	print(buffer_qte)
+	print(expected_actions[buffer_qte[0]["input"]])
+	var last_position = pattern_line.get_point_position(pattern_line.get_point_count()-1) + expected_actions[buffer_qte[0]["input"]] * line_beat_length * buffer_qte[0]["delay"]
+	pattern_line.add_point(last_position)
+	line_length = Vector2.ZERO.distance_to(last_position)
+	var pattern_length = 0
+	for i in range(buffer_qte.size()):
+		print("last position: ", last_position)
+		pattern_length += buffer_qte[i]["delay"]
+		var used_direction
+		var new_vector
+		if expected_actions[buffer_qte[i]["input"]] == Vector2.ZERO:
+			used_direction = last_direction
+		else:
+			used_direction = expected_actions[buffer_qte[i]["input"]]
+			last_direction = used_direction
+		if i != buffer_qte.size()-1:
+			new_vector = buffer_qte[i + 1]["delay"] * used_direction * line_beat_length
+		else:
+			new_vector = buffer_qte[i]["delay"] * used_direction * line_beat_length
+		var new_position = last_position + new_vector
+		line_length += last_position.distance_to(new_position)
+		pattern_line.add_point(new_position)
+		last_position = new_position
+	pattern_end = pattern_start + pattern_length * StaticMusic.beat_length
+	print(pattern_start, ' ', pattern_end, ' ', line_length,' ', StaticMusic.beat_length)
+
+func update_pattern_drawing():
+	if !buffer_qte.is_empty():
+		var pattern_ratio = minf(100.0, (StaticMusic.get_player_total_position() - pattern_start) / (pattern_end - pattern_start))
+		pattern_line.position = Vector2(300, 300) + get_position_on_line_from_ratio(pattern_ratio)
+
+func get_position_on_line_from_ratio(ratio):
+	var current_length = line_length * ratio
+	var incr_length = 0.0
+	for i in range(1, pattern_line.get_point_count()):
+		var current_segment_length = pattern_line.get_point_position(i-1).distance_to(pattern_line.get_point_position(i))
+		if incr_length + current_segment_length >= current_length:
+
+			return -lerp(pattern_line.get_point_position(i-1), pattern_line.get_point_position(i), (current_length - incr_length) / current_segment_length)
+		else:
+			incr_length += current_segment_length
+	return Vector2.ZERO
+	# TODO clean
