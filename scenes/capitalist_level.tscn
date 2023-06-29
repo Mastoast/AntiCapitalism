@@ -79,6 +79,18 @@ theme_override_colors/default_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 100
 text = "5.0"
 
+[node name="WaitingTimerText" type="RichTextLabel" parent="UI"]
+z_index = 10
+layout_mode = 0
+offset_left = 390.0
+offset_top = 247.0
+offset_right = 693.0
+offset_bottom = 377.0
+theme = ExtResource("2_0yje6")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[center]GO[/center]"
+
 [node name="Rentalbility" type="RichTextLabel" parent="UI"]
 layout_mode = 0
 offset_left = 12.0
@@ -105,6 +117,10 @@ scale = Vector2(0.0118715, 0.0726257)
 texture = ExtResource("7_e3pcv")
 
 [node name="SurvivalTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="WaitingTimer" type="Timer" parent="."]
+wait_time = 0.5
 one_shot = true
 
 [node name="Road" type="Sprite3D" parent="."]
@@ -180,3 +196,4 @@ texture = ExtResource("9_aidit")
 position = Vector2(937, 570)
 
 [connection signal="timeout" from="SurvivalTimer" to="." method="_on_survival_timer_timeout"]
+[connection signal="timeout" from="WaitingTimer" to="." method="_on_waiting_timer_timeout"]
