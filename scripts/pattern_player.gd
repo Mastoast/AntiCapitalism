@@ -29,7 +29,7 @@ var pattern_drawing_center
 
 # drawing pattern
 @export var line_beat_length = 50.0
-@onready var pattern_line:Line2D = $PatternLine
+@onready var pattern_line:Line2D = $Node2D/PatternLine
 
 #func _ready():
 #	# DEBUG
@@ -100,11 +100,14 @@ func spawn_qte_on_time():
 			on_new_qte.emit(buffer_qte[0])
 			
 			var new_qte = spawn_qte(buffer_qte[0], StaticMusic.beat_length * buffer_qte[0]["timer"], buffer_qte[0]["position"], buffer_qte[0]["input"])
-			if last_qte != null && buffer_qte[0].has("draw_line") && buffer_qte[0]["draw_line"] :
-				spawn_line(last_qte, new_qte)
-				
-			if buffer_qte[0].has("draw_line"):
-				last_qte = new_qte
+			if pattern_drawing_center == Vector2.ZERO:
+				if last_qte != null && buffer_qte[0].has("draw_line") && buffer_qte[0]["draw_line"] :
+					spawn_line(last_qte, new_qte)
+
+				if buffer_qte[0].has("draw_line"):
+					last_qte = new_qte
+			else:
+				new_qte.visible = false
 			buffer_qte.pop_front()
 
 func spawn_qte(data, timer, position, input):
@@ -185,7 +188,7 @@ func create_pattern_drawing():
 	pattern_end = pattern_start + pattern_length * StaticMusic.beat_length
 	# Draw points
 	for item in pattern_line.points:
-		var new = $LineJoint.duplicate()
+		var new = $Node2D/LineJoint.duplicate()
 		new.visible = true
 		pattern_line.add_child(new)
 		new.position = item
