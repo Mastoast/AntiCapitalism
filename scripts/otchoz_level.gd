@@ -84,7 +84,7 @@ func _on_new_beat():
 	$ProgressBar.value = satisfaction
 	if satisfaction >= 100.0 and not level_ending:
 		level_ending = true
-		$TransitionLayer.sleep_transition(func(): get_tree().change_scene_to_file("res://scenes/menu.tscn"))
+		$TransitionLayer.sleep_transition(func(): get_tree().change_scene_to_file("res://scenes/ending.tscn"))
 	if StaticMusic.beat_count % 2 == 0: # trigger every 2 beat
 		if starting_pattern:
 			current_trash = truck.get_node("Area2D").get_overlapping_areas()[0].get_parent()

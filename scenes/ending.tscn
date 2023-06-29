@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://cm42gnxa775q3"]
+
+[ext_resource type="Script" path="res://scripts/ending.gd" id="1_dqe6b"]
+[ext_resource type="PackedScene" uid="uid://blgqa2l8xh3dk" path="res://objects/transition_layer.tscn" id="2_0awlj"]
+[ext_resource type="Theme" uid="uid://ced1k3bls70p" path="res://themes/arcade_theme.tres" id="3_3v81x"]
+
+[node name="Ending" type="Node2D"]
+script = ExtResource("1_dqe6b")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
+
+[node name="TransitionLayer" parent="." instance=ExtResource("2_0awlj")]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 255.0
+offset_top = 229.0
+offset_right = 915.0
+offset_bottom = 414.0
+theme = ExtResource("3_3v81x")
+bbcode_enabled = true
+text = "[font_size=44][center]THANK YOU FOR PLAYING[/center][/font_size]"
+
+[node name="ContinueLabel" type="RichTextLabel" parent="."]
+offset_left = 590.0
+offset_top = 601.0
+offset_right = 1136.0
+offset_bottom = 643.0
+theme = ExtResource("3_3v81x")
+bbcode_enabled = true
+text = "[font_size=16]PRESS SPACE TO RETURN TO MENU >>[/font_size]"
+text_direction = 2
+structured_text_bidi_override = 1
