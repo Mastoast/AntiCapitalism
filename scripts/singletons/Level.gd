@@ -7,8 +7,7 @@ var level1 = {
 	"briefs" : [
 	"""[font_size=44][center]02:00 AM
 
-Night {night_count}[/center][/font_size]""",
-	"""[font_size=44][center]🎃 COQUELICOT 🎃[/center][/font_size]"""
+Night {night_count}[/center][/font_size]"""
 	],
 	"trashes" : [
 	{"distance": 0.5, "sprite": Color.GREEN_YELLOW, "pattern": Pattern.pattern1},

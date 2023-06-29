@@ -19,8 +19,6 @@ func setup_next_level():
 			new_lvl["pitch"] += 0.1
 			new_lvl["combo_decrease_speed"] += difficulty_ratio * new_lvl["combo_decrease_speed"]
 			Level.capitalism_levels.append(new_lvl)
-	elif otchoz_level_count < Level.otchoz_levels.size():
-		otchoz_level_count += 1
 
 func load_level_scene():
 	if not is_otchoz:
@@ -32,4 +30,4 @@ func get_current_level():
 	if not is_otchoz:
 		return Level.capitalism_levels[capitalism_level_count]
 	else:
-		return Level.otchoz_levels[otchoz_level_count]
+		return Level.level2d

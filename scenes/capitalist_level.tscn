@@ -23,6 +23,7 @@ combo_point_qte_success = 1.0
 combo_point_pattern_success = 5.0
 combo_point_qte_failure = -10.0
 combo_point_trash_missed = -15.0
+min_trash_distance = -1.0
 
 [node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.994522, 0.104528, 0, -0.104528, 0.994522, 0, 0.0698191, 0)

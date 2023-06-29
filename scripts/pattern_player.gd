@@ -31,11 +31,11 @@ var pattern_drawing_center
 @export var line_beat_length = 50.0
 @onready var pattern_line:Line2D = $PatternLine
 
-func _ready():
-	# DEBUG
-	StaticMusic.play(StaticMusic.music1, 1.0)
-	start_pattern(Pattern.pattern1)
-	# DEBUG
+#func _ready():
+#	# DEBUG
+#	StaticMusic.play(StaticMusic.music1, 1.0)
+#	start_pattern(Pattern.pattern1)
+#	# DEBUG
 
 func start_pattern(pattern, drawing_center = Vector2(0, 0)):
 	qte_count = 0
