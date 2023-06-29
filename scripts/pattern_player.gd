@@ -24,21 +24,24 @@ var line_length
 var last_qte
 var qte_count = 0
 var current_pattern_line_center
+var nb_fail_accepted
 
 # drawing pattern
 @export var line_beat_length = 40.0
 @onready var pattern_line:Line2D = $PatternLine
 
-#func _ready():
-#	# DEBUG
-#	StaticMusic.play(StaticMusic.music1, 1.0)
-#	start_pattern(Pattern.pattern1["pattern"])
-#	# DEBUG
+func _ready():
+	# DEBUG
+	StaticMusic.play(StaticMusic.music1, 1.0)
+	start_pattern(Pattern.pattern1)
+	# DEBUG
 
 func start_pattern(pattern):
 	qte_count = 0
 	last_qte = null
-	buffer_qte = pattern.duplicate(true)
+	nb_fail_accepted = pattern["nb_fail_accepted"]
+	print("nb fail accepted : " + str(nb_fail_accepted))
+	buffer_qte = pattern["pattern"].duplicate(true)
 	pattern_start = StaticMusic.get_player_total_position()
 	create_pattern_drawing()
 	sort_qte()
@@ -67,11 +70,15 @@ func _input(event):
 	var min_time = 99999
 	var selected_qte
 	for qte in get_tree().get_nodes_in_group("qte"):
-		if event.is_action_pressed(qte.expected_action) and (qte.timer - qte.counter < min_time):
-			min_time = qte.timer - qte.counter
+		if (qte.timer - qte.counter < min_time):
 			selected_qte = qte
+			min_time = qte.timer - qte.counter
+			
 	if selected_qte:
-		selected_qte.try_input(event)
+		var result = selected_qte.try_input(event, nb_fail_accepted <= 0)
+		if !result : 
+			nb_fail_accepted -= 1
+			print("fail accepted")
 	else:
 		_on_bad_input()
 
@@ -137,19 +144,19 @@ func create_pattern_drawing():
 	pattern_line.clear_points()
 	var last_direction = Vector2.ZERO
 	pattern_line.add_point(Vector2.ZERO)
-	print(buffer_qte)
-	print(expected_actions[buffer_qte[0]["input"]])
+	#print(buffer_qte)
+	#print(expected_actions[buffer_qte[0]["input"]])
 	var last_position = pattern_line.get_point_position(pattern_line.get_point_count()-1) + expected_actions[buffer_qte[0]["input"]] * line_beat_length * buffer_qte[0]["delay"]
 	pattern_line.add_point(last_position)
 	line_length = Vector2.ZERO.distance_to(last_position)
 	var pattern_length = 0
 	for i in range(buffer_qte.size()):
-		print("last position: ", last_position)
+		#print("last position: ", last_position)
 		pattern_length += buffer_qte[i]["delay"]
 		var used_direction
 		var new_vector
 		if expected_actions[buffer_qte[i]["input"]] == Vector2.ZERO:
-			used_direction = last_direction
+			used_direction = expected_actions["input_left"]
 		else:
 			used_direction = expected_actions[buffer_qte[i]["input"]]
 			last_direction = used_direction
