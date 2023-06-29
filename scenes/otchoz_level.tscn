@@ -277,6 +277,7 @@ sources/4 = SubResource("TileSetAtlasSource_o3nl4")
 sources/0 = SubResource("TileSetAtlasSource_ypnri")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hclmx"]
+radius = 9.0
 
 [node name="Otchoz" type="Node2D"]
 texture_filter = 1
