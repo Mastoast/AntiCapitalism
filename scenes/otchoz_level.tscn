@@ -383,6 +383,34 @@ tracks/3/keys = {
 "values": [Vector2(7, 4)]
 }
 
+[sub_resource type="Animation" id="Animation_galmq"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(7, 4), Vector2(7, 4), Vector2(7, 6.9294), Vector2(7, 3.07336)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1.15824, 0.549323), Vector2(0.653278, 1.14256)]
+}
+
 [sub_resource type="Animation" id="Animation_aei3b"]
 resource_name = "move_down"
 length = 0.2
@@ -571,34 +599,6 @@ tracks/2/keys = {
 "values": [Vector2(7, 4), Vector2(7, 10.336), Vector2(7, 4.887), Vector2(7, 4)]
 }
 
-[sub_resource type="Animation" id="Animation_galmq"]
-resource_name = "idle"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.7, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(7, 4), Vector2(7, 4), Vector2(7, 6.9294), Vector2(7, 3.07336)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.7, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1.15824, 0.549323), Vector2(0.653278, 1.14256)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yccrw"]
 _data = {
 "RESET": SubResource("Animation_iiafm"),
@@ -630,7 +630,7 @@ tile_set = SubResource("TileSet_a7oir")
 cell_quadrant_size = 14
 format = 2
 layer_0/name = "Level1"
-layer_0/tile_data = PackedInt32Array(524293, 393216, 65539, 851981, 393216, 65539, 655378, 393216, 65539, 589842, 393216, 65539, 196626, 393216, 65539, 131087, 393216, 65539, 524301, 393216, 65539, 524302, 393216, 65539, 720907, 393216, 65539, 917521, 393216, 65539, 917522, 393216, 65539, 327697, 393216, 65539, 196622, 393216, 65539, 393224, 393216, 65539, 786441, 393216, 65539, 983051, 393216, 65539, 917512, 393216, 65539, 196617, 393216, 65539, 1048590, 393216, 65539)
+layer_0/tile_data = PackedInt32Array(524293, 393216, 65539, 851981, 393216, 65539, 655378, 393216, 65539, 589842, 393216, 65539, 196626, 393216, 65539, 131087, 393216, 65539, 524301, 393216, 65539, 524302, 393216, 65539, 720907, 393216, 65539, 327697, 393216, 65539, 196622, 393216, 65539, 393224, 393216, 65539, 786441, 393216, 65539, 196617, 393216, 65539, 458760, 393216, 65539, 524296, 393216, 65539, 196627, 393216, 65539, 327700, 393216, 65539, 393236, 393216, 65539, 655366, 393216, 65539, 786452, 393216, 65539, 851988, 393216, 65539, 458772, 393216, 65539, 327688, 393216, 65539, 196623, 393216, 65539, 786443, 393216, 65539)
 layer_1/name = "Graound"
 layer_1/enabled = true
 layer_1/modulate = Color(1, 1, 1, 1)
