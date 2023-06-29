@@ -106,12 +106,17 @@ func is_input_valid():
 		return timer - counter < StaticMusic.beat_length * max_input_delay
 	return timer - counter > StaticMusic.beat_length * min_input_delay
 
-func try_input(event):
-	if is_finished or is_canceled : return	
+func try_input(event, can_fail):
+	if is_finished or is_canceled : return false
 	if event.is_action_pressed(expected_action) and is_input_valid():
 		succeed()
-	else:
+		return true
+	elif can_fail:
 		fail()
+		return false
+	else :
+		succeed()
+		return false
 
 func canceled():
 	if is_finished or is_canceled : return

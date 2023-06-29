@@ -136,7 +136,7 @@ func update_trash_cans():
 func _on_new_beat():
 	if StaticMusic.beat_count % 2 == 0: # trigger every 2 beat
 		if starting_pattern:
-			$PatternPlayer.start_pattern(pickable_trash.pattern["pattern"])
+			$PatternPlayer.start_pattern(pickable_trash.pattern)
 			if pickable_trash.pattern.has("anim_sprite"):
 				_on_next_anim(pickable_trash.pattern["anim_sprite"])
 			starting_pattern = false
