@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bj4ndq5wr0mvi"]
+[gd_scene load_steps=3 format=3 uid="uid://bj4ndq5wr0mvi"]
 
 [ext_resource type="Script" path="res://scripts/pattern_player.gd" id="1_8355h"]
+[ext_resource type="Texture2D" uid="uid://bdtt5ei4ix11l" path="res://sprites/icon.svg" id="2_o8ts0"]
 
 [node name="PatternPlayer" type="Node2D"]
 script = ExtResource("1_8355h")
@@ -8,3 +9,8 @@ script = ExtResource("1_8355h")
 [node name="PatternLine" type="Line2D" parent="."]
 position = Vector2(383, 319)
 points = PackedVector2Array(0, 0, 0, 53.2359, 0, 80, -40, 80, -40, 51)
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(300, 300)
+scale = Vector2(0.117188, 0.117188)
+texture = ExtResource("2_o8ts0")
