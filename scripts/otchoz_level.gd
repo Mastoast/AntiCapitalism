@@ -3,7 +3,6 @@ extends Node2D
 var music_pitch = 1.0
 @export var fail_delay = 0.5
 @export var valid_input_cooldown = 0.5
-@export var player_movement_time = 0.1
 @export var beat_per_level = 100
 
 @onready var grid_size = $level/TileMap.cell_quadrant_size
@@ -67,16 +66,8 @@ func _unhandled_input(event):
 		if not truck.get_node("Area2D").get_overlapping_areas().is_empty():
 			starting_pattern = true
 	for input in inputs.keys():
-		if event.is_action_pressed(input):
-			try_move(inputs[input])
-
-func try_move(move):
-	truck.get_node("RayCast2D").target_position = move * grid_size
-	truck.get_node("RayCast2D").force_raycast_update()
-	if !truck.get_node("RayCast2D").is_colliding() and is_input_valid():
-		var tween = create_tween()
-		var prop = tween.tween_property(truck, "position", move * grid_size, player_movement_time)
-		prop.as_relative().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
+		if event.is_action_pressed(input) and is_input_valid():
+			truck.try_move(inputs[input], grid_size)
 
 func is_input_valid():
 	var is_before = StaticMusic.get_delay_with_next_beat() < StaticMusic.beat_length * fail_delay
