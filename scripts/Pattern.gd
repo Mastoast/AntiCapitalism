@@ -26,38 +26,38 @@ const pattern3 = { "nb_fail_accepted" : 2, "anim_sprite": "Pat03/Pat03Anim01.png
 	{"input": "input_right"	, "delay": 1.0, 	"position": Vector2(400.0, 250.0), "timer": 3.0, 	"anim_sprite":"Pat03/Pat03Anim05.png", "draw_line" : true},
 	{"input": "input_down"	, "delay": 1.0, 	"position": Vector2(1000.0, 250.0), "timer": 3.0, 	"anim_sprite":"Pat03/Pat03Anim06.png", "draw_line" : true},
 	{"input": "input_action", "delay": 1.0, 	"position": Vector2(1200.0,  650.0), "timer": 3.0, 	"anim_sprite":"Pat03/Pat03Anim07.png", "draw_line" : true},
-	{"input": "input_right"	, "delay": 2.0, 	"position": Vector2(1000.0, 880.0), "timer": 3.0, 	"anim_sprite":"Pat03/Pat03Anim08.png", "draw_line" : true},
+	{"input": "input_right"	, "delay": 2.0, 	"position": Vector2(1000.0, 880.0), "timer": 3.0, 	"anim_sprite":"Pat03/Pat03Anim08.png", "draw_line" : true},	
 ]}
 
 
-const pattern4 = { "nb_fail_accepted" : 2, "pattern" :
+const pattern4 = { "nb_fail_accepted" : 2, "anim_sprite": "Pat04/Pat04Anim01.png", "pattern" :
 [ # difficulty 2 OLD CONTAINER
-	{"input": "input_left"	, "delay": 2.0, 	"position": Vector2(1200.0, 880.0), "timer": 2.0, "draw_line" : true},
-	{"input": "input_action", "delay": 2.0, 	"position": Vector2(1200.0,  650.0), "timer": 3.0, "draw_line" : true},
-	{"input": "input_up"	, "delay": 1.0, 	"position": Vector2(400.0, 880.0), "timer": 3.0, "draw_line" : true},
-	{"input": "input_right"	, "delay": 2.0, 	"position": Vector2(400.0, 250.0), "timer": 3.0, "draw_line" : true},
-	{"input": "input_down"	, "delay": 1.0, 	"position": Vector2(600.0, 250.0), "timer": 3.0, "draw_line" : true},
-	{"input": "input_right"	, "delay": 1.0, 	"position": Vector2(600.0, 450.0), "timer": 3.0, "draw_line" : true},
-	{"input": "input_up"	, "delay": 1.0, 	"position": Vector2(800.0, 450.0), "timer": 3.0, "draw_line" : true},
-	{"input": "input_right"	, "delay": 1.0, 	"position": Vector2(800.0, 250.0), "timer": 3.0, "draw_line" : true},
-	{"input": "input_down"	, "delay": 1.0, 	"position": Vector2(1000.0, 250.0), "timer": 3.0, "draw_line" : true},
-	{"input": "input_action", "delay": 1.0, 	"position": Vector2(1200.0,  650.0), "timer": 3.0, "draw_line" : true},
-	{"input": "input_right"	, "delay": 2.0, 	"position": Vector2(1000.0, 880.0), "timer": 3.0, "draw_line" : true},
+	{"input": "input_left"	, "delay": 2.0, 	"position": Vector2(1200.0, 880.0), "timer": 2.0, 	"anim_sprite":"Pat04/Pat04Anim02.png", "draw_line" : true},
+	{"input": "input_action", "delay": 2.0, 	"position": Vector2(1200.0,  650.0), "timer": 3.0, 	 "anim_sprite":"Pat04/Pat04Anim03.png", "draw_line" : true},
+	{"input": "input_up"	, "delay": 1.0, 	"position": Vector2(400.0, 880.0), "timer": 3.0, 	"anim_sprite":"Pat04/Pat04Anim04.png", "draw_line" : true},
+	{"input": "input_right"	, "delay": 2.0, 	"position": Vector2(400.0, 250.0), "timer": 3.0, 	"anim_sprite":"Pat04/Pat04Anim05.png", "draw_line" : true},
+	{"input": "input_down"	, "delay": 1.0, 	"position": Vector2(600.0, 250.0), "timer": 3.0, 	"anim_sprite":"Pat04/Pat04Anim06.png", "draw_line" : true},
+	{"input": "input_right"	, "delay": 1.0, 	"position": Vector2(600.0, 450.0), "timer": 3.0, 	"anim_sprite":"Pat04/Pat04Anim07.png", "draw_line" : true},
+	{"input": "input_up"	, "delay": 1.0, 	"position": Vector2(800.0, 450.0), "timer": 3.0, 	"anim_sprite":"Pat04/Pat04Anim08.png", "draw_line" : true},
+	{"input": "input_right"	, "delay": 1.0, 	"position": Vector2(800.0, 250.0), "timer": 3.0, 	"anim_sprite":"Pat04/Pat04Anim09.png", "draw_line" : true},
+	{"input": "input_down"	, "delay": 1.0, 	"position": Vector2(1000.0, 250.0), "timer": 3.0, 	"anim_sprite":"Pat04/Pat04Anim10.png", "draw_line" : true},
+	{"input": "input_action", "delay": 1.0, 	"position": Vector2(1200.0,  650.0), "timer": 3.0, 	 "anim_sprite":"Pat04/Pat04Anim11.png", "draw_line" : true},
+	{"input": "input_right"	, "delay": 2.0, 	"position": Vector2(1000.0, 880.0), "timer": 3.0,  	 "anim_sprite":"Pat04/Pat04Anim12.png","draw_line" : true},
 ]}
 
-const pattern5 = { "nb_fail_accepted" : 3, "pattern" :
+const pattern5 = { "nb_fail_accepted" : 3, "anim_sprite": "Pat05/Pat05Anim01.png", "pattern" :
 [ # difficulty 2.5 PLASTIC CONTAINER
-	{"input": "input_left"	, "delay": 2.0, 	"position": Vector2(1200.0, 880.0), "timer": 2.0, "draw_line" : true},
-	{"input": "input_action", "delay": 2.0, 	"position": Vector2(1200.0,  650.0), "timer": 3.0, "draw_line" : true},
-	{"input": "input_up"	, "delay": 1.0, 	"position": Vector2(400.0, 880.0), "timer": 3.0, "draw_line" : true},
-	{"input": "input_right"	, "delay": 2.0, 	"position": Vector2(400.0, 250.0), "timer": 3.0, "draw_line" : true},
-	{"input": "input_down"	, "delay": 0.66, 	"position": Vector2(600.0, 250.0), "timer": 1.5, "draw_line" : true},
-	{"input": "input_right"	, "delay": 0.66, 	"position": Vector2(600.0, 450.0), "timer": 1.5, "draw_line" : true},
-	{"input": "input_down"	, "delay": 0.66, 	"position": Vector2(800.0, 450.0), "timer": 1.5, "draw_line" : true},
-	{"input": "input_right"	, "delay": 0.66, 	"position": Vector2(800.0, 650.0), "timer": 1.5, "draw_line" : true},
-	{"input": "input_down"	, "delay": 0.66, 	"position": Vector2(1000.0, 650.0), "timer": 1.5, "draw_line" : true},
-	{"input": "input_right"	, "delay": 0.66, 	"position": Vector2(1000.0, 880.0), "timer": 1.5, "draw_line" : true},
-	{"input": "input_action", "delay": 2.0, 	"position": Vector2(1200.0,  650.0), "timer": 3.0, "draw_line" : true},
+	{"input": "input_left"	, "delay": 2.0, 	"position": Vector2(1200.0, 880.0), "timer": 2.0, 	"anim_sprite":"Pat05/Pat05Anim02.png", "draw_line" : true},
+	{"input": "input_action", "delay": 2.0, 	"position": Vector2(1200.0,  650.0), "timer": 3.0, 	"anim_sprite":"Pat05/Pat05Anim03.png", "draw_line" : true},
+	{"input": "input_up"	, "delay": 1.0, 	"position": Vector2(400.0, 880.0), "timer": 3.0, 	"anim_sprite":"Pat05/Pat05Anim04.png", "draw_line" : true},
+	{"input": "input_right"	, "delay": 2.0, 	"position": Vector2(400.0, 250.0), "timer": 3.0, 	"anim_sprite":"Pat05/Pat05Anim05.png", "draw_line" : true},
+	{"input": "input_down"	, "delay": 0.66, 	"position": Vector2(600.0, 250.0), "timer": 1.5, 	"anim_sprite":"Pat05/Pat05Anim06.png", "draw_line" : true},
+	{"input": "input_right"	, "delay": 0.66, 	"position": Vector2(600.0, 450.0), "timer": 1.5, 	"anim_sprite":"Pat05/Pat05Anim07.png", "draw_line" : true},
+	{"input": "input_down"	, "delay": 0.66, 	"position": Vector2(800.0, 450.0), "timer": 1.5, 	"anim_sprite":"Pat05/Pat05Anim08.png", "draw_line" : true},
+	{"input": "input_right"	, "delay": 0.66, 	"position": Vector2(800.0, 650.0), "timer": 1.5, 	"anim_sprite":"Pat05/Pat05Anim09.png", "draw_line" : true},
+	{"input": "input_down"	, "delay": 0.66, 	"position": Vector2(1000.0, 650.0), "timer": 1.5, 	"anim_sprite":"Pat05/Pat05Anim10.png", "draw_line" : true},
+	{"input": "input_right"	, "delay": 0.66, 	"position": Vector2(1000.0, 880.0), "timer": 1.5, 	"anim_sprite":"Pat05/Pat05Anim11.png", "draw_line" : true},
+	{"input": "input_action", "delay": 2.0, 	"position": Vector2(1200.0,  650.0), "timer": 3.0, 	"anim_sprite":"Pat05/Pat05Anim12.png", "draw_line" : true},
 ]}
 
 const pattern6 = { "nb_fail_accepted" : 3, "pattern" :
