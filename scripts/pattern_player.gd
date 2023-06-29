@@ -75,6 +75,12 @@ func _input(event):
 	var min_time = 99999
 	var selected_qte
 	for qte in get_tree().get_nodes_in_group("qte"):
+		if qte.is_finished : continue
+		
+		if event.is_action_pressed(qte.expected_action) and qte.is_input_valid():
+			selected_qte = qte
+			break
+		
 		if (qte.timer - qte.counter < min_time):
 			selected_qte = qte
 			min_time = qte.timer - qte.counter

@@ -103,19 +103,19 @@ func _draw():
 	
 func is_input_valid():
 	if(timer - counter > 0.0):
-		return timer - counter < StaticMusic.beat_length * max_input_delay
-	return timer - counter > StaticMusic.beat_length * min_input_delay
+		return timer - counter <= StaticMusic.beat_length * max_input_delay
+	return timer - counter >= StaticMusic.beat_length * min_input_delay
 
 func try_input(event, can_fail):
 	if is_finished or is_canceled : return false
 	if event.is_action_pressed(expected_action) and is_input_valid():
 		succeed()
 		return true
-	elif can_fail:
-		fail()
+	elif not can_fail and is_input_valid() :
+		succeed()
 		return false
 	else :
-		succeed()
+		fail()
 		return false
 
 func canceled():
