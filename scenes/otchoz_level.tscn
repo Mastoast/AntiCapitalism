@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dqsamugcwmmrq" path="res://sprites/Otchoz/TruckTrash/TruckSimpleOrangeBack.png" id="7_8islr"]
 [ext_resource type="Texture2D" uid="uid://ulyltfv1ao" path="res://sprites/Otchoz/TruckTrash/TruckSimpleOrangeFace.png" id="8_inb0w"]
 [ext_resource type="Theme" uid="uid://ced1k3bls70p" path="res://themes/arcade_theme.tres" id="9_kqiyu"]
+[ext_resource type="Texture2D" uid="uid://c4dal25d1t2kj" path="res://sprites/full_square.png" id="11_bk27e"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ypnri"]
 texture = ExtResource("3_u0kxd")
@@ -301,7 +302,7 @@ texture_region_size = Vector2i(14, 14)
 0:3/0/physics_layer_0/angular_velocity = 0.0
 12:1/size_in_atlas = Vector2i(3, 2)
 12:1/0 = 0
-12:1/0/texture_origin = Vector2i(-7, 14)
+12:1/0/texture_origin = Vector2i(0, -21)
 12:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 12:1/0/physics_layer_0/angular_velocity = 0.0
 15:2/0 = 0
@@ -612,9 +613,6 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_hclmx"]
 radius = 9.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fgalh"]
-bg_color = Color(1, 1, 1, 1)
-
 [node name="Otchoz" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_6tj17")
@@ -658,7 +656,7 @@ layer_4/modulate = Color(1, 1, 1, 1)
 layer_4/y_sort_enabled = false
 layer_4/y_sort_origin = 0
 layer_4/z_index = 10
-layer_4/tile_data = PackedInt32Array(786438, 589826, 4, 393229, 589826, 4, 917510, 262146, 4, 851985, 262146, 4, 524294, 262146, 4, 524298, 262146, 4, 393226, 2, 3, 655370, 131074, 4, 786445, 131074, 4, 917513, 131074, 4, 1048591, 131074, 4, 393233, 131074, 4, 196618, 131074, 4, 917515, 524290, 4, 786442, 524290, 4, 917518, 524290, 4, 786448, 524290, 4, 589841, 524290, 4, 327698, 524290, 4, 131083, 524290, 4, 196621, 524290, 4, 851984, 393218, 4, 196625, 393218, 4, 196616, 393218, 4, 589844, 393218, 4, 655369, 393218, 4, 524303, 393218, 4, 131085, 2, 3, 131090, 2, 3, 65553, 131074, 4, 458777, 393218, 4, 393219, 393218, 4, 655376, 2, 3)
+layer_4/tile_data = PackedInt32Array(786438, 589826, 4, 393229, 589826, 4, 917510, 262146, 4, 851985, 262146, 4, 524294, 262146, 4, 524298, 262146, 4, 393226, 2, 3, 655370, 131074, 4, 786445, 131074, 4, 917513, 131074, 4, 1048591, 131074, 4, 393233, 131074, 4, 196618, 131074, 4, 917515, 524290, 4, 786442, 524290, 4, 917518, 524290, 4, 786448, 524290, 4, 589841, 524290, 4, 327698, 524290, 4, 131083, 524290, 4, 196621, 524290, 4, 851984, 393218, 4, 196625, 393218, 4, 196616, 393218, 4, 589844, 393218, 4, 655369, 393218, 4, 524303, 393218, 4, 131085, 2, 3, 131090, 2, 3, 65553, 131074, 4, 458777, 393218, 4, 393219, 393218, 4, 655376, 2, 3, 65543, 786434, 1)
 
 [node name="truck2D" type="Node2D" parent="level"]
 position = Vector2(196, 98)
@@ -693,32 +691,27 @@ scale = Vector2(0.582031, 0.582031)
 [node name="PatternPlayer" parent="." instance=ExtResource("6_o3201")]
 z_index = 2000
 
+[node name="FullSquare" type="Sprite2D" parent="."]
+position = Vector2(228.5, 35.5)
+scale = Vector2(1.28771, 0.198324)
+texture = ExtResource("11_bk27e")
+
 [node name="ProgressBar" type="ProgressBar" parent="."]
-z_index = 20
-offset_left = 1083.0
-offset_top = 459.0
-offset_right = 1456.0
-offset_bottom = 486.0
-rotation = -1.5708
+z_index = 1
+offset_left = 12.0
+offset_top = 13.0
+offset_right = 444.0
+offset_bottom = 35.0
 theme = ExtResource("9_kqiyu")
-theme_override_styles/fill = SubResource("StyleBoxFlat_fgalh")
-value = 50.0
-show_percentage = false
+allow_greater = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 1069.0
-offset_top = 31.0
-offset_right = 1130.0
-offset_bottom = 82.0
-bbcode_enabled = true
-text = "[font_size=44]😃[/font_size]"
-autowrap_mode = 0
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="."]
-offset_left = 1061.0
-offset_top = 476.0
-offset_right = 1138.0
-offset_bottom = 538.0
-bbcode_enabled = true
-text = "[font_size=44]😡[/font_size]"
+[node name="Rentalbility" type="RichTextLabel" parent="."]
+offset_left = 13.0
+offset_top = 42.0
+offset_right = 443.0
+offset_bottom = 76.0
+theme = ExtResource("9_kqiyu")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "Satisfaction bar"
+scroll_active = false
 autowrap_mode = 0
