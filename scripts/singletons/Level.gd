@@ -1,5 +1,9 @@
 extends Node
 
+const container_texture := preload("res://sprites/Cap/Container.png")
+const trash_bag_texture := preload("res://sprites/Cap/TrashBag.png")
+const open_trash_bag_texture := preload("res://sprites/Cap/OpenTrashBag.png")
+
 var level1 = {
 	"music": StaticMusic.music1, "pitch": 1.0,
 	"combo_bar_start": 100.0, "combo_decrease_speed" : 1.2,
@@ -10,11 +14,11 @@ var level1 = {
 Night {night_count}[/center][/font_size]"""
 	],
 	"trashes" : [
-	{"distance": 0.5, "sprite": Color.GREEN_YELLOW, "pattern": Pattern.pattern1},
-	{"distance": 1.0, "sprite": Color.MIDNIGHT_BLUE, "pattern": Pattern.pattern1},
-	{"distance": 1.5, "sprite": Color.GREEN_YELLOW, "pattern": Pattern.pattern2},
-	{"distance": 1.75, "sprite": Color.BLUE_VIOLET, "pattern": Pattern.pattern1},
-	{"distance": 2.25, "sprite": Color.DARK_RED, "pattern": Pattern.pattern2},
+	{"distance": 0.5, "sprite": trash_bag_texture, "pattern": Pattern.pattern1},
+	{"distance": 1.0, "sprite": trash_bag_texture, "pattern": Pattern.pattern1},
+	{"distance": 1.5, "sprite": open_trash_bag_texture, "pattern": Pattern.pattern2},
+	{"distance": 1.75, "sprite": trash_bag_texture, "pattern": Pattern.pattern1},
+	{"distance": 2.25, "sprite": open_trash_bag_texture, "pattern": Pattern.pattern2},
 ]}
 
 var level2 = {
