@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://blgqa2l8xh3dk" path="res://objects/transition_layer.tscn" id="2_2ryk7"]
 [ext_resource type="Texture2D" uid="uid://bdtt5ei4ix11l" path="res://sprites/icon.svg" id="2_bkkyb"]
 [ext_resource type="Script" path="res://scripts/truck2D.gd" id="2_dnr5s"]
-[ext_resource type="Texture2D" uid="uid://bn4v8nlenpice" path="res://sprites/Otchoz/Tilemap.png" id="3_u0kxd"]
+[ext_resource type="Texture2D" uid="uid://mxbe3k3o07fh" path="res://sprites/Otchoz/Tilemap.png" id="3_u0kxd"]
 [ext_resource type="PackedScene" uid="uid://cacrapbtcy27r" path="res://objects/rythm_visual_helper.tscn" id="5_d703r"]
 [ext_resource type="PackedScene" uid="uid://bj4ndq5wr0mvi" path="res://scenes/pattern_player.tscn" id="6_o3201"]
 
