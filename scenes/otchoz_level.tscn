@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://hnnds01fc3au"]
+[gd_scene load_steps=25 format=3 uid="uid://hnnds01fc3au"]
 
 [ext_resource type="Script" path="res://scripts/otchoz_level.gd" id="1_6tj17"]
 [ext_resource type="Texture2D" uid="uid://d26sjdjtf60pa" path="res://sprites/tiles.png" id="1_m4plf"]
@@ -568,12 +568,41 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.06, 0.12, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(6, 4), Vector2(5.98309, 10.3364), Vector2(5.983, 4.887), Vector2(6, 4)]
+"values": [Vector2(7, 4), Vector2(7, 10.336), Vector2(7, 4.887), Vector2(7, 4)]
+}
+
+[sub_resource type="Animation" id="Animation_galmq"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(7, 4), Vector2(7, 4), Vector2(7, 6.9294), Vector2(7, 3.07336)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1.15824, 0.549323), Vector2(0.653278, 1.14256)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yccrw"]
 _data = {
 "RESET": SubResource("Animation_iiafm"),
+"idle": SubResource("Animation_galmq"),
 "move_down": SubResource("Animation_aei3b"),
 "move_left": SubResource("Animation_eccci"),
 "move_right": SubResource("Animation_rw5hs"),
@@ -583,9 +612,11 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_hclmx"]
 radius = 9.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fgalh"]
+bg_color = Color(1, 1, 1, 1)
+
 [node name="Otchoz" type="Node2D"]
 texture_filter = 1
-position = Vector2(-1, 2)
 script = ExtResource("1_6tj17")
 fail_delay = 0.25
 
@@ -670,6 +701,7 @@ offset_right = 1456.0
 offset_bottom = 486.0
 rotation = -1.5708
 theme = ExtResource("9_kqiyu")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fgalh")
 value = 50.0
 show_percentage = false
 
