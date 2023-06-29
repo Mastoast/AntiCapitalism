@@ -37,6 +37,7 @@ func _process(delta):
 func play(music, pitch = 1.0, position = 0.0):
 	if !player:
 		player = AudioStreamPlayer.new()
+		player.bus = "Music"
 		player.name = playerName
 		player.volume_db = player_volume
 	if !player.is_inside_tree():
