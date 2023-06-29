@@ -45,7 +45,8 @@ func start_pattern(pattern, drawing_center = Vector2(0, 0)):
 	buffer_qte = pattern["pattern"].duplicate(true)
 	pattern_start = StaticMusic.get_player_total_position()
 	pattern_drawing_center = drawing_center
-	create_pattern_drawing()
+	if pattern_drawing_center != Vector2.ZERO:
+		create_pattern_drawing()
 	sort_qte()
 
 func sort_qte():
@@ -65,7 +66,8 @@ func stop_current_pattern():
 
 func _process(delta):
 	spawn_qte_on_time()
-	update_pattern_drawing()
+	if pattern_drawing_center != Vector2.ZERO:
+		update_pattern_drawing()
 
 func _input(event):
 	if qte_count == 0 or !event.is_action_type() or !is_expected_action(event):
@@ -147,6 +149,9 @@ func _on_bad_input():
 func create_pattern_drawing():
 	pattern_line.clear_points()
 	pattern_line.visible = true
+	for point in pattern_line.get_children():
+		pattern_line.remove_child(point)
+		point.queue_free()
 	var last_direction = Vector2.ZERO
 	pattern_line.add_point(Vector2.ZERO)
 	var last_position = pattern_line.get_point_position(pattern_line.get_point_count()-1) + expected_actions[buffer_qte[0]["input"]] * line_beat_length * buffer_qte[0]["delay"]
@@ -174,7 +179,8 @@ func create_pattern_drawing():
 	pattern_end = pattern_start + pattern_length * StaticMusic.beat_length
 	# Draw points
 	for item in pattern_line.points:
-		var new = $Icon.duplicate()
+		var new = $LineJoint.duplicate()
+		new.visible = true
 		pattern_line.add_child(new)
 		new.position = item
 

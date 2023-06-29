@@ -58,6 +58,9 @@ func _process(delta):
 		$TransitionLayer.sleep_transition(func(): get_tree().change_scene_to_file("res://scenes/briefing.tscn"))
 
 func _unhandled_input(event):
+	if event.is_action_pressed("restart"):
+		get_tree().reload_current_scene()
+		return
 	if starting_pattern or current_trash:
 		return
 	if event.is_action_pressed("ui_accept"):
@@ -79,14 +82,14 @@ func is_input_valid():
 	var is_before = StaticMusic.get_delay_with_next_beat() < StaticMusic.beat_length * fail_delay
 	var is_after = StaticMusic.get_delay_with_previous_beat() < StaticMusic.beat_length * fail_delay
 	if is_after and StaticMusic.beat_count != last_after_beat_used:
-		last_ahead_beat_used = StaticMusic.beat_count
+		last_after_beat_used = StaticMusic.beat_count
 		return true
 	if is_before and StaticMusic.beat_count != last_ahead_beat_used:
 		last_ahead_beat_used = StaticMusic.beat_count
 		return true
 
 func _on_new_beat():
-	satisfaction += satisfaction_per_trash[min(ProgressData.otchoz_trash.size(), satisfaction_per_trash.size())]
+	satisfaction += satisfaction_per_trash[min(ProgressData.otchoz_trash.size(), satisfaction_per_trash.size() - 1)]
 	$ProgressBar.value = satisfaction
 	if satisfaction >= 100.0 and not level_ending:
 		level_ending = true
@@ -94,7 +97,7 @@ func _on_new_beat():
 	if StaticMusic.beat_count % 2 == 0: # trigger every 2 beat
 		if starting_pattern:
 			current_trash = truck.get_node("Area2D").get_overlapping_areas()[0].get_parent()
-			$PatternPlayer.start_pattern(current_trash.pattern)
+			$PatternPlayer.start_pattern(current_trash.pattern, current_trash.global_position)
 			starting_pattern = false
 
 func _on_pattern_success():

@@ -290,7 +290,6 @@ position = Vector2(1090, 588)
 scale = Vector2(0.582031, 0.582031)
 
 [node name="PatternPlayer" parent="." instance=ExtResource("6_o3201")]
-visible = false
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_left = 1083.0

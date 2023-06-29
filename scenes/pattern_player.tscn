@@ -7,10 +7,12 @@
 script = ExtResource("1_8355h")
 
 [node name="PatternLine" type="Line2D" parent="."]
+visible = false
 position = Vector2(383, 319)
 points = PackedVector2Array(0, 0, 0, 53.2359, 0, 80, -40, 80, -40, 51)
 
-[node name="Icon" type="Sprite2D" parent="."]
+[node name="LineJoint" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(300, 300)
 scale = Vector2(0.117188, 0.117188)
 texture = ExtResource("2_o8ts0")
