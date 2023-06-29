@@ -21,3 +21,6 @@ func get_pattern():
 func empty():
 	is_empty = true
 	$Area2D/CollisionShape2D.disabled = true
+
+func set_sprite(sprite):
+	$Sprite2D.texture = sprite

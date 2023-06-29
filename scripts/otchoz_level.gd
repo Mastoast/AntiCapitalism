@@ -46,7 +46,7 @@ func load_level(level):
 			ProgressData.otchoz_trash.append({"coords": cell, "pattern": pattern})
 	for trash in ProgressData.otchoz_trash:
 		var new_trash = trash2D.instantiate()
-		new_trash.modulate = Color.DEEP_PINK
+		new_trash.set_sprite(trash["pattern"]["2d_sprite"])
 		new_trash.init(trash["pattern"], trash["coords"])
 		new_trash.position = Vector2(trash["coords"].x * grid_size, trash["coords"].y * grid_size) + Vector2(grid_size / 2, grid_size / 2)
 		$level.add_child(new_trash)
