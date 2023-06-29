@@ -1,6 +1,6 @@
 extends Node
 
-#var test_sfx = load("res://sounds/test.wav")
+var bowup = load("res://sounds/boing.wav")
 
 var audio_players = []
 
@@ -15,6 +15,7 @@ func _process(delta):
 
 func play_sfx(stream, pitch = 1.0, position = 0.0):
 	var player = AudioStreamPlayer.new()
+	player.bus = "Sfx"
 	player.stream = stream
 	player.pitch_scale = pitch
 	get_tree().current_scene.add_child(player)
