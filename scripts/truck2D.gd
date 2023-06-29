@@ -3,7 +3,11 @@ extends Node2D
 @export var player_movement_time = 0.1
 
 func _ready():
-	pass
+	StaticMusic.new_beat.connect(_start_anim)
+
+func _start_anim():
+	if !$Sprite2D/Anim.is_playing():
+		$Sprite2D/Anim.play("idle", -1.0, 1.0 / StaticMusic.beat_length, false)
 
 func _process(delta):
 	pass
