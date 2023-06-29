@@ -8,6 +8,8 @@ signal pattern_next_anim
 
 const qte := preload("res://objects/qte.tscn")
 const line := preload("res://objects/line.tscn")
+const arrow_texture := preload("res://sprites/direction_arrow.png")
+const e_texture := preload("res://sprites/e_action.png")
 
 var expected_actions = {
 	"input_left" : Vector2.LEFT,
@@ -29,12 +31,13 @@ var pattern_drawing_center
 
 # drawing pattern
 @export var line_beat_length = 50.0
+@export var joint_sprite_scale = Vector2.ONE
 @onready var pattern_line:Line2D = $Node2D/PatternLine
 
 #func _ready():
 #	# DEBUG
-#	StaticMusic.play(StaticMusic.music1, 1.0)
-#	start_pattern(Pattern.pattern1)
+#	StaticMusic.play(StaticMusic.music_cap1, 1.0)
+#	start_pattern(Pattern.pattern1, Vector2(300, 300))
 #	# DEBUG
 
 func start_pattern(pattern, drawing_center = Vector2(0, 0)):
@@ -184,14 +187,29 @@ func create_pattern_drawing():
 		if i < buffer_qte.size()-1:
 			line_length += last_position.distance_to(new_position)
 		pattern_line.add_point(new_position)
+		create_line_joint(buffer_qte[i]["input"], last_position)
 		last_position = new_position
 	pattern_end = pattern_start + pattern_length * StaticMusic.beat_length
-	# Draw points
-	for item in pattern_line.points:
-		var new = $Node2D/LineJoint.duplicate()
-		new.visible = true
-		pattern_line.add_child(new)
-		new.position = item
+
+func create_line_joint(input, position):
+	var new_sprite = Sprite2D.new()
+	var new_qte = qte.instantiate()
+	if input == "input_action":
+		new_sprite.texture = e_texture
+	else:
+		new_sprite.texture = arrow_texture
+		if input == "input_up" :
+			new_sprite.modulate = new_qte.up_color
+		elif input == "input_down" :
+			new_sprite.modulate = new_qte.down_color
+		elif input == "input_left" :
+			new_sprite.modulate = new_qte.left_color
+		elif input == "input_right" :
+			new_sprite.modulate = new_qte.right_color
+	new_sprite.rotation_degrees = new_qte.sprite_dict[input]["rotation"]
+	new_sprite.scale = joint_sprite_scale
+	pattern_line.add_child(new_sprite)
+	new_sprite.position = position
 
 func update_pattern_drawing():
 	if !buffer_qte.is_empty() or qte_count > 0:
