@@ -63,9 +63,9 @@ func _process(delta):
 	#
 	$UI/ScoreText.text = str(int(score))
 	$UI/ComboBar.value = combo
-	
+
 	#$PickUpBar.visible = pickable_trash and not in_pattern
-		
+
 	if $SurvivalTimer.is_stopped() :
 		$UI/SurvivalTimerText.text = ""
 	else :
@@ -147,7 +147,7 @@ func _on_next_anim(anim_sprite):
 
 func add_combo(value):
 	var new_combo = clampf(combo + value, combo_min_value, combo_max_value)
-	if new_combo < combo_threshold and $SurvivalTimer.is_stopped():
+	if new_combo < combo_threshold and $SurvivalTimer.is_stopped() and not level_ending:
 		$SurvivalTimer.start()
 	if new_combo >= combo_threshold and not $SurvivalTimer.is_stopped():
 		$SurvivalTimer.stop()
@@ -190,6 +190,7 @@ func _on_truck_start():
 	is_truck_moving = true
 
 func _on_survival_timer_timeout():
+	level_ending = true
 	ProgressData.is_otchoz = true
 	$UI/TransitionLayer.sleep_transition(func(): get_tree().change_scene_to_file("res://scenes/briefing.tscn"))
 	
