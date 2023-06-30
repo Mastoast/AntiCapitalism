@@ -6,6 +6,13 @@ func _init():
 	pass
 
 func _ready():
+	ProgressData.first_spawn_trash = true
+	ProgressData.is_otchoz = false
+	ProgressData.otchoz_level_count = 0 
+	ProgressData.capitalism_level_count = 0
+	ProgressData.otchoz_statisfaction = 50
+	ProgressData.otchoz_trash = []
+	
 	$TransitionLayer.wake_transition(func(): pass)
 
 func _process(delta):
