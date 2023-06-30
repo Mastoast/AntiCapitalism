@@ -112,7 +112,7 @@ var level2d = {
 	"briefs" : [
 		"""[font_size=44][center]And a new day begins[/center][/font_size]"""
 	],
-	"patterns": [Pattern.pattern1, Pattern.pattern2, Pattern.pattern5],
+	"patterns": [Pattern.pattern1, Pattern.pattern2,Pattern.pattern3, Pattern.pattern4, Pattern.pattern5],
 	"trash_count": 3
 }
 
