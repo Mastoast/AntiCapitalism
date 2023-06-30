@@ -14,7 +14,7 @@ extends Node2D
 @export var beat_line_width = 4.0
 
 #func _ready():
-#	StaticMusic.play(StaticMusic.music_cap1)
+#	StaticMusic.play(StaticMusic.music_cap150)
 #	pass
 
 func _process(delta):

@@ -38,7 +38,7 @@ var pattern_drawing_center
 
 #func _ready():
 #	# DEBUG
-#	StaticMusic.play(StaticMusic.music_cap1, 1.0)
+#	StaticMusic.play(StaticMusic.music_cap150, 1.0)
 #	start_pattern(Pattern.pattern1, Vector2(300, 300))
 #	# DEBUG
 
