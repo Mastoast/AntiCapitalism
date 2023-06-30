@@ -69,7 +69,8 @@ func _process(delta):
 	
 	for y in range(i, 15):
 		$level/TileMap.get_material().set_shader_parameter("trash_pos_"+str(y), Vector2(-9999,-9999))	
-		
+	
+	$level/truck2D.show_directions(grid_size)
 	
 func _unhandled_input(event):
 	if event.is_action_pressed("restart"):

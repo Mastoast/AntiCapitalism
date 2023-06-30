@@ -15,6 +15,27 @@ func _process(delta):
 func move(direction):
 	pass
 
+func show_directions(grid_size):
+	$RayCast2D.target_position = Vector2.UP * grid_size
+	$RayCast2D.force_raycast_update()
+	if !$RayCast2D.is_colliding() : $ArrowUp.show()
+	else : $ArrowUp.hide()
+	
+	$RayCast2D.target_position = Vector2.LEFT * grid_size
+	$RayCast2D.force_raycast_update()
+	if !$RayCast2D.is_colliding() : $ArrowLeft.show()
+	else : $ArrowLeft.hide()
+	
+	$RayCast2D.target_position = Vector2.DOWN * grid_size
+	$RayCast2D.force_raycast_update()
+	if !$RayCast2D.is_colliding() : $ArrowDown.show()
+	else : $ArrowDown.hide()
+	
+	$RayCast2D.target_position = Vector2.RIGHT * grid_size
+	$RayCast2D.force_raycast_update()
+	if !$RayCast2D.is_colliding() : $ArrowRight.show()
+	else : $ArrowRight.hide()
+
 func try_move(move, grid_size):
 	$RayCast2D.target_position = move * grid_size
 	$RayCast2D.force_raycast_update()
