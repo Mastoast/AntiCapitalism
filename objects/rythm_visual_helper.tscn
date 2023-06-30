@@ -3,7 +3,14 @@
 [ext_resource type="Texture2D" uid="uid://c4w5gm5nq8u7y" path="res://sprites/Otchoz/TruckTrash/TruckSimpleOrangeEmpty.png" id="1_i3yn6"]
 [ext_resource type="Script" path="res://scripts/rythm_helper.gd" id="2_i35ba"]
 
-[node name="rythm_helper" type="Sprite2D"]
-texture = ExtResource("1_i3yn6")
+[node name="Node2D" type="Node2D"]
 script = ExtResource("2_i35ba")
 scale_multipliyer = 5.0
+line_length = 400.0
+line_width = 14.0
+
+[node name="rythm_helper" type="Sprite2D" parent="."]
+texture = ExtResource("1_i3yn6")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, 32)
