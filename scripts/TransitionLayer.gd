@@ -7,10 +7,12 @@ func _ready():
 	current_material = $TransitionRect.material
 
 func sleep_transition(callback, duration = tween_delay):
+	StaticSfx.play_sfx(StaticSfx.outro)
 	current_material.set_shader_parameter("direction", 1.0)
 	create_transition_tween(callback, duration)
 
 func wake_transition(callback, duration = tween_delay):
+	StaticSfx.play_sfx(StaticSfx.intro)
 	current_material.set_shader_parameter("direction", -1.0)
 	create_transition_tween(callback, duration)
 
