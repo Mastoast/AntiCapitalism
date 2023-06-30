@@ -6,6 +6,7 @@ var player_volume = 0.0
 
 var music1 = { "stream": load("res://sounds/drums_test.wav"), "bpm": 100.0}
 var music_cap1 = { "stream": load("res://sounds/capital_msc.mp3"), "bpm": 150.0}
+var music_cap100 = { "stream": load("res://sounds/capital_100.mp3"), "bpm": 100.0}
 
 signal new_beat
 
