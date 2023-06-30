@@ -201,7 +201,7 @@ func win_level():
 	$UI/TransitionLayer.sleep_transition(func(): get_tree().change_scene_to_file("res://scenes/briefing.tscn"))
 
 func _on_waiting_beat(beat_diff):
-	$UI/WaitingTimerText.text = waiting_timer_texts[beat_diff]
+	$UI/WaitingTimerText.text = "[center]"+waiting_timer_texts[beat_diff]
 	$UI/WaitingTimerText.visible = true
 	$WaitingTimer.start()
 
