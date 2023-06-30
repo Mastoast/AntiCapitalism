@@ -57,7 +57,7 @@ func try_move(move, grid_size):
 	$RayCast2D.target_position = move * grid_size
 	$RayCast2D.force_raycast_update()
 	if !$RayCast2D.is_colliding() :
-		StaticSfx.play_sfx(StaticSfx.bowup)
+		StaticSfx.play_sfx(StaticSfx.bowup, randf_range(0.9, 1.1))
 		var tween = create_tween()
 		var prop = tween.tween_property(self, "position", move * grid_size, player_movement_time)
 		prop.as_relative().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
