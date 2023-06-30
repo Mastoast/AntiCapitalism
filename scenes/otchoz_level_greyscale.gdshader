@@ -27,7 +27,7 @@ void fragment() {
     avg.rgb = mix(vec3(0.5f), avg.rgb, contrast);
     avg.rgb = mix(vec3(dot(vec3(1.0f), avg.rgb)*0.33333), avg.rgb, saturation);
 	
-	float radius = intensity * length(resolution);
+	float radius = trash_pos_1.z * length(resolution);
 	
 	float ratio = clamp(1.0f + dist - radius, 0.f, 1.f);
     COLOR.rgb = COLOR.rgb * ratio + avg * (1.0f - ratio);

@@ -5,6 +5,8 @@ var music_pitch = 1.0
 @export var valid_input_cooldown = 0.5
 @export var beat_per_level = 100
 
+@export var beat_trash_pulse:Curve
+
 @onready var grid_size = $level/TileMap.cell_quadrant_size
 
 var trash2D = load("res://objects/trash_2d.tscn")
@@ -56,14 +58,17 @@ func _process(delta):
 		level_ending = true
 		$TransitionLayer.sleep_transition(func(): get_tree().change_scene_to_file("res://scenes/briefing.tscn"))
 	
-	var t = get_viewport().get_mouse_position()
-	#for trash in ProgressData.otchoz_trash :
+	var i = 1
+	for trash in ProgressData.otchoz_trash :
 		
-	$level/TileMap.get_material().set_shader_parameter("trash_pos_1", t)
-	$level/TileMap.get_material().set_shader_parameter("trash_pos_2", Vector2(300.0, 50.0))
-	$level/TileMap.get_material().set_shader_parameter("trash_pos_3", Vector2(1000.0, 500.0))
-	$level/TileMap.get_material().set_shader_parameter("trash_pos_4", Vector2(50.0, 800.0))
+		var pos = Vector3(trash["coords"].x + 0.5, trash["coords"].y + 0.5, 0.0) * ProjectSettings.get_setting("display/window/size/viewport_height") / 17.0
+		pos.z = beat_trash_pulse.sample((StaticMusic.get_player_total_position() - (StaticMusic.beat_count - 1) * StaticMusic.beat_length) / StaticMusic.beat_length)
+		$level/TileMap.get_material().set_shader_parameter("trash_pos_"+str(i), pos)	
+		i += 1
 	
+	for y in range(i, 5):
+		$level/TileMap.get_material().set_shader_parameter("trash_pos_"+str(y), Vector2(-9999,-9999))	
+		
 	
 func _unhandled_input(event):
 	if event.is_action_pressed("restart"):

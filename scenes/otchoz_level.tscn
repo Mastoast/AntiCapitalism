@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://hnnds01fc3au"]
+[gd_scene load_steps=28 format=3 uid="uid://hnnds01fc3au"]
 
 [ext_resource type="Script" path="res://scripts/otchoz_level.gd" id="1_6tj17"]
 [ext_resource type="Texture2D" uid="uid://d26sjdjtf60pa" path="res://sprites/tiles.png" id="1_m4plf"]
@@ -13,6 +13,11 @@
 [ext_resource type="Texture2D" uid="uid://ulyltfv1ao" path="res://sprites/Otchoz/TruckTrash/TruckSimpleOrangeFace.png" id="8_inb0w"]
 [ext_resource type="Theme" uid="uid://ced1k3bls70p" path="res://themes/arcade_theme.tres" id="9_kqiyu"]
 [ext_resource type="Texture2D" uid="uid://c4dal25d1t2kj" path="res://sprites/full_square.png" id="11_bk27e"]
+
+[sub_resource type="Curve" id="Curve_6lovv"]
+max_value = 0.1
+_data = [Vector2(0, 0.07), 0.0, 0.0588889, 0, 0, Vector2(0.7, 0.09), 0.0, 0.0, 0, 0, Vector2(1, 0.07), -0.0819091, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ckof8"]
 shader = ExtResource("3_fhho8")
@@ -630,6 +635,7 @@ radius = 9.0
 texture_filter = 1
 script = ExtResource("1_6tj17")
 fail_delay = 0.25
+beat_trash_pulse = SubResource("Curve_6lovv")
 
 [node name="TransitionLayer" parent="." instance=ExtResource("2_2ryk7")]
 
