@@ -55,7 +55,13 @@ func _process(delta):
 	if StaticMusic.beat_count >= beat_per_level and not level_ending:
 		level_ending = true
 		$TransitionLayer.sleep_transition(func(): get_tree().change_scene_to_file("res://scenes/briefing.tscn"))
-
+	
+	var t = get_viewport().get_mouse_position()
+	#t.x /= get_viewport_rect().size.x
+	#t.y /= get_viewport_rect().size.y
+	$level/TileMap.get_material().set_shader_parameter("player_position", t)
+	
+	
 func _unhandled_input(event):
 	if event.is_action_pressed("restart"):
 		get_tree().reload_current_scene()
