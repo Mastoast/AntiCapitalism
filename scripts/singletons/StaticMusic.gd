@@ -2,7 +2,7 @@ extends Node
 
 var player:AudioStreamPlayer
 var playerName = "audio_player"
-var player_volume = -20.0
+var player_volume = 0.0
 
 var music1 = { "stream": load("res://sounds/drums_test.wav"), "bpm": 100.0}
 var music_cap1 = { "stream": load("res://sounds/capital_msc.mp3"), "bpm": 150.0}

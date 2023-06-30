@@ -1,6 +1,8 @@
 extends Node
 
 var bowup = load("res://sounds/boing.wav")
+var intro = load("res://sounds/intro.mp3")
+var outro = load("res://sounds/outro.mp3")
 
 var audio_players = []
 
