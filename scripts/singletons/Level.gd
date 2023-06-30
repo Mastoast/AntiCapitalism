@@ -5,7 +5,7 @@ const trash_bag_texture := preload("res://sprites/Cap/TrashBag.png")
 const open_trash_bag_texture := preload("res://sprites/Cap/OpenTrashBag.png")
 
 var level1 = {
-	"music": StaticMusic.music1, "pitch": 1.0,
+	"music": StaticMusic.music_cap100, "pitch": 1.0,
 	"combo_bar_start": 100.0, "combo_decrease_speed" : 1.2,
 	"threshold_survival_time" : 3.0, "combo_threshold" : 20.0,
 	"briefs" : [
@@ -22,7 +22,7 @@ Night {night_count}[/center][/font_size]"""
 ]}
 
 var level2 = {
-	"music": StaticMusic.music1, "pitch": 1.1,
+	"music": StaticMusic.music_cap100, "pitch": 1.1,
 	"combo_bar_start": 100.0, "combo_decrease_speed" : 1.2,
 	"threshold_survival_time" : 3.0, "combo_threshold" : 40.0,
 	"briefs" : [
@@ -39,7 +39,7 @@ Night {night_count}[/center][/font_size]"""
 ]}
 
 var level3 = {
-	"music": StaticMusic.music1, "pitch": 1.2,
+	"music": StaticMusic.music_cap100, "pitch": 1.2,
 	"combo_bar_start": 100.0, "combo_decrease_speed" : 1.2,
 	"threshold_survival_time" : 3.0, "combo_threshold" : 60.0,
 	"briefs" : [
@@ -56,7 +56,7 @@ var level3 = {
 ]}
 
 var level4 = {
-	"music": StaticMusic.music1, "pitch": 1.2,
+	"music": StaticMusic.music_cap100, "pitch": 1.2,
 	"combo_bar_start": 100.0, "combo_decrease_speed" : 1.2,
 	"threshold_survival_time" : 3.0, "combo_threshold" : 60.0,
 	"briefs" : [
@@ -72,7 +72,7 @@ var level4 = {
 	{"distance": 3.25, "sprite": Color.GREEN_YELLOW, "pattern": Pattern.pattern6},
 ]}
 var level5 = {
-	"music": StaticMusic.music1, "pitch": 1.2,
+	"music": StaticMusic.music_cap100, "pitch": 1.2,
 	"combo_bar_start": 100.0, "combo_decrease_speed" : 1.2,
 	"threshold_survival_time" : 3.0, "combo_threshold" : 60.0,
 	"briefs" : [
@@ -89,7 +89,7 @@ var level5 = {
 ]}
 
 var level6 = {
-	"music": StaticMusic.music1, "pitch": 1.4,
+	"music": StaticMusic.music_cap100, "pitch": 1.4,
 	"combo_bar_start": 100.0, "combo_decrease_speed" : 1.2,
 	"threshold_survival_time" : 3.0, "combo_threshold" : 80.0,
 	"briefs" : [
@@ -108,7 +108,7 @@ var capitalism_levels = [level1, level2, level3, level4, level5, level6]
 # Otchoz levels
 
 var level2d = {
-	"music": StaticMusic.music1, "pitch": 1.0,
+	"music": StaticMusic.music_cap100, "pitch": 1.0,
 	"briefs" : [
 		"""[font_size=44][center]And a new day begins[/center][/font_size]"""
 	],
