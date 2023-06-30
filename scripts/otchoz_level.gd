@@ -57,9 +57,12 @@ func _process(delta):
 		$TransitionLayer.sleep_transition(func(): get_tree().change_scene_to_file("res://scenes/briefing.tscn"))
 	
 	var t = get_viewport().get_mouse_position()
-	#t.x /= get_viewport_rect().size.x
-	#t.y /= get_viewport_rect().size.y
-	$level/TileMap.get_material().set_shader_parameter("player_position", t)
+	#for trash in ProgressData.otchoz_trash :
+		
+	$level/TileMap.get_material().set_shader_parameter("trash_pos_1", t)
+	$level/TileMap.get_material().set_shader_parameter("trash_pos_2", Vector2(300.0, 50.0))
+	$level/TileMap.get_material().set_shader_parameter("trash_pos_3", Vector2(1000.0, 500.0))
+	$level/TileMap.get_material().set_shader_parameter("trash_pos_4", Vector2(50.0, 800.0))
 	
 	
 func _unhandled_input(event):

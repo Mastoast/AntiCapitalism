@@ -16,11 +16,15 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ckof8"]
 shader = ExtResource("3_fhho8")
-shader_parameter/player_position = Vector2(0.5, 0.5)
 shader_parameter/intensity = 0.1
 shader_parameter/brightness = 0.839
 shader_parameter/contrast = 0.848
 shader_parameter/saturation = 0.909
+shader_parameter/trash_pos_1 = null
+shader_parameter/trash_pos_2 = null
+shader_parameter/trash_pos_3 = null
+shader_parameter/trash_pos_4 = null
+shader_parameter/trash_pos = null
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ypnri"]
 texture = ExtResource("3_u0kxd")
