@@ -25,6 +25,7 @@ var arrow_texture = load("res://sprites/direction_arrow.png")
 var e_texture = load("res://sprites/e_action.png")
 var current_arc_color : Color
 var qte_data
+var is_played = false
 
 const sprite_dict = {
 	"input_up" : {"rotation": 0},
@@ -71,6 +72,9 @@ func _process(delta):
 	if counter > timer + StaticMusic.beat_length * max_input_delay && !is_finished :
 		self.fail()
 	counter = StaticMusic.get_player_total_position() - creation_time
+	if counter > timer and not is_played:
+		is_played = true
+		StaticSfx.play_sfx(StaticSfx.hihat, 1.3, 0.0, 5.0)
 	if is_input_valid():
 		current_arc_color = arc_valid_color
 	else:
@@ -129,6 +133,7 @@ func fail():
 	is_finished = true
 	qte_failed.emit(qte_data, timer - counter)
 	$Anim.play("fail")
+	StaticSfx.play_sfx(StaticSfx.error)
 	#queue_free()
 
 func succeed():
