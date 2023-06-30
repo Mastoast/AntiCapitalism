@@ -2,6 +2,7 @@ extends Node2D
 
 var current_level
 var brief_count = 0
+var transitioning = false
 
 func _ready():
 	$TransitionLayer.wake_transition(func(): pass)
@@ -17,7 +18,8 @@ func _input(event):
 		if current_level.has("briefs") and brief_count < current_level["briefs"].size() - 1:
 			brief_count += 1
 			update_text_label()
-		else:
+		elif not transitioning:
+			transitioning = true
 			$TransitionLayer.sleep_transition(func(): ProgressData.load_level_scene())
 
 func update_text_label():

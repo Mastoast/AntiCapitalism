@@ -14,7 +14,9 @@ func _ready():
 
 func _process(delta):
 	for player in audio_players:
-		if player and !player.playing:
+		if player == null:
+			audio_players.erase(player)
+		elif !player.playing:
 			player.queue_free()
 			audio_players.erase(player)
 
