@@ -32,6 +32,7 @@ var pickable_trash
 var trash_cans = []
 var near_trash = false
 
+var waiting_timer_texts = ["GO", "3", "2", "1"]
 var combo_threshold
 
 var pattern_player: PatternPlayer  
@@ -41,6 +42,7 @@ func _ready():
 	StaticMusic.play(current_level["music"], current_level["pitch"])
 	StaticMusic.new_beat.connect(_on_new_beat)
 	$truck.started.connect(_on_truck_start)
+	$truck.waiting.connect(_on_waiting_beat)
 	load_level(current_level)
 	setup_combo_threshold()
 	pattern_player = $PatternPlayer
@@ -197,3 +199,11 @@ func _on_survival_timer_timeout():
 func win_level():
 	ProgressData.setup_next_level()
 	$UI/TransitionLayer.sleep_transition(func(): get_tree().change_scene_to_file("res://scenes/briefing.tscn"))
+
+func _on_waiting_beat(beat_diff):
+	$UI/WaitingTimerText.text = waiting_timer_texts[beat_diff]
+	$UI/WaitingTimerText.visible = true
+	$WaitingTimer.start()
+
+func _on_waiting_timer_timeout():
+	$UI/WaitingTimerText.visible = false
