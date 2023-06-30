@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cm42gnxa775q3"]
+[gd_scene load_steps=4 format=3 uid="uid://e1y0rqsqlcd"]
 
 [ext_resource type="Script" path="res://scripts/ending.gd" id="1_dqe6b"]
 [ext_resource type="PackedScene" uid="uid://blgqa2l8xh3dk" path="res://objects/transition_layer.tscn" id="2_0awlj"]
@@ -10,7 +10,7 @@ script = ExtResource("1_dqe6b")
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 1152.0
 offset_bottom = 648.0
-color = Color(0, 0, 0, 1)
+color = Color(0.909804, 0.905882, 0.886275, 1)
 
 [node name="TransitionLayer" parent="." instance=ExtResource("2_0awlj")]
 
@@ -20,6 +20,7 @@ offset_top = 229.0
 offset_right = 915.0
 offset_bottom = 414.0
 theme = ExtResource("3_3v81x")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
 text = "[font_size=44][center]THANK YOU FOR PLAYING[/center][/font_size]"
 
@@ -29,6 +30,7 @@ offset_top = 601.0
 offset_right = 1136.0
 offset_bottom = 643.0
 theme = ExtResource("3_3v81x")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
 text = "[font_size=16]PRESS SPACE TO RETURN TO MENU >>[/font_size]"
 text_direction = 2

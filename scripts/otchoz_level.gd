@@ -42,7 +42,15 @@ func _ready():
 func load_level(level):
 	StaticMusic.play(level["music"], level["pitch"])
 	var cells = $level/TileMap.get_used_cells(0).filter(is_tile_spawnable)
-	for i in range(level["trash_count"]):
+	
+	var size = level["trash_count"]
+	if ProgressData.first_spawn_trash :  
+		size = level["trash_count_at_start"]
+	ProgressData.first_spawn_trash = false
+	for i in range(size):
+		if ProgressData.otchoz_trash.size() > Level.level2d["max_trash"] :
+			break
+		
 		var cell = $level/TileMap.get_used_cells(0).filter(is_tile_spawnable).pick_random()
 		if cell != null:
 			var pattern = Level.level2d["patterns"].pick_random()

@@ -35,6 +35,23 @@ func show_directions(grid_size):
 	$RayCast2D.force_raycast_update()
 	if !$RayCast2D.is_colliding() : $ArrowRight.show()
 	else : $ArrowRight.hide()
+	hide_trash();
+
+func show_trash(direction, grid_size):
+	pass
+#	$Space.show()
+#	print(direction)
+#	if direction.x > 0.7 : direction = Vector2.RIGHT
+#	elif direction.x < -0.7 : direction = Vector2.LEFT
+#	elif direction.y > 0.7 : direction = Vector2.DOWN
+#	elif direction.y < -0.7 : direction = Vector2.UP
+#
+#	$Space.position = Vector2.ONE * grid_size/2.0 + direction * grid_size
+	
+func hide_trash():
+	pass
+#	$Space.hide()
+	
 
 func try_move(move, grid_size):
 	$RayCast2D.target_position = move * grid_size
