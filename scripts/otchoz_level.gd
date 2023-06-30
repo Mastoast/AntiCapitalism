@@ -41,8 +41,6 @@ func _ready():
 
 func load_level(level):
 	StaticMusic.play(level["music"], level["pitch"])
-	var cells = $level/TileMap.get_used_cells(0).filter(is_tile_spawnable)
-	
 	var size = level["trash_count"]
 	if ProgressData.first_spawn_trash :  
 		size = level["trash_count_at_start"]
@@ -50,7 +48,7 @@ func load_level(level):
 	for i in range(size):
 		if ProgressData.otchoz_trash.size() > Level.level2d["max_trash"] :
 			break
-		
+
 		var cell = $level/TileMap.get_used_cells(0).filter(is_tile_spawnable).pick_random()
 		if cell != null:
 			var pattern = Level.level2d["patterns"].pick_random()
@@ -68,7 +66,7 @@ func _process(delta):
 		$TransitionLayer.sleep_transition(func(): get_tree().change_scene_to_file("res://scenes/briefing.tscn"))
 	
 	var i = 1
-	for trash in ProgressData.otchoz_trash :
+	for trash in ProgressData.otchoz_trash:
 		
 		var pos = Vector3(trash["coords"].x + 0.5, trash["coords"].y + 0.5, 0.0) * ProjectSettings.get_setting("display/window/size/viewport_height") / 17.0
 		pos.z = beat_trash_pulse.sample((StaticMusic.get_player_total_position() - (StaticMusic.beat_count - 1) * StaticMusic.beat_length) / StaticMusic.beat_length)
@@ -144,5 +142,4 @@ func _on_qte_success(precision:float):
 	pass
 
 func is_tile_spawnable(coords:Vector2i):
-	return $level/TileMap.get_cell_tile_data(0, coords).get_custom_data("spawnable") and not ProgressData.otchoz_trash.any(func(item): coords == item["coords"])
-
+	return $level/TileMap.get_cell_tile_data(0, coords).get_custom_data("spawnable") and not ProgressData.otchoz_trash.any(func(item): return coords == item["coords"])
