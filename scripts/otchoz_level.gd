@@ -28,6 +28,7 @@ var last_input_time = 0.0
 var starting_pattern = false
 var current_trash
 var level_ending = false
+var ignore_next_input = false
 
 func _ready():
 	randomize()
@@ -76,6 +77,9 @@ func _unhandled_input(event):
 		return
 	if starting_pattern or current_trash:
 		return
+	if 	ignore_next_input :
+		ignore_next_input = false
+		return
 	if event.is_action_pressed("ui_accept"):
 		if not truck.get_node("Area2D").get_overlapping_areas().is_empty():
 			starting_pattern = true
@@ -108,6 +112,7 @@ func _on_new_beat():
 func _on_pattern_success():
 	current_trash.empty()
 	current_trash.visible = false
+	ignore_next_input = true
 	ProgressData.otchoz_trash.erase(ProgressData.otchoz_trash.filter(func(i): return i["coords"] == current_trash.coords)[0])
 	current_trash.queue_free()
 	current_trash = null
@@ -120,6 +125,7 @@ func _on_pattern_success():
 
 func _on_pattern_failure():
 	current_trash = null
+	ignore_next_input = true
 
 func _on_qte_success(precision:float):
 	pass

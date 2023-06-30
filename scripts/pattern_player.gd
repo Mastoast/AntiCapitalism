@@ -231,11 +231,11 @@ func _draw():
 	
 	var framing_offset_x = int(relative_first_point.x) % int(line_beat_length)
 	var framing_offset_y = int(relative_first_point.y) % int(line_beat_length)
-	for x in range(- pattern_radius * 2.0 + framing_offset_x - line_beat_length, pattern_radius * 2.0, line_beat_length) :
+	for x in range(- pattern_radius * 2.0 + framing_offset_x - line_beat_length, pattern_radius * 2.0, line_beat_length / 2.0) :
 		var y = sqrt(pattern_radius * pattern_radius - x*x)
 		draw_line(Vector2(x,-y) + pattern_drawing_center, Vector2(x,y) + pattern_drawing_center, pattern_framing_color, pattern_framing_line_width)
 	
-	for y in range(- pattern_radius * 2.0 + framing_offset_y - line_beat_length, pattern_radius * 2.0, line_beat_length) :
+	for y in range(- pattern_radius * 2.0 + framing_offset_y - line_beat_length, pattern_radius * 2.0, line_beat_length / 2.0) :
 		var x = sqrt(pattern_radius * pattern_radius - y*y)
 		draw_line(Vector2(-x,y) + pattern_drawing_center, Vector2(x,y) + pattern_drawing_center, pattern_framing_color, pattern_framing_line_width)
 	
