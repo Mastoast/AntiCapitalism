@@ -72,6 +72,10 @@ func _process(delta):
 	
 	$level/truck2D.show_directions(grid_size)
 	
+	if not truck.get_node("Area2D").get_overlapping_areas().is_empty():
+		$level/truck2D.show_trash((truck.get_node("Area2D").get_overlapping_areas()[0].global_position - $level/truck2D.global_position - Vector2(-grid_size/2.0, grid_size/2.0)).normalized(), grid_size)
+		
+	
 func _unhandled_input(event):
 	if event.is_action_pressed("restart"):
 		get_tree().reload_current_scene()

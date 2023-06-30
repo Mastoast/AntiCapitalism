@@ -194,7 +194,7 @@ func _on_truck_start():
 func _on_survival_timer_timeout():
 	level_ending = true
 	ProgressData.is_otchoz = true
-	$UI/TransitionLayer.sleep_transition(func(): get_tree().change_scene_to_file("res://scenes/briefing.tscn"))
+	$UI/TransitionLayer.sleep_transition(func(): get_tree().change_scene_to_file("res://scenes/gameover.tscn"))
 	
 func win_level():
 	ProgressData.setup_next_level()

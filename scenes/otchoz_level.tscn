@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://hnnds01fc3au"]
+[gd_scene load_steps=33 format=3 uid="uid://hnnds01fc3au"]
 
 [ext_resource type="Script" path="res://scripts/otchoz_level.gd" id="1_6tj17"]
 [ext_resource type="Texture2D" uid="uid://d26sjdjtf60pa" path="res://sprites/tiles.png" id="1_m4plf"]
@@ -9,9 +9,14 @@
 [ext_resource type="PackedScene" uid="uid://cacrapbtcy27r" path="res://objects/rythm_visual_helper.tscn" id="5_d703r"]
 [ext_resource type="Texture2D" uid="uid://blf2yhquqyb04" path="res://sprites/Otchoz/TruckTrash/TruckSimpleOrangeEmpty.png" id="6_h447i"]
 [ext_resource type="PackedScene" uid="uid://bj4ndq5wr0mvi" path="res://scenes/pattern_player.tscn" id="6_o3201"]
+[ext_resource type="Texture2D" uid="uid://mvp7djjk1cmo" path="res://sprites/Otchoz/arrow_down.png" id="7_2t06d"]
 [ext_resource type="Texture2D" uid="uid://dqsamugcwmmrq" path="res://sprites/Otchoz/TruckTrash/TruckSimpleOrangeBack.png" id="7_8islr"]
 [ext_resource type="Texture2D" uid="uid://ulyltfv1ao" path="res://sprites/Otchoz/TruckTrash/TruckSimpleOrangeFace.png" id="8_inb0w"]
+[ext_resource type="Texture2D" uid="uid://dldl0epr70ig1" path="res://sprites/Otchoz/arrow_up.png" id="8_kgui2"]
 [ext_resource type="Theme" uid="uid://ced1k3bls70p" path="res://themes/arcade_theme.tres" id="9_kqiyu"]
+[ext_resource type="Texture2D" uid="uid://vl5qrc8egtkn" path="res://sprites/Otchoz/arrow_left.png" id="9_yh5n7"]
+[ext_resource type="Texture2D" uid="uid://cods0qt6ag270" path="res://sprites/Otchoz/arrow_right.png" id="10_3hi8e"]
+[ext_resource type="Texture2D" uid="uid://cdux20jl7w2a5" path="res://sprites/Otchoz/space.png" id="11_2p8q3"]
 [ext_resource type="Texture2D" uid="uid://c4dal25d1t2kj" path="res://sprites/full_square.png" id="11_bk27e"]
 
 [sub_resource type="Curve" id="Curve_6lovv"]
@@ -702,6 +707,32 @@ layer_4/tile_data = PackedInt32Array(786438, 589826, 4, 393229, 589826, 4, 91751
 [node name="truck2D" type="Node2D" parent="level"]
 position = Vector2(196, 98)
 script = ExtResource("2_dnr5s")
+
+[node name="ArrowDown" type="Sprite2D" parent="level/truck2D"]
+position = Vector2(7, 21)
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("7_2t06d")
+
+[node name="ArrowUp" type="Sprite2D" parent="level/truck2D"]
+position = Vector2(7, -7)
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("8_kgui2")
+
+[node name="ArrowLeft" type="Sprite2D" parent="level/truck2D"]
+position = Vector2(-7, 7)
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("9_yh5n7")
+
+[node name="ArrowRight" type="Sprite2D" parent="level/truck2D"]
+position = Vector2(21, 7)
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("10_3hi8e")
+
+[node name="Space" type="Sprite2D" parent="level/truck2D"]
+visible = false
+position = Vector2(6.99998, 7)
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("11_2p8q3")
 
 [node name="Sprite2D" type="Sprite2D" parent="level/truck2D"]
 position = Vector2(7, 4)
