@@ -1,9 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://hnnds01fc3au"]
+[gd_scene load_steps=27 format=3 uid="uid://hnnds01fc3au"]
 
 [ext_resource type="Script" path="res://scripts/otchoz_level.gd" id="1_6tj17"]
 [ext_resource type="Texture2D" uid="uid://d26sjdjtf60pa" path="res://sprites/tiles.png" id="1_m4plf"]
 [ext_resource type="PackedScene" uid="uid://blgqa2l8xh3dk" path="res://objects/transition_layer.tscn" id="2_2ryk7"]
 [ext_resource type="Script" path="res://scripts/truck2D.gd" id="2_dnr5s"]
+[ext_resource type="Shader" path="res://scenes/otchoz_level_greyscale.gdshader" id="3_fhho8"]
 [ext_resource type="Texture2D" uid="uid://mxbe3k3o07fh" path="res://sprites/Otchoz/Tilemap.png" id="3_u0kxd"]
 [ext_resource type="PackedScene" uid="uid://cacrapbtcy27r" path="res://objects/rythm_visual_helper.tscn" id="5_d703r"]
 [ext_resource type="Texture2D" uid="uid://blf2yhquqyb04" path="res://sprites/Otchoz/TruckTrash/TruckSimpleOrangeEmpty.png" id="6_h447i"]
@@ -12,6 +13,14 @@
 [ext_resource type="Texture2D" uid="uid://ulyltfv1ao" path="res://sprites/Otchoz/TruckTrash/TruckSimpleOrangeFace.png" id="8_inb0w"]
 [ext_resource type="Theme" uid="uid://ced1k3bls70p" path="res://themes/arcade_theme.tres" id="9_kqiyu"]
 [ext_resource type="Texture2D" uid="uid://c4dal25d1t2kj" path="res://sprites/full_square.png" id="11_bk27e"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ckof8"]
+shader = ExtResource("3_fhho8")
+shader_parameter/player_position = Vector2(0.5, 0.5)
+shader_parameter/intensity = 0.1
+shader_parameter/brightness = 0.839
+shader_parameter/contrast = 0.848
+shader_parameter/saturation = 0.909
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ypnri"]
 texture = ExtResource("3_u0kxd")
@@ -624,6 +633,7 @@ fail_delay = 0.25
 scale = Vector2(2.723, 2.723)
 
 [node name="TileMap" type="TileMap" parent="level"]
+material = SubResource("ShaderMaterial_ckof8")
 tile_set = SubResource("TileSet_a7oir")
 cell_quadrant_size = 14
 format = 2
