@@ -11,8 +11,8 @@ var trash2D = load("res://objects/trash_2d.tscn")
 @onready var pattern_player = $PatternPlayer
 @onready var truck = $level/truck2D
 
+const satisfaction_max = 100.0
 var satisfaction_per_trash = [0.33, 0.1, 0.1, 0.1, 0, 0, 0, 0, 0, 0, -0.1, -0.1, -0.1, -0.33]
-var satisfaction = 50.0
 
 var inputs = {
 	"input_up": Vector2.UP,
@@ -86,9 +86,9 @@ func is_input_valid():
 		return true
 
 func _on_new_beat():
-	satisfaction += satisfaction_per_trash[min(ProgressData.otchoz_trash.size(), satisfaction_per_trash.size() - 1)]
-	$ProgressBar.value = satisfaction
-	if satisfaction >= 100.0 and not level_ending:
+	ProgressData.otchoz_statisfaction += satisfaction_per_trash[min(ProgressData.otchoz_trash.size(), satisfaction_per_trash.size() - 1)]
+	$ProgressBar.value = ProgressData.otchoz_statisfaction
+	if ProgressData.otchoz_statisfaction >= satisfaction_max and not level_ending:
 		level_ending = true
 		$TransitionLayer.sleep_transition(func(): get_tree().change_scene_to_file("res://scenes/ending.tscn"))
 	if StaticMusic.beat_count % 2 == 0: # trigger every 2 beat
@@ -103,6 +103,11 @@ func _on_pattern_success():
 	ProgressData.otchoz_trash.erase(ProgressData.otchoz_trash.filter(func(i): return i["coords"] == current_trash.coords)[0])
 	current_trash.queue_free()
 	current_trash = null
+	if ProgressData.otchoz_trash.size() == 0:
+		ProgressData.otchoz_statisfaction += satisfaction_per_trash[0] * (beat_per_level - StaticMusic.beat_count)
+		if ProgressData.otchoz_statisfaction > satisfaction_max: return
+		level_ending = true
+		$TransitionLayer.sleep_transition(func(): get_tree().change_scene_to_file("res://scenes/briefing.tscn"))
 
 
 func _on_pattern_failure():

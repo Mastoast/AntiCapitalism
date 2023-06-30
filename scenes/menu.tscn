@@ -30,7 +30,7 @@ size_flags_horizontal = 4
 theme = ExtResource("2_km5ho")
 theme_override_font_sizes/normal_font_size = 42
 bbcode_enabled = true
-text = "[center]LE TITRE.jpeg[/center]"
+text = "[center]On the other side[/center]"
 
 [node name="StartLabel" type="RichTextLabel" parent="."]
 anchors_preset = 8
