@@ -20,6 +20,7 @@ var expected_actions = {
 }
 
 var buffer_qte = []
+var inputs = []
 var pattern_start
 var pattern_end
 var line_length
@@ -30,6 +31,7 @@ var nb_fail_accepted
 var pattern_drawing_center
 
 # drawing pattern
+@export var line_distance_draw:Curve
 @export var line_beat_length = 50.0
 @export var joint_sprite_scale = Vector2.ONE
 @onready var pattern_line:Line2D = $Node2D/PatternLine
@@ -44,7 +46,6 @@ func start_pattern(pattern, drawing_center = Vector2(0, 0)):
 	qte_count = 0
 	last_qte = null
 	nb_fail_accepted = pattern["nb_fail_accepted"]
-	print("nb fail accepted : " + str(nb_fail_accepted))
 	buffer_qte = pattern["pattern"].duplicate(true)
 	pattern_start = StaticMusic.get_player_total_position()
 	pattern_drawing_center = drawing_center
@@ -70,7 +71,7 @@ func stop_current_pattern():
 func _process(delta):
 	spawn_qte_on_time()
 	if pattern_drawing_center != Vector2.ZERO:
-		update_pattern_drawing()
+		queue_redraw()
 
 func _input(event):
 	if qte_count == 0 or !event.is_action_type() or !is_expected_action(event):
@@ -160,6 +161,7 @@ func _on_bad_input():
 
 func create_pattern_drawing():
 	pattern_line.clear_points()
+	inputs = []
 	pattern_line.visible = true
 	for point in pattern_line.get_children():
 		pattern_line.remove_child(point)
@@ -208,9 +210,74 @@ func create_line_joint(input, position):
 			new_sprite.modulate = new_qte.right_color
 	new_sprite.rotation_degrees = new_qte.sprite_dict[input]["rotation"]
 	new_sprite.scale = joint_sprite_scale
+	inputs.append(new_sprite)
 	pattern_line.add_child(new_sprite)
 	new_sprite.position = position
 
+func _draw():
+	update_pattern_drawing()
+	# DRAW BLUEPRINT
+	if !pattern_line.visible : return
+	var pattern_radius = 100.0
+	var pattern_border_radius = 20.0
+	var pattern_border_width = 6.0
+	var pattern_bg_color = Color(Color.CADET_BLUE, 0.8)
+	var pattern_framing_color = Color(Color.WHITE, 0.3)
+	var pattern_framing_line_width = 1.0
+	
+	var relative_first_point = pattern_line.global_position + pattern_line.get_point_position(0) - pattern_drawing_center
+	
+	draw_circle(pattern_drawing_center, pattern_radius, pattern_bg_color)
+	
+	var framing_offset_x = int(relative_first_point.x) % int(line_beat_length)
+	var framing_offset_y = int(relative_first_point.y) % int(line_beat_length)
+	for x in range(- pattern_radius * 2.0 + framing_offset_x - line_beat_length, pattern_radius * 2.0, line_beat_length) :
+		var y = sqrt(pattern_radius * pattern_radius - x*x)
+		draw_line(Vector2(x,-y) + pattern_drawing_center, Vector2(x,y) + pattern_drawing_center, pattern_framing_color, pattern_framing_line_width)
+	
+	for y in range(- pattern_radius * 2.0 + framing_offset_y - line_beat_length, pattern_radius * 2.0, line_beat_length) :
+		var x = sqrt(pattern_radius * pattern_radius - y*y)
+		draw_line(Vector2(-x,y) + pattern_drawing_center, Vector2(x,y) + pattern_drawing_center, pattern_framing_color, pattern_framing_line_width)
+	
+	draw_arc(pattern_drawing_center, pattern_border_radius, 0.0, 2*PI, 80, Color.WHITE, pattern_border_width, false )
+		
+	
+	#DRAW LINE
+	var step = 0.01
+	var max_line_dist = 2.0
+	var line_width = 4.0
+	
+	var total_distance = 0.0
+	var current_pattern_position = (StaticMusic.get_player_total_position() - pattern_start) / StaticMusic.beat_length
+	for i in range(1, pattern_line.get_point_count()):
+		var posA = pattern_line.get_point_position(i - 1)
+		var posB = pattern_line.get_point_position(i)
+		var relative_dist = posA.distance_to(posB) / line_beat_length
+		
+		if i <= inputs.size() :
+			inputs[i-1].self_modulate = Color(Color.WHITE, line_distance_draw.sample(clamp(1.0 - abs(total_distance + relative_dist - current_pattern_position)/max_line_dist, 0.0, 1.0)))
+		
+		if total_distance > current_pattern_position + max_line_dist || total_distance + relative_dist < current_pattern_position - max_line_dist : 
+			total_distance += relative_dist
+			continue
+			
+		var next_point = step
+		while next_point < relative_dist : # use a while because range(step, relative_dist, step) cause error for no reasons.... thx godot
+			
+			var dist = min(abs(total_distance + next_point - current_pattern_position) ,
+						   abs(total_distance + next_point - step - current_pattern_position))
+			
+			if (total_distance + next_point >= current_pattern_position - max_line_dist && 
+				total_distance + next_point - step <= current_pattern_position + max_line_dist) :
+				draw_line(pattern_line.global_position + lerp(posA, posB, clamp((next_point - step) / relative_dist, 0.0, 1.0)), 
+					  pattern_line.global_position + lerp(posA, posB, clamp(next_point / relative_dist, 0.0, 1.0)),
+					  Color(Color.WHITE, line_distance_draw.sample(clamp(1.0 - dist/max_line_dist, 0.0, 1.0))), line_width)
+			next_point += step
+			
+		total_distance += relative_dist
+	
+	draw_circle(pattern_line.global_position + pattern_line.get_point_position(0), 10.0, Color(Color.WHITE, line_distance_draw.sample(clamp(1.0 - current_pattern_position/max_line_dist, 0.0, 1.0))))
+	
 func update_pattern_drawing():
 	if !buffer_qte.is_empty() or qte_count > 0:
 		var pattern_ratio = minf(1.1, (StaticMusic.get_player_total_position() - pattern_start) / (pattern_end - pattern_start))
@@ -218,6 +285,7 @@ func update_pattern_drawing():
 		if new_position:
 			pattern_line.position = new_position
 
+	
 func get_position_on_line_from_ratio(ratio):
 	var current_length = line_length * ratio
 	var incr_length = 0.0

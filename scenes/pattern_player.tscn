@@ -1,9 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://bj4ndq5wr0mvi"]
+[gd_scene load_steps=3 format=3 uid="uid://bj4ndq5wr0mvi"]
 
 [ext_resource type="Script" path="res://scripts/pattern_player.gd" id="1_8355h"]
 
+[sub_resource type="Curve" id="Curve_r3l1n"]
+_data = [Vector2(0, 0), 0.0, 9.46116, 0, 0, Vector2(0.3, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
 [node name="PatternPlayer" type="Node2D"]
 script = ExtResource("1_8355h")
+line_distance_draw = SubResource("Curve_r3l1n")
 joint_sprite_scale = Vector2(0.1, 0.1)
 
 [node name="Node2D" type="Node2D" parent="."]
@@ -12,3 +17,4 @@ joint_sprite_scale = Vector2(0.1, 0.1)
 visible = false
 position = Vector2(383, 319)
 points = PackedVector2Array(0, 0, 0, 53.2359, 0, 80, -40, 80, -40, 51)
+width = 0.0

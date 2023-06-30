@@ -66,7 +66,7 @@ func _process(delta):
 		$level/TileMap.get_material().set_shader_parameter("trash_pos_"+str(i), pos)	
 		i += 1
 	
-	for y in range(i, 5):
+	for y in range(i, 15):
 		$level/TileMap.get_material().set_shader_parameter("trash_pos_"+str(y), Vector2(-9999,-9999))	
 		
 	
