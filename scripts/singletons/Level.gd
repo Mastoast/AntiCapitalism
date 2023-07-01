@@ -92,7 +92,7 @@ var level5 = {
 ]}
 
 var level6 = {
-	"music": StaticMusic.music_cap100, "pitch": 1.4,
+	"music": StaticMusic.music_cap150, "pitch": 0.93,
 	"combo_bar_start": 100.0, "combo_decrease_speed" : 1.2,
 	"threshold_survival_time" : 3.0, "combo_threshold" : 80.0,
 	"briefs" : [
@@ -111,7 +111,7 @@ var capitalism_levels = [level1, level2, level3, level4, level5, level6]
 # Otchoz levels
 
 var level2d = {
-	"music": StaticMusic.music_cap100, "pitch": 1.0,
+	"music": StaticMusic.music_otchoz_100bpm, "pitch": 1.0,
 	"briefs" : [
 		"""[font_size=44][center]And a new day begins[/center][/font_size]"""
 	],
