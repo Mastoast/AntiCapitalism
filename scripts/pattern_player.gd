@@ -215,7 +215,8 @@ func create_line_joint(input, position):
 	new_sprite.position = position
 
 func _draw():
-	update_pattern_drawing()
+	if pattern_drawing_center != Vector2.ZERO:
+		update_pattern_drawing()
 	# DRAW BLUEPRINT
 	if !pattern_line.visible : return
 	var pattern_radius = 100.0
