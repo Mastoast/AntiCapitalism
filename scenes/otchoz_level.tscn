@@ -660,7 +660,7 @@ radius = 9.0
 [node name="Otchoz" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_6tj17")
-fail_delay = 0.25
+fail_delay = 0.3
 beat_trash_pulse = SubResource("Curve_6lovv")
 
 [node name="TransitionLayer" parent="." instance=ExtResource("2_2ryk7")]

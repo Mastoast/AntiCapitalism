@@ -76,7 +76,7 @@ func _process(delta):
 	for y in range(i, 15):
 		$level/TileMap.get_material().set_shader_parameter("trash_pos_"+str(y), Vector2(-9999,-9999))	
 	
-	$level/truck2D.show_directions(grid_size)
+	$level/truck2D.show_directions(grid_size, is_input_valid())
 	
 	if not truck.get_node("Area2D").get_overlapping_areas().is_empty():
 		$level/truck2D.show_trash((truck.get_node("Area2D").get_overlapping_areas()[0].global_position - $level/truck2D.global_position - Vector2(-grid_size/2.0, grid_size/2.0)).normalized(), grid_size)
@@ -96,16 +96,15 @@ func _unhandled_input(event):
 			starting_pattern = true
 	for input in inputs.keys():
 		if event.is_action_pressed(input) and is_input_valid():
+			last_ahead_beat_used = StaticMusic.beat_count
 			truck.try_move(inputs[input], grid_size)
 
 func is_input_valid():
 	var is_before = StaticMusic.get_delay_with_next_beat() < StaticMusic.beat_length * fail_delay
 	var is_after = StaticMusic.get_delay_with_previous_beat() < StaticMusic.beat_length * fail_delay
 	if is_after and StaticMusic.beat_count != last_after_beat_used:
-		last_after_beat_used = StaticMusic.beat_count
 		return true
 	if is_before and StaticMusic.beat_count != last_ahead_beat_used:
-		last_ahead_beat_used = StaticMusic.beat_count
 		return true
 
 func _on_new_beat():
